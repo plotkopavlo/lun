@@ -11,6 +11,8 @@ class CityTableSeeder extends Seeder
      */
     public function run()
     {
-        //
+        DB::table('city')->insert([
+            //'name' => Kiev
+        ]);
     }
 }
