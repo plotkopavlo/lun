@@ -9,6 +9,8 @@ class Flat extends Model
 {
     use SoftDeletes;
 
+    protected $table = 'flat';
+
     /**
      * The attributes that should be mutated to dates.
      *

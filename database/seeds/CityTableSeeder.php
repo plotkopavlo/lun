@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Http\Models;
 
 class CityTableSeeder extends Seeder
 {
@@ -11,8 +12,8 @@ class CityTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('city')->insert([
-            //'name' => Kiev
-        ]);
+        factory(Models\City::class, 50)->create()->each(function ($city) {
+            $city->residentialComplexes()->save(factory(Models\ResidentialComplex::class)->make());
+        });
     }
 }

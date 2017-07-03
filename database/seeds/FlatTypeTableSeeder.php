@@ -11,6 +11,19 @@ class FlatTypeTableSeeder extends Seeder
      */
     public function run()
     {
-        //
+        DB::table('flat_type')->insert([
+            [
+                'name' => 'studio'
+            ],
+            [
+                'name' => 'one level'
+            ],
+            [
+                'name' => 'two level'
+            ],
+            [
+                'name' => 'ordinary'
+            ]
+        ]);
     }
 }

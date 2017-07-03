@@ -9,6 +9,8 @@ class ResidentialComplex extends Model
 {
     use SoftDeletes;
 
+    protected $table = 'residential_complex';
+
     /**
      * The attributes that should be mutated to dates.
      *

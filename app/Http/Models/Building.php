@@ -9,6 +9,8 @@ class Building extends Model
 {
     use SoftDeletes;
 
+    protected $table = 'building';
+
     /**
      * The attributes that should be mutated to dates.
      *
