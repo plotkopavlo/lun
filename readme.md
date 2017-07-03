@@ -27,4 +27,5 @@ For more information check [Laravel docs](https://laravel.com/docs/5.4/installat
 
 - Refresh migrations **php artisan migrate:refresh --seed**
 
-
+## TODOs for future
+- Write seeders for all models

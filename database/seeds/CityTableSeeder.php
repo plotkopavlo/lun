@@ -12,8 +12,16 @@ class CityTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(Models\City::class, 50)->create()->each(function ($city) {
-            $city->residentialComplexes()->save(factory(Models\ResidentialComplex::class)->make());
-        });
+        DB::table('city')->insert([
+            [
+                'name' => 'kiev'
+            ],
+            [
+                'name' => 'lviv'
+            ],
+            [
+                'name' => 'odessa'
+            ]
+        ]);
     }
 }

@@ -35,3 +35,14 @@ $factory->define(App\Http\Models\ResidentialComplex::class, function (Faker\Gene
         'name' => $faker->company
     ];
 });
+
+$factory->define(App\Http\Models\Building::class, function (Faker\Generator $faker) {
+    return [
+        'name'    => 'Building 1',
+        'address' => $faker->address,
+
+        // near Kiev
+        'lat'     => $faker->latitude(49, 51),
+        'lon'     => $faker->longitude(29, 31),
+    ];
+});
