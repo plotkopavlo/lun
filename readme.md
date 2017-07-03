@@ -29,3 +29,5 @@ For more information check [Laravel docs](https://laravel.com/docs/5.4/installat
 
 ## TODOs for future
 - Write seeders for all models
+- API doc
+- Write tests for repositories and API
