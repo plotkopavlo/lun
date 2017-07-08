@@ -1,0 +1,52 @@
+.ibox {
+  margin-top: 5%; }
+  .ibox .table .info td {
+    vertical-align: middle;
+    background-color: white; }
+  .ibox .section-create {
+    width: 180px; }
+  .ibox .section-edit {
+    width: 50px; }
+  .ibox .section-delete {
+    width: 66px; }
+  .ibox .dis-none {
+    display: none; }
+  .ibox .style-editor {
+    min-height: 300px;
+    border: 1px solid  #d9d9d9;
+    font-size: 18px; }
+
+.file-field {
+  width: 170px;
+  height: 25px;
+  display: inline-block;
+  border: 1px solid #e5e6e7;
+  float:left;
+  padding: 0 10px;
+  line-height: 23px;
+}
+.file-btn {
+  background: #1ab394;
+  border: 1px solid #1ab394;
+  height: 25px;
+  float: left;
+  line-height: 23px;
+  padding: 0 15px;
+  color: #ffffff;
+  margin-left: -2px;
+  cursor: pointer;
+}
+.file-btn:hover {
+  background: #1c9e77;
+  border: 1px solid #1ab394;
+}
+.image-block-admin {
+  width: 100px;
+  height: 100px;
+  overflow: hidden;
+}
+.image-block-admin img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

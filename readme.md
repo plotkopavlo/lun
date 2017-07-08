@@ -19,9 +19,13 @@ For more information check [Laravel docs](https://laravel.com/docs/5.4/installat
 2. Setup php 5.6+, SQLite/MySQL/postgreSQL server, create DB
 3. Rename .env.example to .env
 4. Configure .env file
+5. Run **php composer install**
 5. Run **php artisan key:generate**
 6. Run **php artisan migrate**
 7. Run **php artisan db:seed**
+8. Rules 
+    **sudo chmod -R ug+rwx storage bootstrap/cache**
+    **sudo chgrp -R www-data storage bootstrap/cache**
 
 ## Useful commands
 

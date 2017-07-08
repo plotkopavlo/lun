@@ -7,3 +7,73 @@
 
 // Bootstrap
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+
+//Bootstrap select
+
+@import "node_modules/bootstrap-select/sass/bootstrap-select.scss";
+
+
+.search-block {
+  margin-top: 10vh;
+  .btn-info-select {
+    width: 100px;
+    outline: none;
+    border: 1px solid #ccd0d2;
+    background-color: white;
+    border-radius: 0;
+    border-left: 0;
+    &:hover {
+      outline: none !important;
+    }
+    &:active {
+      outline: none !important;
+    }
+    &:focus {
+      outline: none !important;
+    }
+    &:active:focus {
+      outline: none !important;
+    }
+    .dropdown-menu a {
+      &:hover {
+        outline: none !important;
+      }
+      &:active {
+        outline: none !important;
+      }
+      &:focus {
+        outline: none !important;
+      }
+      &:active:focus {
+        outline: none !important;
+      }
+    }
+  }
+}
+.result-block {
+  .result-apartments-block {
+    width: 100%;
+    float: left;
+    border-bottom: 1px solid #ccd0d2;
+    margin-top: 20px;
+    .block-img {
+      width: 100px;
+      height: 100px;
+      overflow: hidden;
+      display: inline-block;
+      float: left;
+      .image-apartaments {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+    .left-info-block {
+      float: left;
+      margin-left: 20px;
+    }
+    .right-info-block {
+      float: right;
+    }
+  }
+}
