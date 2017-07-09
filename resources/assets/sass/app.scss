@@ -15,10 +15,13 @@
 
 .search-block {
   height: 100vh;
+  background: url(../img/main.jpg) 50% 50% fixed,#464646;
+  background-size: cover;
   .center-screen {
     margin-top: calc(50vh - 40px);
     .header-text {
       text-align: center;
+      color: white;
     }
     .btn-info-select {
       width: 100px;
