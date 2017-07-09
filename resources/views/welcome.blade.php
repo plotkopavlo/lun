@@ -16,21 +16,24 @@
             <div class="container">
                 <div class="row">
                     <div class="col-sm-6 col-sm-offset-3">
-                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Search for...">
-                            <select class="selectpicker">
-                                <option>Kiev</option>
-                                <option>Odessa</option>
-                                <option>Lviv</option>
-                            </select>
-                            <select class="selectpicker">
-                                <option>1k</option>
-                                <option>2k</option>
-                                <option>3k</option>
-                            </select>
-                            <span class="input-group-btn">
+                        <div class="center-screen">
+                            <h2 class="header-text">Найдем быстро!!!</h2>
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Search for...">
+                                <select class="selectpicker">
+                                    <option>Kiev</option>
+                                    <option>Odessa</option>
+                                    <option>Lviv</option>
+                                </select>
+                                <select class="selectpicker">
+                                    <option>1k</option>
+                                    <option>2k</option>
+                                    <option>3k</option>
+                                </select>
+                                <span class="input-group-btn">
                                 <button class="btn btn-default" type="button">Go!</button>
                             </span>
+                            </div>
                         </div>
                     </div>
                 </div>
