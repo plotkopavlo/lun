@@ -27,18 +27,29 @@
                         </ul>
                     </div>
                     <div class="logo-element">
-                        BG
+                        LN
                     </div>
                 </li>
                 <li>
                     <a href="">
-                        <i class="fa fa-edit"></i>
+                        <i class="fa fa-globe"></i>
                         <span class="nav-label">Cities</span>
                         <span class="fa arrow"></span>
                     </a>
                     <ul class="nav nav-second-level">
                         <li><a href="{{ url('panel/cities') }}">List all cities</a></li>
                         <li><a href="{{ url('panel/cities/create') }}">Add a city</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="">
+                        <i class="fa fa-building-o"></i>
+                        <span class="nav-label">Res. Complexes</span>
+                        <span class="fa arrow"></span>
+                    </a>
+                    <ul class="nav nav-second-level">
+                        <li><a href="{{ url('panel/complexes') }}">List all complexes</a></li>
+                        <li><a href="{{ url('panel/complexes/create') }}">Add a complex</a></li>
                     </ul>
                 </li>
                 {{--<li>--}}

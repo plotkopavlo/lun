@@ -11,6 +11,8 @@ class ResidentialComplex extends Model
 
     protected $table = 'residential_complex';
 
+    protected $fillable = ['name'];
+
     /**
      * The attributes that should be mutated to dates.
      *

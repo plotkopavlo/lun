@@ -7,7 +7,7 @@
             <div class="col-lg-10 col-lg-offset-1">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>Form to update city</h5>
+                        <h5>Update complex</h5>
                         <div class="ibox-tools">
                             <a class="collapse-link">
                                 <i class="fa fa-chevron-up"></i>
@@ -19,13 +19,20 @@
                     </div>
                     <div class="ibox-content">
 
-                        {!! Form::model($city, ['method' => 'PATCH', 'action' => ['Admin\CityController@update', $city->id],
+                        {!! Form::model($complex, ['method' => 'PATCH', 'action' => ['Admin\ResidentialComplexController@update', $complex->id],
                         'class' => 'form-horizontal', 'enctype' => 'multipart/form-data']) !!}
 
                         <div class="form-group">
                             {!! Form::label('name', 'Name', ['class' => 'col-lg-3 control-label']) !!}
                             <div class="col-lg-9">
                                 {!! Form::text('name', null, ['class' => 'form-control']) !!}
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            {!! Form::label('city', 'City', ['class' => 'col-lg-3 control-label']) !!}
+                            <div class="col-lg-9">
+                                {!! Form::select('city', $cities, $selectedCity, ['class' => 'form-control m-b']) !!}
                             </div>
                         </div>
 

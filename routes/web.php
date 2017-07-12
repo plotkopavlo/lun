@@ -24,4 +24,5 @@ Route::middleware(['auth'])->namespace('Admin')->prefix('panel')->group(function
     Route::get('/', 'DashboardController@index');
 
     Route::resource('cities', 'CityController');
+    Route::resource('complexes', 'ResidentialComplexController');
 });

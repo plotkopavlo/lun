@@ -34,10 +34,13 @@ For more information check [Laravel docs](https://laravel.com/docs/5.4/installat
 ## TODOs for future
 - Write seeders for all models
 - API doc
+- process errors during CRUD - repositories should throw own errors
 - Write tests for repositories and API
 
 
 
 
 Notes:
-Model binding becomes useless with repositories
+- Model binding becomes useless with repositories
+- Better init models in repositories as SomeModel::class
+- Probably I'll need to reproduce all Eloquent functions

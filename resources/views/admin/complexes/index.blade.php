@@ -25,21 +25,24 @@
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th>City name</th>
+                            <th>Complex name</th>
+                            <th>City</th>
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($cities as $city)
+                        @foreach($complexes as $complex)
+
                             <tr class="info">
-                                <td>{{ $city->id }}</td>
-                                <td>{{ $city->name }}</td>
+                                <td>{{ $complex->id }}</td>
+                                <td>{{ $complex->name }}</td>
+                                <td>{{ $complex->city->name or '' }}</td>
                                 <td class="section-edit">
-                                    <a href="{{ url('panel/cities/' . $city->id . '/edit')}}">
+                                    <a href="{{ url('panel/complexes/' . $complex->id . '/edit')}}">
                                         <button class="btn btn-outline btn-success">edit</button>
                                     </a>
                                 </td>
                                 <td class="section-delete">
-                                    {!! Form::model($city, ['method' => 'DELETE', 'action' => ['Admin\CityController@destroy', $city->id]]) !!}
+                                    {!! Form::model($complex, ['method' => 'DELETE', 'action' => ['Admin\ResidentialComplexController@destroy', $complex->id]]) !!}
                                     {!! Form::submit('delete', ['class' => 'btn btn-outline btn-danger']) !!}
                                     {!! Form::close() !!}
                                 </td>
@@ -49,7 +52,7 @@
                     </table>
                 </div>
 
-                {{ $cities->links() }}
+                {{ $complexes->links() }}
 
             </div>
         </div>
