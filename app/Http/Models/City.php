@@ -8,6 +8,8 @@ class City extends Model
 {
     protected $table = 'city';
 
+    protected $fillable = ['name'];
+
     public $timestamps = false;
 
     public function residentialComplexes()

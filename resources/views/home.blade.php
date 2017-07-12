@@ -1,5 +1,5 @@
 @extends('layouts.admin')
 
 @section('content')
-    <h1>Index Admin</h1>
+    <h1>Panel Index</h1>
 @endsection

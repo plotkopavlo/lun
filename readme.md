@@ -23,9 +23,9 @@ For more information check [Laravel docs](https://laravel.com/docs/5.4/installat
 5. Run **php artisan key:generate**
 6. Run **php artisan migrate**
 7. Run **php artisan db:seed**
-8. Rules 
+8. Permissions  
     **sudo chmod -R ug+rwx storage bootstrap/cache**
-    **sudo chgrp -R www-data storage bootstrap/cache**
+    \+ **sudo chgrp -R www-data storage bootstrap/cache**
 
 ## Useful commands
 
@@ -35,3 +35,9 @@ For more information check [Laravel docs](https://laravel.com/docs/5.4/installat
 - Write seeders for all models
 - API doc
 - Write tests for repositories and API
+
+
+
+
+Notes:
+Model binding becomes useless with repositories

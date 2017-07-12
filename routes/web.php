@@ -1,5 +1,6 @@
 <?php
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,4 +18,10 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/dashboard', 'HomeController@index')->name('home');
+/*Route::get('/dashboard', 'HomeController@index')->name('home');*/
+
+Route::middleware(['auth'])->namespace('Admin')->prefix('panel')->group(function () {
+    Route::get('/', 'DashboardController@index');
+
+    Route::resource('cities', 'CityController');
+});

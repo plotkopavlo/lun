@@ -7,18 +7,18 @@
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                         <span class="clear">
                             <span class="block m-t-xs">
-                                <strong class="font-bold">Bygimotic</strong>
+                                <strong class="font-bold">Lun test</strong>
                             </span>
-                            <span class="text-muted text-xs block">Панель администрации<b class="caret"></b></span>
+                            <span class="text-muted text-xs block">Panel<b class="caret"></b></span>
                         </span>
                         </a>
                         <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                            <li><a href="profile.html">Профиль</a></li>
+                            {{--<li><a href="profile.html">Профиль</a></li>
                             <li><a href="contacts.html">Контакты</a></li>
-                            <li><a href="mailbox.html">Почтовый ящик</a></li>
+                            <li><a href="mailbox.html">Почтовый ящик</a></li>--}}
                             <li class="divider"></li>
                             <li><a href="{{ url('/logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
-                                    Выйти
+                                    Logout
                                 </a>
                                 <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
                                     {{ csrf_field() }}
@@ -33,12 +33,12 @@
                 <li>
                     <a href="">
                         <i class="fa fa-edit"></i>
-                        <span class="nav-label">Блог</span>
+                        <span class="nav-label">Cities</span>
                         <span class="fa arrow"></span>
                     </a>
                     <ul class="nav nav-second-level">
-                        <li><a href="{{url('dashboard/blog')}}">Просмотреть все блоги</a></li>
-                        <li><a href="{{url('dashboard/blog/create')}}">Создать новый блог</a></li>
+                        <li><a href="{{ url('panel/cities') }}">List all cities</a></li>
+                        <li><a href="{{ url('panel/cities/create') }}">Add a city</a></li>
                     </ul>
                 </li>
                 {{--<li>--}}

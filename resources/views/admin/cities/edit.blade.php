@@ -12,15 +12,6 @@
                             <a class="collapse-link">
                                 <i class="fa fa-chevron-up"></i>
                             </a>
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                <i class="fa fa-wrench"></i>
-                            </a>
-                            <ul class="dropdown-menu dropdown-user">
-                                <li><a href="#">Config option 1</a>
-                                </li>
-                                <li><a href="#">Config option 2</a>
-                                </li>
-                            </ul>
                             <a class="close-link">
                                 <i class="fa fa-times"></i>
                             </a>
@@ -28,26 +19,19 @@
                     </div>
                     <div class="ibox-content">
 
-                        {!! Form::model($blog, ['method' => 'PATCH', 'action' => ['Admin\BlogController@update', $blog->id],
+                        {!! Form::model($city, ['method' => 'PATCH', 'action' => ['Admin\CityController@update', $city->id],
                         'class' => 'form-horizontal', 'enctype' => 'multipart/form-data']) !!}
 
                         <div class="form-group">
-                            {!! Form::label('title', 'Enter the name of the blog', ['class' => 'col-lg-3 control-label']) !!}
+                            {!! Form::label('title', 'Name', ['class' => 'col-lg-3 control-label']) !!}
                             <div class="col-lg-9">
-                                {!! Form::text('title', null, ['class' => 'form-control']) !!}
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            {!! Form::label('body', 'Some text', ['class' => 'col-lg-3 control-label']) !!}
-                            <div class="col-lg-9">
-                                {!! Form::textarea('body', null, ['class' => 'form-control', 'id' => 'summernote']) !!}
+                                {!! Form::text('name', null, ['class' => 'form-control']) !!}
                             </div>
                         </div>
 
                         <div class="form-group">
                             <div class="col-lg-offset-3 col-lg-9">
-                                {!! Form::submit('Update blog', ['class' => 'btn btn-lg']) !!}
+                                {!! Form::submit('Update city', ['class' => 'btn btn-lg']) !!}
                             </div>
                         </div>
                         {!! Form::close() !!}

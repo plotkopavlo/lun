@@ -4,7 +4,7 @@
     <div class="middle-box text-center loginscreen  animated fadeInDown">
         <div>
             <div>
-                <h1 class="logo-name">BG</h1>
+                <h1 class="logo-name">LN</h1>
             </div>
 
             <h3>Welcome, Me</h3>
