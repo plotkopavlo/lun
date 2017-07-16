@@ -20,7 +20,7 @@
                     <div class="ibox-content">
 
                         {!! Form::model($city, ['method' => 'PATCH', 'action' => ['Admin\CityController@update', $city->id],
-                        'class' => 'form-horizontal', 'enctype' => 'multipart/form-data']) !!}
+                        'class' => 'form-horizontal']) !!}
 
                         <div class="form-group">
                             {!! Form::label('name', 'Name', ['class' => 'col-lg-3 control-label']) !!}

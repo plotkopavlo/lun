@@ -20,7 +20,7 @@
                     <div class="ibox-content">
 
                         {!! Form::model($complex, ['method' => 'PATCH', 'action' => ['Admin\ResidentialComplexController@update', $complex->id],
-                        'class' => 'form-horizontal', 'enctype' => 'multipart/form-data']) !!}
+                        'class' => 'form-horizontal']) !!}
 
                         <div class="form-group">
                             {!! Form::label('name', 'Name', ['class' => 'col-lg-3 control-label']) !!}
@@ -38,7 +38,7 @@
 
                         <div class="form-group">
                             <div class="col-lg-offset-3 col-lg-9">
-                                {!! Form::submit('Update city', ['class' => 'btn btn-lg']) !!}
+                                {!! Form::submit('Update complex', ['class' => 'btn btn-lg']) !!}
                             </div>
                         </div>
                         {!! Form::close() !!}

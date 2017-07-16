@@ -14,13 +14,13 @@ class CityTableSeeder extends Seeder
     {
         DB::table('city')->insert([
             [
-                'name' => 'kiev'
+                'name' => 'Kiev'
             ],
             [
-                'name' => 'lviv'
+                'name' => 'Lviv'
             ],
             [
-                'name' => 'odessa'
+                'name' => 'Odessa'
             ]
         ]);
     }

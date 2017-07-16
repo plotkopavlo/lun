@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Models\ResidentialComplex;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Repositories\ResidentialComplexRepository as ComplexRepository;
@@ -160,6 +161,23 @@ class ResidentialComplexController extends Controller
 
         return redirect('panel/complexes')
             ->with('status', "Complex $complexName deleted!")
-            ;
+        ;
+    }
+
+
+    public function listBuildings($id)
+    {
+        $complex = $this->complex->find($id);
+
+        $buildingsAssoc = [];
+        foreach ($complex->buildings as $building)
+        {
+            $buildingsAssoc[] = [
+                'id' => $building->id,
+                'name' => $building->name
+            ];
+        }
+
+        return response()->json($buildingsAssoc);
     }
 }

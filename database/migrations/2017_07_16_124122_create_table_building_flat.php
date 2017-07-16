@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateBuildingTable extends Migration
+class CreateTableBuildingFlat extends Migration
 {
     /**
      * Run the migrations.
@@ -13,21 +13,20 @@ class CreateBuildingTable extends Migration
      */
     public function up()
     {
-        Schema::create('building', function (Blueprint $table) {
+        Schema::create('building_flat', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->string('address');
 
-            $table->double('lat');
-            $table->double('lon');
-
-            $table->integer('residential_complex_id')->nullable()->unsigned();
-            $table->foreign('residential_complex_id')
+            $table->integer('building_id')->unsigned();
+            $table->foreign('building_id')
                 ->references('id')
-                ->on('residential_complex')
+                ->on('building')
                 ->onDelete('cascade');
 
-            $table->softDeletes();
+            $table->integer('flat_id')->unsigned();
+            $table->foreign('flat_id')
+                ->references('id')
+                ->on('flat')
+                ->onDelete('cascade');
 
             $table->timestamps();
         });
@@ -40,6 +39,6 @@ class CreateBuildingTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('building');
+        Schema::dropIfExists('building_flat');
     }
 }

@@ -20,6 +20,28 @@ abstract class Repository extends BosnadevRepository {
         return $this;
     }
 
+    /**
+     * Build assoc array key => value
+     *
+     * @param $key
+     * @param $value
+     * @return array
+     */
+    public function getAssocArray($key, $value)
+    {
+        $this->applyCriteria();
+
+        $allModels = $this->model->all();
+
+        $modelsAssoc = [];
+        foreach ($allModels as $model)
+        {
+            $modelsAssoc[$model->$key] = $model->$value;
+        }
+
+        return $modelsAssoc;
+    }
+
     public function associate()
     {
 

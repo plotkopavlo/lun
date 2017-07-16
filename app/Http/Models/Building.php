@@ -11,6 +11,8 @@ class Building extends Model
 
     protected $table = 'building';
 
+    protected $fillable = ['name', 'address', 'lat', 'lon'];
+
     /**
      * The attributes that should be mutated to dates.
      *
@@ -25,6 +27,6 @@ class Building extends Model
 
     public function flats()
     {
-        return $this->hasMany(Flat::class);
+        return $this->belongsToMany(Flat::class);
     }
 }

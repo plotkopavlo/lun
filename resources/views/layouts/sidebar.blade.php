@@ -52,59 +52,28 @@
                         <li><a href="{{ url('panel/complexes/create') }}">Add a complex</a></li>
                     </ul>
                 </li>
-                {{--<li>--}}
-                    {{--<a href="">--}}
-                        {{--<i class="fa fa-edit"></i>--}}
-                        {{--<span class="nav-label">Категории товаров</span>--}}
-                        {{--<span class="fa arrow"></span>--}}
-                    {{--</a>--}}
-                    {{--<ul class="nav nav-second-level">--}}
-                        {{--<li><a href="{{url('dashboard/categories')}}">Просмотреть все категории</a></li>--}}
-                        {{--<li><a href="{{url('dashboard/categories/create')}}">Создать новую категорию</a></li>--}}
-                    {{--</ul>--}}
-                {{--</li>--}}
-                {{--<li>--}}
-                    {{--<a href="">--}}
-                        {{--<i class="fa fa-edit"></i>--}}
-                        {{--<span class="nav-label">Фотогаллерея</span>--}}
-                        {{--<span class="fa arrow"></span>--}}
-                    {{--</a>--}}
-                    {{--<ul class="nav nav-second-level">--}}
-                        {{--<li><a href="{{url('dashboard/gallery')}}">Просмотреть все фотографии</a></li>--}}
-                        {{--<li><a href="{{url('dashboard/gallery/create')}}">Добавить новую фотографию</a></li>--}}
-                    {{--</ul>--}}
-                {{--</li>--}}
-                {{--<li>--}}
-                    {{--<a href="">--}}
-                        {{--<i class="fa fa-edit"></i>--}}
-                        {{--<span class="nav-label">Партнёры</span>--}}
-                        {{--<span class="fa arrow"></span>--}}
-                    {{--</a>--}}
-                    {{--<ul class="nav nav-second-level">--}}
-                        {{--<li><a href="{{url('dashboard/partners')}}">Просмотреть всех партнёров</a></li>--}}
-                        {{--<li><a href="{{url('dashboard/partners/create')}}">Создать нового партнера</a></li>--}}
-                    {{--</ul>--}}
-                {{--</li>--}}
-                {{--<li>--}}
-                    {{--<a href="">--}}
-                        {{--<i class="fa fa-shopping-cart"></i>--}}
-                        {{--<span class="nav-label">Продукты</span>--}}
-                        {{--<span class="fa arrow"></span></a>--}}
-                    {{--<ul class="nav nav-second-level">--}}
-                        {{--<li><a href="{{url('admin/store')}}">Посмотреть все продукты</a></li>--}}
-                        {{--<li><a href="{{url('admin/store/create')}}">Добавить новый продукт</a></li>--}}
-                    {{--</ul>--}}
-                {{--</li>--}}
-                {{--<li>--}}
-                    {{--<a href="{{ url('dashboard/contact/1/edit')}}">--}}
-                        {{--<i class="fa fa-edit"></i>--}}
-                        {{--<span class="nav-label">Обновить контакты</span></a>--}}
-                {{--</li>--}}
-                {{--<li>--}}
-                    {{--<a href="{{ url('dashboard/footer/1/edit')}}">--}}
-                        {{--<i class="fa fa-edit"></i>--}}
-                        {{--<span class="nav-label">Обновить футер</span></a>--}}
-                {{--</li>--}}
+                <li>
+                    <a href="">
+                        <i class="fa fa-building"></i>
+                        <span class="nav-label">Buildings</span>
+                        <span class="fa arrow"></span>
+                    </a>
+                    <ul class="nav nav-second-level">
+                        <li><a href="{{ url('panel/buildings') }}">List all buildings</a></li>
+                        <li><a href="{{ url('panel/buildings/create') }}">Add a building</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="">
+                        <i class="fa fa-home"></i>
+                        <span class="nav-label">Flats</span>
+                        <span class="fa arrow"></span>
+                    </a>
+                    <ul class="nav nav-second-level">
+                        <li><a href="{{ url('panel/flats') }}">List all flats</a></li>
+                        <li><a href="{{ url('panel/flats/create') }}">Add a flat</a></li>
+                    </ul>
+                </li>
             </ul>
         </div>
     </nav>

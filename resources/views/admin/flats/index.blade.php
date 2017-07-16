@@ -11,7 +11,7 @@
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
 
-                    <h5>All complexes</h5>
+                    <h5>All Flats</h5>
 
                     <div class="ibox-tools">
                         <a class="collapse-link">
@@ -27,24 +27,35 @@
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th>Complex name</th>
-                            <th>City</th>
+                            <th>Flat name</th>
+                            {{--<th>Address</th>--}}
+                            <th>Description</th>
+                            <th>Rooms</th>
+                            <th>Area</th>
+                            <th>Price (USD)</th>
+                            <th>Type</th>
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($complexes as $complex)
+                        @foreach($flats as $flat)
 
                             <tr class="info">
-                                <td>{{ $complex->id }}</td>
-                                <td>{{ $complex->name }}</td>
-                                <td>{{ $complex->city->name or '' }}</td>
+                                <td>{{ $flat->id }}</td>
+                                <td>{{ $flat->name }}</td>
+                                {{--<td>{{ $flat->buildings()->first()->address or '' }}</td>--}}
+                                <td>{!! $flat->description !!}</td>
+                                <td>{{ $flat->num_of_rooms }}</td>
+                                <td>{{ $flat->area_m2 }}</td>
+                                <td>{{ $flat->price_per_m2 or $flat->price_total }}</td>
+                                <td>{{ $flat->type->name or '' }}</td>
+
                                 <td class="section-edit">
-                                    <a href="{{ url('panel/complexes/' . $complex->id . '/edit')}}">
+                                    <a href="{{ url('panel/flats/' . $flat->id . '/edit')}}">
                                         <button class="btn btn-outline btn-success">edit</button>
                                     </a>
                                 </td>
                                 <td class="section-delete">
-                                    {!! Form::model($complex, ['method' => 'DELETE', 'action' => ['Admin\ResidentialComplexController@destroy', $complex->id]]) !!}
+                                    {!! Form::model($flat, ['method' => 'DELETE', 'action' => ['Admin\FlatController@destroy', $flat->id]]) !!}
                                     {!! Form::submit('delete', ['class' => 'btn btn-outline btn-danger']) !!}
                                     {!! Form::close() !!}
                                 </td>
@@ -54,7 +65,7 @@
                     </table>
                 </div>
 
-                {{ $complexes->links() }}
+                {{ $flats->links() }}
 
             </div>
         </div>

@@ -26,6 +26,8 @@ For more information check [Laravel docs](https://laravel.com/docs/5.4/installat
 8. Permissions  
     **sudo chmod -R ug+rwx storage bootstrap/cache**
     \+ **sudo chgrp -R www-data storage bootstrap/cache**
+9. Create new user: [http://localhost/register](http://localhost/register)
+10. Login: [http://localhost/login](http://localhost/login)
 
 ## Useful commands
 

@@ -12,7 +12,7 @@ class ResidentialComplexTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(Models\ResidentialComplex::class, 50)->create()->each(function ($rc) {
+        factory(Models\ResidentialComplex::class, 20)->create()->each(function ($rc) {
             /**@var $rc Models\ResidentialComplex **/
             $rc->buildings()->save(factory(Models\Building::class)->make());
         });

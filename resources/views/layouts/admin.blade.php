@@ -18,11 +18,17 @@
     {!! Html::style('admin/css/app.css') !!}
 </head>
 <body>
+
     @include('layouts.sidebar')
+
     <div id="page-wrapper" class="gray-bg">
         @include('layouts.sidebar-top')
+
         @yield('content')
     </div>
+
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     {!! Html::script('admin/js/jquery-2.1.1.js') !!}
     {!! Html::script('admin/js/bootstrap.min.js') !!}
     {!! Html::script('admin/js/plugins/metisMenu/jquery.metisMenu.js') !!}
@@ -34,6 +40,15 @@
     {!! Html::script('admin/js/plugins/slick/slick.min.js') !!}
     {!! Html::script('admin/js/plugins/dropzone/dropzone.js') !!}
 
+    <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+    </script>
+
     @yield('js')
+
 </body>
 </html>

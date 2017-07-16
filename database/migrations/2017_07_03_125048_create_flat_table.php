@@ -23,17 +23,13 @@ class CreateFlatTable extends Migration
             $table->integer('price_total')->nullable();
             $table->integer('price_per_m2')->nullable();
 
-            $table->integer('building_id')->unsigned();
-            $table->foreign('building_id')
-                ->references('id')
-                ->on('building')
-                ->onDelete('cascade');
-
             $table->integer('flat_type_id')->unsigned()->nullable();
             $table->foreign('flat_type_id')
                 ->references('id')
                 ->on('flat_type')
                 ->onDelete('set null');
+
+            $table->timestamps();
 
             $table->softDeletes();
         });

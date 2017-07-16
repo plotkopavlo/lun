@@ -11,7 +11,7 @@
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
 
-                    <h5>All complexes</h5>
+                    <h5>All buildings</h5>
 
                     <div class="ibox-tools">
                         <a class="collapse-link">
@@ -27,24 +27,26 @@
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th>Complex name</th>
-                            <th>City</th>
+                            <th>Building name</th>
+                            <th>Address</th>
+                            <th>Res. Complex</th>
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($complexes as $complex)
+                        @foreach($buildings as $building)
 
                             <tr class="info">
-                                <td>{{ $complex->id }}</td>
-                                <td>{{ $complex->name }}</td>
-                                <td>{{ $complex->city->name or '' }}</td>
+                                <td>{{ $building->id }}</td>
+                                <td>{{ $building->name }}</td>
+                                <td>{{ $building->address }}</td>
+                                <td>{{ $building->residentialComplex->name or '' }}</td>
                                 <td class="section-edit">
-                                    <a href="{{ url('panel/complexes/' . $complex->id . '/edit')}}">
+                                    <a href="{{ url('panel/buildings/' . $building->id . '/edit')}}">
                                         <button class="btn btn-outline btn-success">edit</button>
                                     </a>
                                 </td>
                                 <td class="section-delete">
-                                    {!! Form::model($complex, ['method' => 'DELETE', 'action' => ['Admin\ResidentialComplexController@destroy', $complex->id]]) !!}
+                                    {!! Form::model($building, ['method' => 'DELETE', 'action' => ['Admin\BuildingController@destroy', $building->id]]) !!}
                                     {!! Form::submit('delete', ['class' => 'btn btn-outline btn-danger']) !!}
                                     {!! Form::close() !!}
                                 </td>
@@ -54,7 +56,7 @@
                     </table>
                 </div>
 
-                {{ $complexes->links() }}
+                {{ $buildings->links() }}
 
             </div>
         </div>

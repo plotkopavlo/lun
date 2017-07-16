@@ -11,6 +11,11 @@ class Flat extends Model
 
     protected $table = 'flat';
 
+    protected $fillable = [
+        'name', 'description', 'num_of_rooms', 'area_m2',
+        'flat_type_id', 'price_total', 'price_per_m2'
+    ];
+
     /**
      * The attributes that should be mutated to dates.
      *
@@ -18,9 +23,9 @@ class Flat extends Model
      */
     protected $dates = ['deleted_at'];
 
-    public function building()
+    public function buildings()
     {
-        return $this->belongsTo(Building::class);
+        return $this->belongsToMany(Building::class);
     }
 
     /**
@@ -28,6 +33,6 @@ class Flat extends Model
      */
     public function type()
     {
-        return $this->belongsTo(FlatType::class);
+        return $this->belongsTo(FlatType::class, 'flat_type_id');
     }
 }
