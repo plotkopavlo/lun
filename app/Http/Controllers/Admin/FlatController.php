@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Models\Building;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -84,15 +85,15 @@ class FlatController extends Controller
      */
     public function store(Request $request)
     {
-        $complex = $this->complex->find($request->complex);
+        //$complex = $this->complex->find($request->complex);
 
         $flatName    = $request->name;
 
         $flatData = [
-            'name'        => $flatName,
-            'description' => $request->description,
+            'name'         => $flatName,
+            'description'  => $request->description,
             'num_of_rooms' => $request->rooms,
-            'area_m2' => $request->area,
+            'area_m2'      => $request->area,
             'flat_type_id' => $request->type,
 
         ];
@@ -136,21 +137,35 @@ class FlatController extends Controller
         $flatPriceType = isset($flat->price_total) ? 'total' : 'per_m2';
 
         $flatTypes    = $this->flatType->getAssocArray('id', 'name');
+        $resComplexes = $this->complex->getAssocArray('id',  'name');
 
-        $resComplexes       = $this->complex->getAssocArray('id',  'name');
-        $resComplexSelected = $flat->buildings()
-            ->first()
-            ->residentialComplex
-            ->id
-        ;
+        /**
+         * Set selected res.complex
+         * @var $building Building
+         */
+        $resComplexSelected = $buildings = null;
+        $buildingsAssoc = [];
+
+        $building = $flat->buildings()->first();
+
+        if (isset($building)) {
+            $resComplexSelected = $building->residentialComplex;
+
+            $buildings = $resComplexSelected->buildings;
+
+            foreach ($buildings as $building)
+            {
+                $buildingsAssoc[$building->id] = $building->name;
+            }
+        }
 
         // fill form with first complex buildings
-        $buildings = $flat->buildings;
+        $buildingsSelected = $flat->buildings;
 
-        $buildingsAssoc = [];
-        foreach ($buildings as $building)
+        $buildingsSelectedArray = [];
+        foreach ($buildingsSelected as $building)
         {
-            $buildingsAssoc[$building->id] = $building->name;
+            $buildingsSelectedArray[] = $building->id;
         }
 
         return view('admin.flats.edit', [
@@ -163,9 +178,9 @@ class FlatController extends Controller
             'flatTypes' => $flatTypes,
             'buildings' => $buildingsAssoc,
 
-            'flatTypeSelected' => $flat->flat_type_id,
-            'resComplexSelected' => $resComplexSelected
-
+            'flatTypeSelected'   => $flat->flat_type_id,
+            'resComplexSelected' => $resComplexSelected->id,
+            'buildingsSelected'  => $buildingsSelectedArray
         ]);
     }
 
@@ -178,7 +193,34 @@ class FlatController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $flatName = $request->name;
+
+        $flatData = [
+            'name'         => $flatName,
+            'description'  => $request->description,
+            'num_of_rooms' => $request->rooms,
+            'area_m2'      => $request->area,
+            'flat_type_id' => $request->type,
+
+        ];
+
+        if ($request->price_type == 'total') {
+            $flatData['price_total']  = $request->price;
+            $flatData['price_per_m2'] = null;
+        } else {
+            $flatData['price_total']  = null;
+            $flatData['price_per_m2'] = $request->price;
+        }
+
+        $this->flat->update($flatData, $id);
+
+        $flat = $this->flat->find($id);
+
+        $flat->buildings()->sync($request->buildings);
+
+        return redirect('panel/flats')
+            ->with('status', "Flat $flatName updated!")
+        ;
     }
 
     /**

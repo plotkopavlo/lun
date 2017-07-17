@@ -66,7 +66,7 @@
                         <div class="form-group">
                             {!! Form::label('buildings', 'Buildings', ['class' => 'col-lg-3 control-label']) !!}
                             <div class="col-lg-9">
-                                {!! Form::select('buildings[]', $buildings, null, ['id' =>'buildings', 'class' => 'form-control m-b', 'multiple']) !!}
+                                {!! Form::select('buildings[]', $buildings, $buildingsSelected, ['id' =>'buildings', 'class' => 'form-control m-b', 'multiple']) !!}
                             </div>
                         </div>
 
@@ -85,7 +85,7 @@
 
                                     <div class="input-group-btn">
                                         <button id="price_type_btn" data-toggle="dropdown" class="btn btn-white dropdown-toggle" type="button">
-                                            <span id="price_type_text">per m2</span>
+                                            <span id="price_type_text">{{ $flatPriceType == 'total' ? 'Total' : 'per m2' }}</span>
                                             <span class="caret"></span>
                                         </button>
                                         <ul class="dropdown-menu pull-right">
@@ -109,4 +109,8 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('js')
+    {!! Html::script('js/admin/flats/main.js') !!}
 @endsection

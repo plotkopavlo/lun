@@ -46,3 +46,4 @@ Notes:
 - Model binding becomes useless with repositories
 - Better init models in repositories as SomeModel::class
 - Probably I'll need to reproduce all Eloquent functions
+- Better if I'd linked flats to complexes

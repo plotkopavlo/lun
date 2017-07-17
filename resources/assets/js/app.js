@@ -5,8 +5,8 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-require('./bootstrap');
-require('./../../../node_modules/bootstrap-select/js/bootstrap-select');
+/*require('./bootstrap');
+require('./../../../node_modules/bootstrap-select/js/bootstrap-select');*/
 // require('./jquery.simplePagination.js');
 
 $('.selectpicker').selectpicker({
