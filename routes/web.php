@@ -12,9 +12,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::resource('/', 'SearchController');
 
 Auth::routes();
 
@@ -23,7 +21,7 @@ Auth::routes();
 Route::middleware(['auth'])->namespace('Admin')->prefix('panel')->group(function () {
     Route::get('/', 'DashboardController@index');
 
-    Route::resource('cities', 'CityController');
+    Route::resource('cities',    'CityController');
     Route::resource('complexes', 'ResidentialComplexController');
     Route::resource('buildings', 'BuildingController');
     Route::resource('flats',     'FlatController');

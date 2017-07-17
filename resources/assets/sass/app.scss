@@ -13,15 +13,19 @@
 @import "node_modules/bootstrap-select/sass/bootstrap-select.scss";
 
 
+.first-screen {
+  background-color: #464646;
+}
+
 .search-block {
-  height: 100vh;
-  background: url(../img/main.jpg) 50% 50% fixed,#464646;
+  height: 70vh;
+  background: url(../img/main.jpg) 50% 50% fixed, #464646;
   background-size: cover;
   .center-screen {
-    margin-top: calc(50vh - 40px);
+    margin-top: calc(30vh - 40px);
     .header-text {
       text-align: center;
-      color: white;
+      color: #333;
     }
     .btn-info-select {
       width: 100px;
@@ -79,6 +83,7 @@
     }
     .left-info-block {
       float: left;
+      max-width: 340px;
       margin-left: 20px;
     }
     .right-info-block {

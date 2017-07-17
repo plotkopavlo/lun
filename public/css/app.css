@@ -8005,19 +8005,23 @@ select.selectpicker {
   float: none;
 }
 
+.first-screen {
+  background-color: #464646;
+}
+
 .search-block {
-  height: 100vh;
+  height: 70vh;
   background: url(../img/main.jpg) 50% 50% fixed, #464646;
   background-size: cover;
 }
 
 .search-block .center-screen {
-  margin-top: calc(50vh - 40px);
+  margin-top: calc(30vh - 40px);
 }
 
 .search-block .center-screen .header-text {
   text-align: center;
-  color: white;
+  color: #333;
 }
 
 .search-block .center-screen .btn-info-select {
@@ -8085,6 +8089,7 @@ select.selectpicker {
 
 .result-block .result-apartments-block .left-info-block {
   float: left;
+  max-width: 340px;
   margin-left: 20px;
 }
 

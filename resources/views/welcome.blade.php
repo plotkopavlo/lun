@@ -7,107 +7,99 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <title>Lun TEST</title>
+
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     </head>
     <body>
-        <section class="search-block">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-6 col-sm-offset-3">
-                        <div class="center-screen">
-                            <h2 class="header-text">Найдем быстро!!!</h2>
-                            <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Search for...">
-                                <select class="selectpicker">
-                                    <option>Kiev</option>
-                                    <option>Odessa</option>
-                                    <option>Lviv</option>
-                                </select>
-                                <select class="selectpicker">
-                                    <option>1k</option>
-                                    <option>2k</option>
-                                    <option>3k</option>
-                                </select>
-                                <span class="input-group-btn">
-                                <button class="btn btn-default" type="button">Go!</button>
-                            </span>
+        <section class="first-screen">
+            <div class="search-block">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-6 col-sm-offset-3">
+                            <div class="center-screen">
+                                <h2 class="header-text">Let's find something</h2>
+                                <form method="GET" class="input-group">
+                                    <input type="text" class="form-control" disabled placeholder="Search for...">
+                                    <select name="city" class="selectpicker">
+                                        @foreach($cities as $city)
+                                            <option value="{{ $city->id }}" {{ $city->id == $cityID ? 'selected' : '' }}>
+                                                {{ $city->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    <select name="rooms" class="selectpicker">
+                                        @for($idx = 1; $idx <= $maxRooms; $idx++ )
+                                            <option value="{{ $idx }}" {{ $idx == $rooms ? 'selected' : '' }}>
+                                                {{ $idx }} rooms
+                                            </option>
+                                        @endfor
+                                    </select>
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" type="submit">Go!</button>
+                                    </span>
+                                </form>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-        <section class="result-block">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-6 col-sm-offset-3">
-                        <h2 class="header-text">Найдено ХХХ результатов</h2>
+
+        <section class="container result-block">
+            <div class="row">
+                <div class="col-sm-6 col-sm-offset-3">
+                    <h2 class="header-text">Found <span id="num-of-results">{{ $total }}</span> results</h2>
+
+                    @foreach($flats as $flat)
                         <div class="result-apartments-block">
                             <div class="block-img">
                                 <img src="img/page.jpg" class="image-apartaments" alt="">
                             </div>
                             <div class="left-info-block">
-                                <p class="info-text">asdasd</p>
-                                <p class="info-text">ЖК</p>
-                                <p class="info-text">Киев</p>
-                                <p class="info-text">Дом 3</p>
+                                <a><p class="info-text">
+                                    {{ $flat->name }}
+                                </p></a>
+                                <div class="info-text">
+                                    <b>Description: </b>{!! $flat->description !!}
+                                </div>
+                                <p class="info-text">
+                                    <b>Complex:</b> {{ $flat->buildings()->first() ? $flat->buildings()->first()->residentialComplex->name : '-' }}
+                                </p>
+                                <p class="info-text">
+                                    <b>City:</b> {{ ($flat->buildings()->first() && $flat->buildings()->first()->residentialComplex->city) ?
+                                        $flat->buildings()->first()->residentialComplex->city->name
+                                        : '-' }}
+                                </p>
+                                <p class="info-text">
+                                    <b>Rooms: </b> {{ $flat->num_of_rooms }}
+                                </p>
+                                <p class="info-text">
+                                    <b>Building(s): </b>
+                                    <ul>
+                                        @foreach($flat->buildings as $building)
+                                            <li>{{ $building->name }}</li>
+                                        @endforeach
+                                    </ul>
+                                </p>
                             </div>
                             <div class="right-info-block">
-                                <p class="info-text">5000 $</p>
-                                <p class="info-text">55 м2</p>
+                                <p class="info-text">{{ $flat->price }} $</p>
+                                <p class="info-text">
+                                    <b>Area: </b> {{ $flat->area_m2 }} m2
+                                </p>
                             </div>
                         </div>
-                        <div class="result-apartments-block">
-                            <div class="block-img">
-                                <img src="img/page.jpg" class="image-apartaments" alt="">
-                            </div>
-                            <div class="left-info-block">
-                                <p class="info-text">asdasd</p>
-                                <p class="info-text">ЖК</p>
-                                <p class="info-text">Киев</p>
-                                <p class="info-text">Дом 3</p>
-                            </div>
-                            <div class="right-info-block">
-                                <p class="info-text">5000 $</p>
-                                <p class="info-text">55 м2</p>
-                            </div>
-                        </div>
-                        <div class="result-apartments-block">
-                            <div class="block-img">
-                                <img src="img/page.jpg" class="image-apartaments" alt="">
-                            </div>
-                            <div class="left-info-block">
-                                <p class="info-text">asdasd</p>
-                                <p class="info-text">ЖК</p>
-                                <p class="info-text">Киев</p>
-                                <p class="info-text">Дом 3</p>
-                            </div>
-                            <div class="right-info-block">
-                                <p class="info-text">5000 $</p>
-                                <p class="info-text">55 м2</p>
-                            </div>
-                        </div>
-                        <div class="result-apartments-block">
-                            <div class="block-img">
-                                <img src="img/page.jpg" class="image-apartaments" alt="">
-                            </div>
-                            <div class="left-info-block">
-                                <p class="info-text">asdasd</p>
-                                <p class="info-text">ЖК</p>
-                                <p class="info-text">Киев</p>
-                                <p class="info-text">Дом 3</p>
-                            </div>
-                            <div class="right-info-block">
-                                <p class="info-text">5000 $</p>
-                                <p class="info-text">55 м2</p>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
+
+                    {{ $flats->appends(['city' => $cityID, 'rooms' => $rooms])->links() }}
+
                 </div>
             </div>
-            <div class="container">
+
+
+            {{--<div class="container">
                 <div class="row">
                     <div class="col-sm-6 col-sm-offset-3">
                         <ul class="pagination">
@@ -121,8 +113,8 @@
                         </ul>
                     </div>
                 </div>
-            </div>
+            </div>--}}
         </section>
-        <script src="/js/app.js"></script>
+        {!! Html::script('js/app.js') !!}
     </body>
 </html>

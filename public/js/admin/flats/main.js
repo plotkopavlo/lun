@@ -63,11 +63,21 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 1);
+/******/ 	return __webpack_require__(__webpack_require__.s = 36);
 /******/ })
 /************************************************************************/
-/******/ ([
-/* 0 */
+/******/ ({
+
+/***/ 36:
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__(7);
+module.exports = __webpack_require__(9);
+
+
+/***/ }),
+
+/***/ 7:
 /***/ (function(module, exports) {
 
 /**TODO: organize JS*/
@@ -112,11 +122,12 @@ $(".price_type_select").on('click', function (e) {
 });
 
 /***/ }),
-/* 1 */
-/***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(0);
+/***/ 9:
+/***/ (function(module, exports) {
 
+// removed by extract-text-webpack-plugin
 
 /***/ })
-/******/ ]);
+
+/******/ });
