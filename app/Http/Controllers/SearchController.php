@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Repositories\FlatRepository;
 use Illuminate\Http\Request;
 use App\Repositories\Criteria\Flat\SortByMinPrice;
+use Illuminate\Support\Facades\DB;
 
 class SearchController extends Controller
 {
@@ -23,6 +24,7 @@ class SearchController extends Controller
      */
     public function index(Request $request)
     {
+
         $cityID = $request->city  ? $request->city  : null;
         $rooms  = $request->rooms ? $request->rooms : null;
 
@@ -34,7 +36,11 @@ class SearchController extends Controller
             $flats->findWhere(['num_of_rooms' => $rooms]);
         }
 
-        $flats = $flats->paginate(5);
+        if ($cityID) {
+            $flats->findWhere(['city_id' => $cityID]);
+        }
+
+        $flats = $flats->paginate(2);
 
         return view('welcome', [
             'cityID' => $cityID,

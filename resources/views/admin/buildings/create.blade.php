@@ -27,19 +27,19 @@
                         <div class="form-group">
                             {!! Form::label('name', 'Building name', ['class' => 'col-lg-3 control-label']) !!}
                             <div class="col-lg-9">
-                                {!! Form::text('name', null, ['class' => 'form-control']) !!}
+                                {!! Form::text('name', null, ['class' => 'form-control', 'required']) !!}
                             </div>
                         </div>
                         <div class="form-group">
                             {!! Form::label('address', 'Address', ['class' => 'col-lg-3 control-label']) !!}
                             <div class="col-lg-9">
-                                {!! Form::text('address', null, ['class' => 'form-control']) !!}
+                                {!! Form::text('address', null, ['class' => 'form-control', 'required']) !!}
                             </div>
                         </div>
                         <div class="form-group">
                             {!! Form::label('complex', 'Complex', ['class' => 'col-lg-3 control-label']) !!}
                             <div class="col-lg-9">
-                                {!! Form::select('complex', $complexes, null, ['class' => 'form-control m-b']) !!}
+                                {!! Form::select('complex', $complexes, null, ['class' => 'form-control m-b', 'required']) !!}
                             </div>
                         </div>
 

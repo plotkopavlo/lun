@@ -85,7 +85,8 @@ class FlatController extends Controller
      */
     public function store(Request $request)
     {
-        //$complex = $this->complex->find($request->complex);
+        $complex = $this->complex->find($request->res_complex);
+        $cityID  = isset($complex->city) ? $complex->city->id : null;
 
         $flatName    = $request->name;
 
@@ -95,7 +96,7 @@ class FlatController extends Controller
             'num_of_rooms' => $request->rooms,
             'area_m2'      => $request->area,
             'flat_type_id' => $request->type,
-
+            'city_id'      => $cityID
         ];
 
         $request->price_type == 'total' ?
@@ -193,6 +194,9 @@ class FlatController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $complex  = $this->complex->find($request->res_complex);
+        $cityID   = isset($complex->city) ? $complex->city->id : null;
+
         $flatName = $request->name;
 
         $flatData = [
@@ -201,7 +205,7 @@ class FlatController extends Controller
             'num_of_rooms' => $request->rooms,
             'area_m2'      => $request->area,
             'flat_type_id' => $request->type,
-
+            'city_id'      => $cityID
         ];
 
         if ($request->price_type == 'total') {

@@ -29,6 +29,12 @@ class CreateFlatTable extends Migration
                 ->on('flat_type')
                 ->onDelete('set null');
 
+            $table->integer('city_id')->unsigned()->nullable();
+            $table->foreign('city_id')
+                ->references('id')
+                ->on('city')
+                ->onDelete('set null');
+
             $table->timestamps();
 
             $table->softDeletes();

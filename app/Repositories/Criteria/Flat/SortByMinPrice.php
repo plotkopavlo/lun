@@ -19,7 +19,7 @@ class SortByMinPrice extends Criteria {
         //sort from minimum price (price calculated)
         $model = $model->select(DB::raw('*, (COALESCE(price_total, 0) + ( COALESCE(price_per_m2, 0) * area_m2) ) as price '))
             //for mysql 7.5+
-            ->groupBy('id')
+            //->groupBy('flat.id')
             ->orderBy('price', 'asc')
         ;
 

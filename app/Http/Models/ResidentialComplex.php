@@ -37,5 +37,4 @@ class ResidentialComplex extends Model
     {
         return $this->belongsTo(City::class);
     }
-
 }

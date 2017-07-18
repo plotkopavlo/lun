@@ -25,14 +25,14 @@
                         <div class="form-group">
                             {!! Form::label('name', 'Name', ['class' => 'col-lg-3 control-label']) !!}
                             <div class="col-lg-9">
-                                {!! Form::text('name', null, ['class' => 'form-control']) !!}
+                                {!! Form::text('name', null, ['class' => 'form-control', 'required']) !!}
                             </div>
                         </div>
 
                         <div class="form-group">
                             {!! Form::label('city', 'City', ['class' => 'col-lg-3 control-label']) !!}
                             <div class="col-lg-9">
-                                {!! Form::select('city', $cities, $selectedCity, ['class' => 'form-control m-b']) !!}
+                                {!! Form::select('city', $cities, $selectedCity, ['class' => 'form-control m-b', 'required']) !!}
                             </div>
                         </div>
 

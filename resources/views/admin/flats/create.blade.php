@@ -27,7 +27,7 @@
                         <div class="form-group">
                             {!! Form::label('name', 'Flat name', ['class' => 'col-lg-3 control-label']) !!}
                             <div class="col-lg-9">
-                                {!! Form::text('name', null, ['class' => 'form-control']) !!}
+                                {!! Form::text('name', null, ['class' => 'form-control', 'required']) !!}
                             </div>
                         </div>
                         <div class="form-group">
@@ -39,34 +39,34 @@
                         <div class="form-group">
                             {!! Form::label('area', 'Flat area m2', ['class' => 'col-lg-3 control-label']) !!}
                             <div class="col-lg-9">
-                                {!! Form::number('area', null, ['class' => 'form-control']) !!}
+                                {!! Form::number('area', null, ['class' => 'form-control', 'required', 'step' => "0.1"]) !!}
                             </div>
                         </div>
                         <div class="form-group">
                             {!! Form::label('rooms', 'Num of rooms', ['class' => 'col-lg-3 control-label']) !!}
                             <div class="col-lg-9">
-                                {!! Form::number('rooms', null, ['class' => 'form-control']) !!}
+                                {!! Form::number('rooms', null, ['class' => 'form-control', 'required']) !!}
                             </div>
                         </div>
 
                         <div class="form-group">
                             {!! Form::label('type', 'Type', ['class' => 'col-lg-3 control-label']) !!}
                             <div class="col-lg-9">
-                                {!! Form::select('type', $flatTypes, null, ['class' => 'form-control m-b']) !!}
+                                {!! Form::select('type', $flatTypes, null, ['class' => 'form-control m-b', 'required']) !!}
                             </div>
                         </div>
 
                         <div class="form-group">
                             {!! Form::label('res_complex', 'Res. Complex', ['class' => 'col-lg-3 control-label']) !!}
                             <div class="col-lg-9">
-                                {!! Form::select('res_complex', $complexes, null, ['class' => 'form-control m-b']) !!}
+                                {!! Form::select('res_complex', $complexes, null, ['class' => 'form-control m-b', 'required']) !!}
                             </div>
                         </div>
 
                         <div class="form-group">
                             {!! Form::label('buildings', 'Buildings', ['class' => 'col-lg-3 control-label']) !!}
                             <div class="col-lg-9">
-                                {!! Form::select('buildings[]', $buildings, null, ['id' =>'buildings', 'class' => 'form-control m-b', 'multiple']) !!}
+                                {!! Form::select('buildings[]', $buildings, null, ['id' =>'buildings', 'class' => 'form-control m-b', 'multiple', 'required']) !!}
                             </div>
                         </div>
 
@@ -78,7 +78,7 @@
                             <div class="col-lg-9">
 
                                 <div class="input-group">
-                                    {!! Form::number('price', null, ['class' => 'form-control']) !!}
+                                    {!! Form::number('price', null, ['class' => 'form-control', 'required']) !!}
 
                                     {{-- default type = 'per_m2 --}}
                                     {!! Form::hidden('price_type', 'per_m2', ['id' =>'price_type']) !!}

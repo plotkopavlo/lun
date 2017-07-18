@@ -58,9 +58,9 @@
                                 <img src="img/page.jpg" class="image-apartaments" alt="">
                             </div>
                             <div class="left-info-block">
-                                <a><p class="info-text">
-                                    {{ $flat->name }}
-                                </p></a>
+                                <p class="info-text">
+                                    <a>{{ $flat->name }}</a> - updated {{ $flat->updated_at->diffForHumans() }}
+                                </p>
                                 <div class="info-text">
                                     <b>Description: </b>{!! $flat->description !!}
                                 </div>
@@ -68,8 +68,8 @@
                                     <b>Complex:</b> {{ $flat->buildings()->first() ? $flat->buildings()->first()->residentialComplex->name : '-' }}
                                 </p>
                                 <p class="info-text">
-                                    <b>City:</b> {{ ($flat->buildings()->first() && $flat->buildings()->first()->residentialComplex->city) ?
-                                        $flat->buildings()->first()->residentialComplex->city->name
+                                    <b>City:</b> {{ isset($flat->city) ?
+                                        $flat->city->name
                                         : '-' }}
                                 </p>
                                 <p class="info-text">
@@ -93,7 +93,7 @@
                         </div>
                     @endforeach
 
-                    {{ $flats->appends(['city' => $cityID, 'rooms' => $rooms])->links() }}
+                    {{ $flats->appends(['rooms' => $rooms, 'city' => $cityID])->links() }}
 
                 </div>
             </div>
