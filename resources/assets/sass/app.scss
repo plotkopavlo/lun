@@ -12,6 +12,10 @@
 
 @import "node_modules/bootstrap-select/sass/bootstrap-select.scss";
 
+ul, li{
+  padding:0;
+  list-style-type: none;
+}
 
 .first-screen {
   background-color: #464646;

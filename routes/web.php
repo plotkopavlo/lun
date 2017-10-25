@@ -13,6 +13,7 @@
 */
 
 Route::resource('/', 'SearchController');
+Route::get('/flats','RestAPI@getFlats');
 
 Auth::routes();
 

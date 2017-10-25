@@ -51,9 +51,13 @@
             <div class="row">
                 <div class="col-sm-6 col-sm-offset-3">
                     <h2 class="header-text">Found <span id="num-of-results">{{ $total }}</span> results</h2>
-
+                    <div class="resualt-vue" id="app">
+                       <apartments-list></apartments-list>
+                    </div>
                     @foreach($flats as $flat)
                         <div class="result-apartments-block">
+                            {{ $flats }}
+
                             <div class="block-img">
                                 <img src="img/page.jpg" class="image-apartaments" alt="">
                             </div>
