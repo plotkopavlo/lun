@@ -1,5 +1,7 @@
 const { mix } = require('laravel-mix');
-
+require("babel-core").transform("code", {
+    presets: ["stage-2"]
+});
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management

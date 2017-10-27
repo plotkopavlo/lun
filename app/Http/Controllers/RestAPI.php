@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Repositories\FlatRepository;
+use App\Repositories\FlatTypeRepository;
+use App\Repositories\CityRepository;
 use Illuminate\Http\Request;
 use App\Repositories\Criteria\Flat\SortByMinPrice;
 use Illuminate\Support\Facades\DB;
@@ -13,10 +15,12 @@ class RestAPI extends Controller
     protected $city;
     protected $flat;
 
-    public function __construct(FlatRepository $flat)
+    public function __construct(FlatRepository $flat,CityRepository $city)
     {
         $this->flat = $flat;
+        $this->city = $city;
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -25,8 +29,8 @@ class RestAPI extends Controller
     public function getFlats(Request $request)
     {
 
-        //$cityID = $request->city  ? $request->city  : null;
-        //$rooms  = $request->rooms ? $request->rooms : null;
+        $cityID = $request->city  ? $request->city  : null;
+        $rooms  = $request->rooms ? $request->rooms : null;
 
         //$this->flat->pushCriteria(new SortByMinPrice());
 
@@ -41,13 +45,18 @@ class RestAPI extends Controller
             $flats->findWhere(['city_id' => $cityID]);
         }*/
 
+
         $flats = $flats->paginate(2);
         foreach ($flats as $flatOne){
             $flatOne->residential_complex = $flatOne->buildings()->first()->residentialComplex;
             $flatOne->buildings =$flatOne->buildings()->get();
             $flatOne->updated = $flatOne->updated_at->diffForHumans();
 
+            $flatOne->cityID = $flatOne->city;
+            dd($this->city);
             $flatOne->city = $flatOne->city->name;
+
+            $flatOne->price_total = $flatOne->price_per_m2*$flatOne->area_m2;
         }
 
         return response()->json( [

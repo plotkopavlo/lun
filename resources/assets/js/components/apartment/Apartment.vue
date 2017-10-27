@@ -31,7 +31,7 @@
             </div>
         </div>
         <div class="apartment-item--right-info">
-            <div class="apartment-item--info-text">{{ flat.price }} $</div>
+            <div class="apartment-item--info-text">{{ flat.price_total }} $</div>
             <div class="apartment-item--info-text">
                 <b>Area: </b> {{ flat.area_m2 }} m2
             </div>
