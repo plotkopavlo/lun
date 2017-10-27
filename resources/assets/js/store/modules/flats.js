@@ -27,7 +27,7 @@ const state = {
 // getters
 const getters = {
     checkoutStatus: (state, getters, rootState) => state.checkoutStatus,
-    flatsFilters: (state, getters, rootState) =>{
+    flatsFilters: (state, getters, rootState) => {
         return state.flatsFilters;
     }
 };
