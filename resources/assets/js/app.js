@@ -33,7 +33,6 @@ $('.selectpicker').selectpicker({
 // }
 
 
-window.Vue = require('vue');
 
 
 /**
@@ -42,9 +41,18 @@ window.Vue = require('vue');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+
+window.Vue = require('vue');
+import Vue from 'vue';
+import Vuex from 'vuex';
+import store from './store';
+
+Vue.use(Vuex);
+
 //Vue.component('example', require('./components/Example.vue'));
 Vue.component('apartments-list', require('./components/apartmentsList/ApartmentsList.vue'));
 
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+    store
 });
