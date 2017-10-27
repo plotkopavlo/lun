@@ -112,6 +112,6 @@
 @endsection
 
 @section('js')
-    {!! Html::script('js/admin/flats/main.js') !!}
+    {!! Html::script('js/admin/flats/index.js') !!}
 @endsection
 

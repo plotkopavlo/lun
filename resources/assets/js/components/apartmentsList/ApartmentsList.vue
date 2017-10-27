@@ -1,6 +1,7 @@
 <template>
    <ul class="apartments-list">
-       <!--<filer></filer>-->
+       <filters></filters>
+
        <apartment v-for="flat in flats" :flat="flat"></apartment>
    </ul>
 </template>

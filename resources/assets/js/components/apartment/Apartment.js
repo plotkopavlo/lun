@@ -1,6 +1,6 @@
 export default {
     mounted() {
-        console.log('Component mounted1.')
+        console.log('Component mounted.');
     },
     props:['flat'],
     created(){
