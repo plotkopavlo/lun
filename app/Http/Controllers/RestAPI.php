@@ -53,7 +53,6 @@ class RestAPI extends Controller
             $flatOne->updated = $flatOne->updated_at->diffForHumans();
 
             $flatOne->cityID = $flatOne->city;
-            dd($this->city);
             $flatOne->city = $flatOne->city->name;
 
             $flatOne->price_total = $flatOne->price_per_m2*$flatOne->area_m2;

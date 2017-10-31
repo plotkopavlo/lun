@@ -1,7 +1,5 @@
 const { mix } = require('laravel-mix');
-require("babel-core").transform("code", {
-    presets: ["stage-2"]
-});
+
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
@@ -14,8 +12,8 @@ require("babel-core").transform("code", {
  */
 
 mix//.js('resources/assets/js/admin/flats/main.js', 'public/js/admin/flats')
-   .js('resources/assets/js/app.js', 'public/js')
-   .sass('resources/assets/sass/app.scss', 'public/css')
+   .js('resources/assets/js/app.js', 'public/js/app.js')
+   .sass('resources/assets/sass/app.scss', 'public/css/app.css')
    .options({
        processCssUrls: false
    });

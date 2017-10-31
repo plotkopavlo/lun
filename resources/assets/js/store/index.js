@@ -7,9 +7,8 @@ import flats from './modules/flats'
 Vue.use(Vuex);
 
 export default new Vuex.Store({
+    strict: process.env.NODE_ENV !== 'production',
     state: {
-        cityID: null,
-        rooms: null
     },
     mutations: {
         flats(state, flats){

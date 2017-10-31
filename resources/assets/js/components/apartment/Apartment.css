@@ -1,5 +1,5 @@
 
-.apartment-item{
+.apartment-item {
     display: flex;
     justify-content: space-between;
 
@@ -14,7 +14,6 @@
     width: 100px;
     height: 100px;
     display: inline-block;
-
 }
 
 .apartment-item--img{
@@ -31,7 +30,7 @@
 
 }
 
-.apartment-item--right-info{
+.apartment-item--right-info {
 }
 
 .apartment-item--info-text{

@@ -8,23 +8,23 @@ import filters from './../filters/Filters.vue';
 export default  {
     name: 'apartmentsList',
 
-    components:{
+    components: {
         apartment: apartment,
-        filters: filters
+        filters:   filters
     },
-    data(){
+    data() {
         return{}
     },
     computed: mapGetters({
-            flats: 'flatsFilters'
+            flats: 'flats'
+    }),
 
-        }),
     created(){
         console.log("YES");
         this.$store.dispatch('getAjaxFlats');
     },
 
     methods: mapActions({
-        getAjaxFlats: 'getAjaxFlats'
+                       getAjaxFlats: 'getAjaxFlats'
     })
 }
