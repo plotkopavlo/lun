@@ -54,5 +54,8 @@ Vue.component('apartments-list', require('./components/apartmentsList/Apartments
 
 const app = new Vue({
     el: '#app',
-    store
+    store,
+    created(){
+        this.$store.dispatch('')
+    }
 });

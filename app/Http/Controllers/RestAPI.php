@@ -77,6 +77,15 @@ class RestAPI extends Controller
         ]);
     }
 
+    public function getSearchCriteria(Request $request)
+    {
+
+
+        return response()->json( [
+            'citiesID' => $citiesID,
+            'roomsMax'  => $roomsMax,
+        ]);
+    }
     /**
      * Show the form for creating a new resource.
      *

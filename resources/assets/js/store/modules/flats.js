@@ -17,10 +17,13 @@ const state = {
 
     checkoutStatus: null,
 
+    roomsMax: 0,
+
     citiesID: [
         {
             id: 0,
-            name:'All'
+            name:'Any',
+            selected: true
         }
 
     ],
@@ -47,17 +50,65 @@ const state = {
 // getters
 const getters = {
 
+    flats: (state, getters, rootState) => state.flats,
+
+    checkoutStatus: (state, getters, rootState) => state.checkoutStatus,
+
+    //filter
     priceSortIndex: (state,getters,rootState) => state.priceFilter.sortIndex,
 
     areaSortIndex: (state,getters,rootState) => state.areaFilter.sortIndex,
 
-    checkoutStatus: (state, getters, rootState) => state.checkoutStatus,
+    //search
 
-    flats: (state, getters, rootState) => state.flats
+    citiesID:(state,getters,rootState) => state.citiesID,
+
+    cityID:(state,getters,rootState) => state.searchCriteria.cityID,
+
+    roomsMax:(state,getters,rootState) => state.roomsMax,
+
+    rooms:(state,getters,rootState) => state.searchCriteria.rooms,
+
+
+
 };
 
 // actions
 const actions = {
+
+    searchCriteriaAJAX({ state, commit, rootState }) {
+        axios.get('/searchCriteria')
+            .then((response) => {
+                let data = response.data;
+
+                commit({
+                    type: types.REWRITE_CITIES_ID,
+                    citiesID: data.citiesID
+                });
+
+                commit({
+                    type: types.REWRITE_MAX_ROOM,
+                    roomsMax: data.roomsMax
+                });
+            })
+            .error((error) => {
+                console.error(error);
+            })
+    },
+
+    cityIDChange({ state, commit, rootState }, event) {
+        commit({
+            type: types.REWRITE_SEARCH_CRITERIA,
+            cityID: event.target.value
+        })
+    },
+
+    roomsChange({ state, commit, rootState }, event) {
+        commit({
+            type: types.REWRITE_SEARCH_CRITERIA,
+            rooms: event.target.value
+        })
+    },
 
     sortByPrice({ state, commit, rootState }, event) {
         commit({
@@ -145,15 +196,14 @@ const mutations = {
             state.priceFilter.sortIndex = data.sortIndex;
             console.log(state.priceFilter.sortIndex);
         }
-        //
-        // if(data.min) {
-        //     state.priceFilter.min = data.min;
-        // }
-        //
-        // if(data.max) {
-        //     state.priceFilter.min = data.max;
-        // }
 
+        if(data.min) {
+            state.priceFilter.min = data.min;
+        }
+
+        if(data.max) {
+            state.priceFilter.min = data.max;
+        }
 
     },
 
@@ -169,7 +219,25 @@ const mutations = {
         if(data.max) {
             state.areaFilter.min = data.max;
         }
-    }
+    },
+
+    [types.REWRITE_CITIES_ID] (state, data) {
+        state.citiesID = data.citiesID
+    },
+
+    [types.REWRITE_MAX_ROOM] (state, data) {
+        state.roomsMax = data.roomsMax
+    },
+
+    [types.REWRITE_SEARCH_CRITERIA] (state, data) {
+        if(data.rooms) {
+            state.searchCriteria.rooms = data.rooms;
+        }
+
+        if(data.cityID) {
+            state.searchCriteria.cityID = data.cityID;
+        }
+    },
 };
 
 export default {

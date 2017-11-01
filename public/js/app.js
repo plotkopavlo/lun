@@ -12835,7 +12835,7 @@ __webpack_require__(42);
 // require('./jquery.simplePagination.js');
 
 $('.selectpicker').selectpicker({
-  style: 'btn-info-select'
+    style: 'btn-info-select'
 });
 
 // $(function() {
@@ -12873,8 +12873,11 @@ _vue2.default.use(_vuex2.default);
 _vue2.default.component('apartments-list', __webpack_require__(51));
 
 var app = new _vue2.default({
-  el: '#app',
-  store: _store2.default
+    el: '#app',
+    store: _store2.default,
+    created: function created() {
+        this.$store.dispatch('');
+    }
 });
 
 /***/ }),
@@ -13978,9 +13981,12 @@ var state = {
 
     checkoutStatus: null,
 
+    roomsMax: 0,
+
     citiesID: [{
         id: 0,
-        name: 'All'
+        name: 'Any',
+        selected: true
     }],
 
     searchCriteria: {
@@ -14005,6 +14011,15 @@ var state = {
 // getters
 var getters = {
 
+    flats: function flats(state, getters, rootState) {
+        return state.flats;
+    },
+
+    checkoutStatus: function checkoutStatus(state, getters, rootState) {
+        return state.checkoutStatus;
+    },
+
+    //filter
     priceSortIndex: function priceSortIndex(state, getters, rootState) {
         return state.priceFilter.sortIndex;
     },
@@ -14013,21 +14028,73 @@ var getters = {
         return state.areaFilter.sortIndex;
     },
 
-    checkoutStatus: function checkoutStatus(state, getters, rootState) {
-        return state.checkoutStatus;
+    //search
+
+    citiesID: function citiesID(state, getters, rootState) {
+        return state.citiesID;
     },
 
-    flats: function flats(state, getters, rootState) {
-        return state.flats;
+    cityID: function cityID(state, getters, rootState) {
+        return state.searchCriteria.cityID;
+    },
+
+    roomsMax: function roomsMax(state, getters, rootState) {
+        return state.roomsMax;
+    },
+
+    rooms: function rooms(state, getters, rootState) {
+        return state.searchCriteria.rooms;
     }
+
 };
 
 // actions
 var actions = {
-    sortByPrice: function sortByPrice(_ref, event) {
+    searchCriteriaAJAX: function searchCriteriaAJAX(_ref) {
         var state = _ref.state,
             commit = _ref.commit,
             rootState = _ref.rootState;
+
+        axios.get('/searchCriteria').then(function (response) {
+            var data = response.data;
+
+            commit({
+                type: types.REWRITE_CITIES_ID,
+                citiesID: data.citiesID
+            });
+
+            commit({
+                type: types.REWRITE_MAX_ROOM,
+                roomsMax: data.roomsMax
+            });
+        }).error(function (error) {
+            console.error(error);
+        });
+    },
+    cityIDChange: function cityIDChange(_ref2, event) {
+        var state = _ref2.state,
+            commit = _ref2.commit,
+            rootState = _ref2.rootState;
+
+        commit({
+            type: types.REWRITE_SEARCH_CRITERIA,
+            cityID: event.target.value
+        });
+    },
+    roomsChange: function roomsChange(_ref3, event) {
+        var state = _ref3.state,
+            commit = _ref3.commit,
+            rootState = _ref3.rootState;
+
+        commit({
+            type: types.REWRITE_SEARCH_CRITERIA,
+            rooms: event.target.value
+        });
+    },
+    sortByPrice: function sortByPrice(_ref4, event) {
+        var state = _ref4.state,
+            commit = _ref4.commit,
+            rootState = _ref4.rootState;
 
         commit({
             type: types.REWRITE_PRICE,
@@ -14047,10 +14114,10 @@ var actions = {
 
         });
     },
-    sortByArea: function sortByArea(_ref2, event) {
-        var state = _ref2.state,
-            commit = _ref2.commit,
-            rootState = _ref2.rootState;
+    sortByArea: function sortByArea(_ref5, event) {
+        var state = _ref5.state,
+            commit = _ref5.commit,
+            rootState = _ref5.rootState;
 
         commit({
             type: types.REWRITE_AREA,
@@ -14069,10 +14136,10 @@ var actions = {
         //
         // })
     },
-    getAjaxFlats: function getAjaxFlats(_ref3, body) {
-        var state = _ref3.state,
-            commit = _ref3.commit,
-            rootState = _ref3.rootState;
+    getAjaxFlats: function getAjaxFlats(_ref6, body) {
+        var state = _ref6.state,
+            commit = _ref6.commit,
+            rootState = _ref6.rootState;
 
 
         return axios.get('/flats', body).then(function (response) {
@@ -14107,15 +14174,14 @@ var mutations = (_mutations = {}, _defineProperty(_mutations, types.REWRITE_FLAT
         state.priceFilter.sortIndex = data.sortIndex;
         console.log(state.priceFilter.sortIndex);
     }
-    //
-    // if(data.min) {
-    //     state.priceFilter.min = data.min;
-    // }
-    //
-    // if(data.max) {
-    //     state.priceFilter.min = data.max;
-    // }
 
+    if (data.min) {
+        state.priceFilter.min = data.min;
+    }
+
+    if (data.max) {
+        state.priceFilter.min = data.max;
+    }
 }), _defineProperty(_mutations, types.REWRITE_AREA, function (state, data) {
     if (data.sortIndex) {
         state.areaFilter.sortIndex = data.sortIndex;
@@ -14127,6 +14193,18 @@ var mutations = (_mutations = {}, _defineProperty(_mutations, types.REWRITE_FLAT
 
     if (data.max) {
         state.areaFilter.min = data.max;
+    }
+}), _defineProperty(_mutations, types.REWRITE_CITIES_ID, function (state, data) {
+    state.citiesID = data.citiesID;
+}), _defineProperty(_mutations, types.REWRITE_MAX_ROOM, function (state, data) {
+    state.roomsMax = data.roomsMax;
+}), _defineProperty(_mutations, types.REWRITE_SEARCH_CRITERIA, function (state, data) {
+    if (data.rooms) {
+        state.searchCriteria.rooms = data.rooms;
+    }
+
+    if (data.cityID) {
+        state.searchCriteria.cityID = data.cityID;
     }
 }), _mutations);
 
@@ -14150,6 +14228,10 @@ Object.defineProperty(exports, "__esModule", {
 var REWRITE_FLATS = exports.REWRITE_FLATS = 'REWRITE_FLATS';
 var REWRITE_PRICE = exports.REWRITE_PRICE = 'REWRITE_PRICE';
 var REWRITE_AREA = exports.REWRITE_AREA = 'REWRITE_AREA';
+var REWRITE_MAX_ROOM = exports.REWRITE_MAX_ROOM = 'REWRITE_MAX_ROOM';
+var REWRITE_CITIES_ID = exports.REWRITE_CITIES_ID = 'REWRITE_CITES_ID';
+var REWRITE_SEARCH_CRITERIA = exports.REWRITE_SEARCH_CRITERIA = 'REWRITE_SEARCH_CRITERIA';
+
 var CHECKOUT_REQUEST = exports.CHECKOUT_REQUEST = 'CHECKOUT_REQUEST';
 var CHECKOUT_SUCCESS = exports.CHECKOUT_SUCCESS = 'CHECKOUT_SUCCESS';
 var CHECKOUT_FAILURE = exports.CHECKOUT_FAILURE = 'CHECKOUT_FAILURE';
