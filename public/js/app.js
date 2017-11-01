@@ -377,13 +377,14 @@ module.exports = {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* unused harmony export Store */
-/* unused harmony export install */
-/* unused harmony export mapState */
-/* unused harmony export mapMutations */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return mapGetters; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return mapActions; });
-/* unused harmony export createNamespacedHelpers */
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Store", function() { return Store; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "install", function() { return install; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "mapState", function() { return mapState; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "mapMutations", function() { return mapMutations; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "mapGetters", function() { return mapGetters; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "mapActions", function() { return mapActions; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createNamespacedHelpers", function() { return createNamespacedHelpers; });
 /**
  * vuex v3.0.0
  * (c) 2017 Evan You
@@ -1314,7 +1315,7 @@ var index_esm = {
 };
 
 
-/* harmony default export */ __webpack_exports__["a"] = (index_esm);
+/* harmony default export */ __webpack_exports__["default"] = (index_esm);
 
 
 /***/ }),
@@ -12804,14 +12805,24 @@ process.umask = function() { return 0; };
 
 /***/ }),
 /* 14 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__store__ = __webpack_require__(38);
+
+
+var _vue = __webpack_require__(6);
+
+var _vue2 = _interopRequireDefault(_vue);
+
+var _vuex = __webpack_require__(1);
+
+var _vuex2 = _interopRequireDefault(_vuex);
+
+var _store = __webpack_require__(38);
+
+var _store2 = _interopRequireDefault(_store);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -12856,16 +12867,14 @@ $('.selectpicker').selectpicker({
 window.Vue = __webpack_require__(6);
 
 
-
-
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */]);
+_vue2.default.use(_vuex2.default);
 
 //Vue.component('example', require('./components/Example.vue'));
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('apartments-list', __webpack_require__(51));
+_vue2.default.component('apartments-list', __webpack_require__(51));
 
-var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
+var app = new _vue2.default({
   el: '#app',
-  store: __WEBPACK_IMPORTED_MODULE_2__store__["a" /* default */]
+  store: _store2.default
 });
 
 /***/ }),
@@ -13719,6 +13728,8 @@ module.exports = function spread(callback) {
 /* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
+"use strict";
+
 
 window._ = __webpack_require__(47);
 
@@ -13775,158 +13786,180 @@ if (token) {
 
 /***/ }),
 /* 35 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony default export */ __webpack_exports__["default"] = ({
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = {
     mounted: function mounted() {
         console.log('Component mounted.');
     },
 
+
     props: ['flat'],
+
     created: function created() {
         console.log(this.flat);
     }
-});
+};
 
 /***/ }),
 /* 36 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__apartment_Apartment_vue__ = __webpack_require__(50);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__apartment_Apartment_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__apartment_Apartment_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__filters_Filters_vue__ = __webpack_require__(52);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__filters_Filters_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__filters_Filters_vue__);
 
 
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
 
+var _vuex = __webpack_require__(1);
 
+var _Apartment = __webpack_require__(50);
 
+var _Apartment2 = _interopRequireDefault(_Apartment);
 
-/* harmony default export */ __webpack_exports__["default"] = ({
+var _Filters = __webpack_require__(52);
+
+var _Filters2 = _interopRequireDefault(_Filters);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = {
     name: 'apartmentsList',
 
     components: {
-        apartment: __WEBPACK_IMPORTED_MODULE_1__apartment_Apartment_vue___default.a,
-        filters: __WEBPACK_IMPORTED_MODULE_2__filters_Filters_vue___default.a
+        apartment: _Apartment2.default,
+        filters: _Filters2.default
     },
     data: function data() {
         return {};
     },
 
-    computed: __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapGetters */])({
-        flats: 'flatsFilters'
-
+    computed: (0, _vuex.mapGetters)({
+        flats: 'flats'
     }),
+
     created: function created() {
         console.log("YES");
         this.$store.dispatch('getAjaxFlats');
     },
 
 
-    methods: __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_vuex__["c" /* mapActions */])({
+    methods: (0, _vuex.mapActions)({
         getAjaxFlats: 'getAjaxFlats'
     })
-});
+};
 
 /***/ }),
 /* 37 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(1);
 
 
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
 
-/* harmony default export */ __webpack_exports__["default"] = ({
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _vuex = __webpack_require__(1);
+
+exports.default = {
+
     name: 'filters',
     mounted: function mounted() {
         console.log('Component mounted filters.');
     },
 
-    computed: __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapGetters */])({
-        flats: 'flats'
 
-    }),
+    computed: _extends({}, (0, _vuex.mapGetters)({
+        priceSortIndex: 'priceSortIndex',
+        areaSortIndex: 'areaSortIndex'
+    })),
+
     data: function data() {
-        return {
-            SPFCTE: true
-
-        };
+        return {};
     },
     created: function created() {},
 
-    watch: {
-        SPFCTE: function SPFCTE(optionValue) {
-            var SPFCTE = true;
-            if (optionValue === "false") {
-                SPFCTE = false;
-            }
-            var array = flats;
 
-            array.sort(function (a, b) {
+    methods: _extends({}, (0, _vuex.mapActions)({
+        sortByPrice: 'sortByPrice',
+        sortByArea: 'sortByArea'
+    }))
 
-                var max = a.price_total - b.price_total > 0 ? true : false;
-                console.log(window.max = max);
-                console.log(window.SPFCTE = SPFCTE);
-                console.log(max == SPFCTE);
-                return max === SPFCTE;
-            });
-            this.$store.commit(types.REWRITE_FLATS, {
-                flats: array
-            });
-        }
-    }
-});
+};
 
 /***/ }),
 /* 38 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__modules_flats__ = __webpack_require__(39);
 
 
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _vue = __webpack_require__(6);
+
+var _vue2 = _interopRequireDefault(_vue);
+
+var _vuex = __webpack_require__(1);
+
+var _vuex2 = _interopRequireDefault(_vuex);
+
+var _flats2 = __webpack_require__(39);
+
+var _flats3 = _interopRequireDefault(_flats2);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // import * as actions from './actions'
 // import * as getters from './getters'
 
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */]);
+_vue2.default.use(_vuex2.default);
 
-/* harmony default export */ __webpack_exports__["a"] = (new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
-    state: {
-        cityID: null,
-        rooms: null
-    },
+exports.default = new _vuex2.default.Store({
+    strict: "development" !== 'production',
+    state: {},
     mutations: {
         flats: function flats(state, _flats) {
             state.flats = _flats;
         }
     },
     modules: {
-        flats: __WEBPACK_IMPORTED_MODULE_2__modules_flats__["a" /* default */]
+        flats: _flats3.default
     }
-}));
+});
 
 /***/ }),
 /* 39 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mutation_types__ = __webpack_require__(40);
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
 var _mutations;
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+var _mutationTypes = __webpack_require__(40);
 
-// import shop from '../../api/shop'
+var types = _interopRequireWildcard(_mutationTypes);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; } // import shop from '../../api/shop'
 
 
 // initial state
@@ -13935,96 +13968,192 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  *
  * @type {{flats: Array, flatsFilters: Array, checkoutStatus: null, citiesID: {}}}
  */
+
+/**
+ *
+ * @type {{flats: Array, checkoutStatus: null, citiesID: [{id: number, name: string}], searchCriteria: {cityID: number, rooms: number}, priceRange: {min: number, max: number, isDESC: boolean}, areaRange: {min: number, max: number, isDESC: boolean}}}
+ */
 var state = {
     flats: [],
-    flatsFilters: [],
+
     checkoutStatus: null,
-    citiesID: {},
-    roomsType: {},
-    PriceRange: {
-        min: null,
-        max: null
+
+    citiesID: [{
+        id: 0,
+        name: 'All'
+    }],
+
+    searchCriteria: {
+        cityID: 0,
+        rooms: 0
     },
-    AreaRange: {
-        min: null,
-        max: null
+
+    priceFilter: {
+        min: 0,
+        max: 0,
+        sortIndex: ""
+    },
+
+    areaFilter: {
+        min: 0,
+        max: 0,
+        sortIndex: ""
     }
 
 };
 
 // getters
 var getters = {
+
+    priceSortIndex: function priceSortIndex(state, getters, rootState) {
+        return state.priceFilter.sortIndex;
+    },
+
+    areaSortIndex: function areaSortIndex(state, getters, rootState) {
+        return state.areaFilter.sortIndex;
+    },
+
     checkoutStatus: function checkoutStatus(state, getters, rootState) {
         return state.checkoutStatus;
     },
-    flatsFilters: function flatsFilters(state, getters, rootState) {
-        return state.flatsFilters;
+
+    flats: function flats(state, getters, rootState) {
+        return state.flats;
     }
 };
 
 // actions
 var actions = {
-    getAjaxFlats: function getAjaxFlats(_ref) {
+    sortByPrice: function sortByPrice(_ref, event) {
         var state = _ref.state,
             commit = _ref.commit,
             rootState = _ref.rootState;
 
-        return axios.get('/flats').then(function (response) {
-            window.flats = response.data.flats.data;
-            commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["a" /* CHECKOUT_SUCCESS */]);
-            commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["b" /* REWRITE_FLATS */], {
-                flats: response.data.flats.data
-            });
-            commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["c" /* REWRITE_FLATS_FILTERS */], {
+        commit({
+            type: types.REWRITE_PRICE,
+            min: null,
+            max: null,
+            sortIndex: event.target.value
+        });
+
+        console.log(this);
+        this._actions.getAjaxFlats({
+            sort: {
+                type: 'price',
+                sortIndex: state.priceFilter.sortIndex
+            },
+
+            searchCriteria: state.searchCriteria
+
+        });
+    },
+    sortByArea: function sortByArea(_ref2, event) {
+        var state = _ref2.state,
+            commit = _ref2.commit,
+            rootState = _ref2.rootState;
+
+        commit({
+            type: types.REWRITE_AREA,
+            min: null,
+            max: null,
+            sortIndex: event.target.value
+        });
+
+        // getAjaxFlats({
+        //     sort: {
+        //         type: 'area',
+        //         isDESC: state.priceArea.isDESC
+        //     },
+        //
+        //     searchCriteria: state.searchCriteria
+        //
+        // })
+    },
+    getAjaxFlats: function getAjaxFlats(_ref3, body) {
+        var state = _ref3.state,
+            commit = _ref3.commit,
+            rootState = _ref3.rootState;
+
+
+        return axios.get('/flats', body).then(function (response) {
+
+            commit(types.CHECKOUT_SUCCESS);
+
+            commit({
+                type: types.REWRITE_FLATS,
                 flats: response.data.flats.data
             });
         }).catch(function (error) {
-            commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["d" /* CHECKOUT_FAILURE */]);
+            commit(types.CHECKOUT_FAILURE);
             console.error(error);
         });
     }
 };
 
 // mutations
-var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["b" /* REWRITE_FLATS */], function (state, data) {
+var mutations = (_mutations = {}, _defineProperty(_mutations, types.REWRITE_FLATS, function (state, data) {
     state.flats = data.flats;
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["c" /* REWRITE_FLATS_FILTERS */], function (state, data) {
-    state.flatsFilters = data.flats;
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["e" /* CHECKOUT_REQUEST */], function (state) {
-    // clear cart
+}), _defineProperty(_mutations, types.CHECKOUT_REQUEST, function (state) {
     state.flats = [];
-    state.flatsFilters = [];
     state.checkoutStatus = null;
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["a" /* CHECKOUT_SUCCESS */], function (state) {
+}), _defineProperty(_mutations, types.CHECKOUT_SUCCESS, function (state) {
     state.checkoutStatus = 'successful';
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["d" /* CHECKOUT_FAILURE */], function (state) {
+}), _defineProperty(_mutations, types.CHECKOUT_FAILURE, function (state) {
     state.checkoutStatus = 'failed';
+}), _defineProperty(_mutations, types.REWRITE_PRICE, function (state, data) {
+
+    if (data.sortIndex) {
+        console.log(data);
+        state.priceFilter.sortIndex = data.sortIndex;
+        console.log(state.priceFilter.sortIndex);
+    }
+    //
+    // if(data.min) {
+    //     state.priceFilter.min = data.min;
+    // }
+    //
+    // if(data.max) {
+    //     state.priceFilter.min = data.max;
+    // }
+
+}), _defineProperty(_mutations, types.REWRITE_AREA, function (state, data) {
+    if (data.sortIndex) {
+        state.areaFilter.sortIndex = data.sortIndex;
+    }
+
+    if (data.min) {
+        state.areaFilter.min = data.min;
+    }
+
+    if (data.max) {
+        state.areaFilter.min = data.max;
+    }
 }), _mutations);
 
-/* harmony default export */ __webpack_exports__["a"] = ({
+exports.default = {
     state: state,
     getters: getters,
     actions: actions,
     mutations: mutations
-});
+};
 
 /***/ }),
 /* 40 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return REWRITE_FLATS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return REWRITE_FLATS_FILTERS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return CHECKOUT_REQUEST; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CHECKOUT_SUCCESS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return CHECKOUT_FAILURE; });
-/* unused harmony export RECEIVE_PRODUCTS */
-var REWRITE_FLATS = 'REWRITE_FLATS';
-var REWRITE_FLATS_FILTERS = 'REWRITE_FLATS_FILTERS';
-var CHECKOUT_REQUEST = 'CHECKOUT_REQUEST';
-var CHECKOUT_SUCCESS = 'CHECKOUT_SUCCESS';
-var CHECKOUT_FAILURE = 'CHECKOUT_FAILURE';
-var RECEIVE_PRODUCTS = 'RECEIVE_PRODUCTS';
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var REWRITE_FLATS = exports.REWRITE_FLATS = 'REWRITE_FLATS';
+var REWRITE_PRICE = exports.REWRITE_PRICE = 'REWRITE_PRICE';
+var REWRITE_AREA = exports.REWRITE_AREA = 'REWRITE_AREA';
+var CHECKOUT_REQUEST = exports.CHECKOUT_REQUEST = 'CHECKOUT_REQUEST';
+var CHECKOUT_SUCCESS = exports.CHECKOUT_SUCCESS = 'CHECKOUT_SUCCESS';
+var CHECKOUT_FAILURE = exports.CHECKOUT_FAILURE = 'CHECKOUT_FAILURE';
+var RECEIVE_PRODUCTS = exports.RECEIVE_PRODUCTS = 'RECEIVE_PRODUCTS';
 
 /***/ }),
 /* 41 */
@@ -18266,14 +18395,14 @@ if (typeof jQuery === 'undefined') {
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(3)();
-exports.push([module.i, "\n.apartment-item{\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: justify;\n        -ms-flex-pack: justify;\n            justify-content: space-between;\n\n    width: 100%;\n\n    margin-bottom: 20px;\n\n    border-bottom: 1px solid #ccd0d2;\n}\n.apartment-item--img-container{\n    width: 100px;\n    height: 100px;\n    display: inline-block;\n}\n.apartment-item--img{\n    width:100%;\n    height:100%;\n    -o-object-fit: cover;\n       object-fit: cover;\n    overflow: hidden;\n}\n.apartment-item--left-info{\n    max-width: 340px;\n    margin-left: 20px;\n}\n.apartment-item--right-info{\n}\n.apartment-item--info-text{\n    margin-bottom: 10px;\n}", ""]);
+exports.push([module.i, "\n.apartment-item {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: justify;\n        -ms-flex-pack: justify;\n            justify-content: space-between;\n\n    width: 100%;\n\n    margin-bottom: 20px;\n\n    border-bottom: 1px solid #ccd0d2;\n}\n.apartment-item--img-container{\n    width: 100px;\n    height: 100px;\n    display: inline-block;\n}\n.apartment-item--img{\n    width:100%;\n    height:100%;\n    -o-object-fit: cover;\n       object-fit: cover;\n    overflow: hidden;\n}\n.apartment-item--left-info{\n    max-width: 340px;\n    margin-left: 20px;\n}\n.apartment-item--right-info {\n}\n.apartment-item--info-text{\n    margin-bottom: 10px;\n}", ""]);
 
 /***/ }),
 /* 44 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(3)();
-exports.push([module.i, "", ""]);
+exports.push([module.i, "\n.filters{\n    margin-bottom:20px;\n}", ""]);
 
 /***/ }),
 /* 45 */
@@ -46059,42 +46188,52 @@ if (false) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('form', {
-    staticClass: "filters-for-flat",
+    staticClass: "filters",
     attrs: {
-      "action": "none"
+      "action": "none",
+      "name": "price"
     }
   }, [_c('select', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.SPFCTE),
-      expression: "SPFCTE"
-    }],
+    staticClass: "filters--sort",
     attrs: {
-      "name": "Price",
-      "id": ""
+      "name": "price"
+    },
+    domProps: {
+      "value": _vm.priceSortIndex
     },
     on: {
-      "change": function($event) {
-        var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
-          return o.selected
-        }).map(function(o) {
-          var val = "_value" in o ? o._value : o.value;
-          return val
-        });
-        _vm.SPFCTE = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-      }
+      "input": _vm.sortByPrice
     }
   }, [_c('option', {
     attrs: {
-      "value": "true",
+      "value": "asc",
       "selected": ""
     }
   }, [_vm._v("From chip to expensive")]), _vm._v(" "), _c('option', {
     attrs: {
-      "value": "false"
+      "value": "desc"
     }
-  }, [_vm._v("From expensive to chip")])])])
+  }, [_vm._v("From expensive to chip")])]), _vm._v(" "), _c('select', {
+    staticClass: "filters--sort",
+    attrs: {
+      "name": "area"
+    },
+    domProps: {
+      "value": _vm.areaSortIndex
+    },
+    on: {
+      "input": _vm.sortByArea
+    }
+  }, [_c('option', {
+    attrs: {
+      "value": "asc",
+      "selected": ""
+    }
+  }, [_vm._v("From small to big")]), _vm._v(" "), _c('option', {
+    attrs: {
+      "value": "desc"
+    }
+  }, [_vm._v("From big to small")])])])
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {

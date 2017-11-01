@@ -7,44 +7,109 @@ import * as types from '../mutation-types'
  *
  * @type {{flats: Array, flatsFilters: Array, checkoutStatus: null, citiesID: {}}}
  */
+
+/**
+ *
+ * @type {{flats: Array, checkoutStatus: null, citiesID: [{id: number, name: string}], searchCriteria: {cityID: number, rooms: number}, priceRange: {min: number, max: number, isDESC: boolean}, areaRange: {min: number, max: number, isDESC: boolean}}}
+ */
 const state = {
     flats: [],
-    flatsFilters:[],
+
     checkoutStatus: null,
-    citiesID: {},
-    roomsType:{},
-    PriceRange:{
-        min: null,
-        max: null
+
+    citiesID: [
+        {
+            id: 0,
+            name:'All'
+        }
+
+    ],
+
+    searchCriteria: {
+        cityID: 0,
+        rooms: 0
     },
-    AreaRange:{
-        min: null,
-        max: null
+
+    priceFilter: {
+        min: 0,
+        max: 0,
+        sortIndex: "",
+    },
+
+    areaFilter:{
+        min: 0,
+        max: 0,
+        sortIndex: ""
     }
 
 };
 
 // getters
 const getters = {
+
+    priceSortIndex: (state,getters,rootState) => state.priceFilter.sortIndex,
+
+    areaSortIndex: (state,getters,rootState) => state.areaFilter.sortIndex,
+
     checkoutStatus: (state, getters, rootState) => state.checkoutStatus,
-    flatsFilters: (state, getters, rootState) => {
-        return state.flatsFilters;
-    }
+
+    flats: (state, getters, rootState) => state.flats
 };
 
 // actions
 const actions = {
-    getAjaxFlats( { state, commit, rootState }){
-        return axios.get('/flats')
+
+    sortByPrice({ state, commit, rootState }, event) {
+        commit({
+            type: types.REWRITE_PRICE,
+            min: null,
+            max: null,
+            sortIndex : event.target.value
+        });
+
+        console.log(this);
+        this._actions.getAjaxFlats({
+            sort: {
+                type: 'price',
+                sortIndex: state.priceFilter.sortIndex
+            },
+
+            searchCriteria: state.searchCriteria
+
+        })
+    },
+
+    sortByArea({ state, commit, rootState }, event) {
+        commit({
+            type: types.REWRITE_AREA,
+            min: null,
+            max: null,
+            sortIndex : event.target.value
+        });
+
+        // getAjaxFlats({
+        //     sort: {
+        //         type: 'area',
+        //         isDESC: state.priceArea.isDESC
+        //     },
+        //
+        //     searchCriteria: state.searchCriteria
+        //
+        // })
+    },
+
+    getAjaxFlats( { state, commit, rootState }, body) {
+
+        return axios.get('/flats', body)
             .then(response => {
-                window.flats= response.data.flats.data;
+
                 commit(types.CHECKOUT_SUCCESS);
-                commit(types.REWRITE_FLATS,{
+
+                commit({
+                    type:types.REWRITE_FLATS,
                     flats: response.data.flats.data
                 });
-                commit(types.REWRITE_FLATS_FILTERS,{
-                    flats: response.data.flats.data
-                });
+
             })
             .catch(error => {
                 commit(types.CHECKOUT_FAILURE);
@@ -59,14 +124,9 @@ const mutations = {
     [types.REWRITE_FLATS] (state, data) {
         state.flats = data.flats
     },
-    [types.REWRITE_FLATS_FILTERS] (state, data) {
-        state.flatsFilters = data.flats
-    },
 
     [types.CHECKOUT_REQUEST] (state) {
-        // clear cart
         state.flats = [];
-        state.flatsFilters = [];
         state.checkoutStatus = null
     },
 
@@ -76,6 +136,39 @@ const mutations = {
 
     [types.CHECKOUT_FAILURE] (state) {
         state.checkoutStatus = 'failed'
+    },
+
+    [types.REWRITE_PRICE] (state, data) {
+
+         if(data.sortIndex) {
+            console.log(data);
+            state.priceFilter.sortIndex = data.sortIndex;
+            console.log(state.priceFilter.sortIndex);
+        }
+        //
+        // if(data.min) {
+        //     state.priceFilter.min = data.min;
+        // }
+        //
+        // if(data.max) {
+        //     state.priceFilter.min = data.max;
+        // }
+
+
+    },
+
+    [types.REWRITE_AREA] (state, data) {
+        if(data.sortIndex) {
+            state.areaFilter.sortIndex = data.sortIndex;
+        }
+
+        if(data.min) {
+            state.areaFilter.min = data.min;
+        }
+
+        if(data.max) {
+            state.areaFilter.min = data.max;
+        }
     }
 };
 

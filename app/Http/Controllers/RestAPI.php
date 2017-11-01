@@ -6,7 +6,7 @@ use App\Repositories\FlatRepository;
 use App\Repositories\FlatTypeRepository;
 use App\Repositories\CityRepository;
 use Illuminate\Http\Request;
-use App\Repositories\Criteria\Flat\SortByMinPrice;
+use App\Repositories\Criteria\Flat\SortByPrice;
 use Illuminate\Support\Facades\DB;
 
 class RestAPI extends Controller
@@ -29,21 +29,31 @@ class RestAPI extends Controller
     public function getFlats(Request $request)
     {
 
-        $cityID = $request->city  ? $request->city  : null;
-        $rooms  = $request->rooms ? $request->rooms : null;
+        $cityID = 0;
+        $rooms  = 0;
 
-        //$this->flat->pushCriteria(new SortByMinPrice());
+        if( $request->searchCriteria){
+            dd($request->searchCriteria);
+            $cityID = $request->searchCriteria->city ? $request->city : 0;
+            $rooms = $request->searchCriteria->rooms ? $request->rooms : 0;
+        }
+//        $sort  = $request->sort ? $request->sort : null;
+//
+//        // TODO: use one method
+//        if ($sort.type == "price") {
+//            $this->flat->pushCriteria(new SortByPrice());
+//        }
 
         $flats = $this->flat;
 
 
-        /*if ($rooms) {
-            $flats->findWhere(['num_of_rooms' => $rooms]);
-        }
-
-        if ($cityID) {
-            $flats->findWhere(['city_id' => $cityID]);
-        }*/
+//        if ($rooms) {
+//            $flats->findWhere(['num_of_rooms' => $rooms]);
+//        }
+//
+//        if ($cityID) {
+//            $flats->findWhere(['city_id' => $cityID]);
+//        }
 
 
         $flats = $flats->paginate(2);
@@ -53,7 +63,6 @@ class RestAPI extends Controller
             $flatOne->updated = $flatOne->updated_at->diffForHumans();
 
             $flatOne->cityID = $flatOne->city;
-            dd($this->city);
             $flatOne->city = $flatOne->city->name;
 
             $flatOne->price_total = $flatOne->price_per_m2*$flatOne->area_m2;

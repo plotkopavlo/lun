@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Repositories\FlatRepository;
 use Illuminate\Http\Request;
-use App\Repositories\Criteria\Flat\SortByMinPrice;
+use App\Repositories\Criteria\Flat\SortByPrice;
 use Illuminate\Support\Facades\DB;
 
 class SearchController extends Controller
@@ -28,7 +28,7 @@ class SearchController extends Controller
         $cityID = $request->city  ? $request->city  : null;
         $rooms  = $request->rooms ? $request->rooms : null;
 
-        $this->flat->pushCriteria(new SortByMinPrice());
+//        $this->flat->pushCriteria(new SortByPrice());
 
         $flats = $this->flat;
 
