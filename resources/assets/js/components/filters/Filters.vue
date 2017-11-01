@@ -1,14 +1,14 @@
 <template>
     <form action="none" name="price" class="filters">
-        <select :value="priceIsDESC" @input="sortByPrice" name="price" class="filters--sort-by-price" >
-            <option :value="true" selected>From chip to expensive</option>
-            <option :value="false">From expensive to chip</option>
+        <select :value="priceSortIndex" @input="sortByPrice" name="price" class="filters--sort" >
+            <option value="asc" selected>From chip to expensive</option>
+            <option value="desc">From expensive to chip</option>
 
         </select>
 
-        <select :value="areaIsDESC"  @input="sortByArea"  name="area" class="filters--sort-by-price" >
-            <option :value="true" selected>From small to big</option>
-            <option :value="false">From big to small</option>
+        <select :value="areaSortIndex"  @input="sortByArea"  name="area" class="filters--sort" >
+            <option value="asc" selected>From small to big</option>
+            <option value="desc">From big to small</option>
         </select>
 
     </form>

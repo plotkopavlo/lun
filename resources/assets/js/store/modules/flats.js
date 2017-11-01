@@ -30,16 +30,16 @@ const state = {
         rooms: 0
     },
 
-    priceRange: {
+    priceFilter: {
         min: 0,
         max: 0,
-        isDESC: false,
+        sortIndex: "",
     },
 
-    areaRange:{
+    areaFilter:{
         min: 0,
         max: 0,
-        isDESC: false
+        sortIndex: ""
     }
 
 };
@@ -47,9 +47,9 @@ const state = {
 // getters
 const getters = {
 
-    priceIsDESC: (state,getters,rootState) => state.priceRange.isDESC,
+    priceSortIndex: (state,getters,rootState) => state.priceFilter.sortIndex,
 
-    areaIsDESC: (state,getters,rootState) => state.areaRange.isDESC,
+    areaSortIndex: (state,getters,rootState) => state.areaFilter.sortIndex,
 
     checkoutStatus: (state, getters, rootState) => state.checkoutStatus,
 
@@ -60,31 +60,31 @@ const getters = {
 const actions = {
 
     sortByPrice({ state, commit, rootState }, event) {
-        let isDESC = event.target.value === "true";
-        console.log('price');
         commit({
-            type: types.REWRITE_PRICE_IS_DESC,
-            isDESC : isDESC
+            type: types.REWRITE_PRICE,
+            min: null,
+            max: null,
+            sortIndex : event.target.value
         });
 
+        console.log(this);
+        this._actions.getAjaxFlats({
+            sort: {
+                type: 'price',
+                sortIndex: state.priceFilter.sortIndex
+            },
 
-        // getAjaxFlats({
-        //     sort: {
-        //         type: 'price',
-        //         isDESC: state.priceRange.isDESC
-        //     },
-        //
-        //     searchCriteria: state.searchCriteria
-        //
-        // })
+            searchCriteria: state.searchCriteria
+
+        })
     },
 
     sortByArea({ state, commit, rootState }, event) {
-        let isDESC = event.target.value === "true";
-        console.log( event.target.value);
         commit({
-            type: types.REWRITE_AREA_IS_DESC,
-            isDESC : isDESC
+            type: types.REWRITE_AREA,
+            min: null,
+            max: null,
+            sortIndex : event.target.value
         });
 
         // getAjaxFlats({
@@ -98,7 +98,7 @@ const actions = {
         // })
     },
 
-    getAjaxFlats( { state, commit, rootState }, body){
+    getAjaxFlats( { state, commit, rootState }, body) {
 
         return axios.get('/flats', body)
             .then(response => {
@@ -138,12 +138,37 @@ const mutations = {
         state.checkoutStatus = 'failed'
     },
 
-    [types.REWRITE_PRICE_IS_DESC] (state, data) {
-        state.priceRange.isDESC = data.isDESC
+    [types.REWRITE_PRICE] (state, data) {
+
+         if(data.sortIndex) {
+            console.log(data);
+            state.priceFilter.sortIndex = data.sortIndex;
+            console.log(state.priceFilter.sortIndex);
+        }
+        //
+        // if(data.min) {
+        //     state.priceFilter.min = data.min;
+        // }
+        //
+        // if(data.max) {
+        //     state.priceFilter.min = data.max;
+        // }
+
+
     },
 
-    [types.REWRITE_AREA_IS_DESC] (state, data) {
-        state.areaRange.isDESC = data.isDESC
+    [types.REWRITE_AREA] (state, data) {
+        if(data.sortIndex) {
+            state.areaFilter.sortIndex = data.sortIndex;
+        }
+
+        if(data.min) {
+            state.areaFilter.min = data.min;
+        }
+
+        if(data.max) {
+            state.areaFilter.min = data.max;
+        }
     }
 };
 

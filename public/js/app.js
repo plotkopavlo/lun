@@ -13880,8 +13880,8 @@ exports.default = {
 
 
     computed: _extends({}, (0, _vuex.mapGetters)({
-        priceIsDESC: 'priceIsDESC',
-        areaIsDESC: 'areaIsDESC'
+        priceSortIndex: 'priceSortIndex',
+        areaSortIndex: 'areaSortIndex'
     })),
 
     data: function data() {
@@ -13988,16 +13988,16 @@ var state = {
         rooms: 0
     },
 
-    priceRange: {
+    priceFilter: {
         min: 0,
         max: 0,
-        isDESC: false
+        sortIndex: ""
     },
 
-    areaRange: {
+    areaFilter: {
         min: 0,
         max: 0,
-        isDESC: false
+        sortIndex: ""
     }
 
 };
@@ -14005,12 +14005,12 @@ var state = {
 // getters
 var getters = {
 
-    priceIsDESC: function priceIsDESC(state, getters, rootState) {
-        return state.priceRange.isDESC;
+    priceSortIndex: function priceSortIndex(state, getters, rootState) {
+        return state.priceFilter.sortIndex;
     },
 
-    areaIsDESC: function areaIsDESC(state, getters, rootState) {
-        return state.areaRange.isDESC;
+    areaSortIndex: function areaSortIndex(state, getters, rootState) {
+        return state.areaFilter.sortIndex;
     },
 
     checkoutStatus: function checkoutStatus(state, getters, rootState) {
@@ -14029,33 +14029,34 @@ var actions = {
             commit = _ref.commit,
             rootState = _ref.rootState;
 
-        var isDESC = event.target.value === "true";
-        console.log('price');
         commit({
-            type: types.REWRITE_PRICE_IS_DESC,
-            isDESC: isDESC
+            type: types.REWRITE_PRICE,
+            min: null,
+            max: null,
+            sortIndex: event.target.value
         });
 
-        // getAjaxFlats({
-        //     sort: {
-        //         type: 'price',
-        //         isDESC: state.priceRange.isDESC
-        //     },
-        //
-        //     searchCriteria: state.searchCriteria
-        //
-        // })
+        console.log(this);
+        this._actions.getAjaxFlats({
+            sort: {
+                type: 'price',
+                sortIndex: state.priceFilter.sortIndex
+            },
+
+            searchCriteria: state.searchCriteria
+
+        });
     },
     sortByArea: function sortByArea(_ref2, event) {
         var state = _ref2.state,
             commit = _ref2.commit,
             rootState = _ref2.rootState;
 
-        var isDESC = event.target.value === "true";
-        console.log(event.target.value);
         commit({
-            type: types.REWRITE_AREA_IS_DESC,
-            isDESC: isDESC
+            type: types.REWRITE_AREA,
+            min: null,
+            max: null,
+            sortIndex: event.target.value
         });
 
         // getAjaxFlats({
@@ -14099,10 +14100,34 @@ var mutations = (_mutations = {}, _defineProperty(_mutations, types.REWRITE_FLAT
     state.checkoutStatus = 'successful';
 }), _defineProperty(_mutations, types.CHECKOUT_FAILURE, function (state) {
     state.checkoutStatus = 'failed';
-}), _defineProperty(_mutations, types.REWRITE_PRICE_IS_DESC, function (state, data) {
-    state.priceRange.isDESC = data.isDESC;
-}), _defineProperty(_mutations, types.REWRITE_AREA_IS_DESC, function (state, data) {
-    state.areaRange.isDESC = data.isDESC;
+}), _defineProperty(_mutations, types.REWRITE_PRICE, function (state, data) {
+
+    if (data.sortIndex) {
+        console.log(data);
+        state.priceFilter.sortIndex = data.sortIndex;
+        console.log(state.priceFilter.sortIndex);
+    }
+    //
+    // if(data.min) {
+    //     state.priceFilter.min = data.min;
+    // }
+    //
+    // if(data.max) {
+    //     state.priceFilter.min = data.max;
+    // }
+
+}), _defineProperty(_mutations, types.REWRITE_AREA, function (state, data) {
+    if (data.sortIndex) {
+        state.areaFilter.sortIndex = data.sortIndex;
+    }
+
+    if (data.min) {
+        state.areaFilter.min = data.min;
+    }
+
+    if (data.max) {
+        state.areaFilter.min = data.max;
+    }
 }), _mutations);
 
 exports.default = {
@@ -14123,8 +14148,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 var REWRITE_FLATS = exports.REWRITE_FLATS = 'REWRITE_FLATS';
-var REWRITE_PRICE_IS_DESC = exports.REWRITE_PRICE_IS_DESC = 'REWRITE_PRICE_IS_DESC';
-var REWRITE_AREA_IS_DESC = exports.REWRITE_AREA_IS_DESC = 'REWRITE_AREA_IS_DESC';
+var REWRITE_PRICE = exports.REWRITE_PRICE = 'REWRITE_PRICE';
+var REWRITE_AREA = exports.REWRITE_AREA = 'REWRITE_AREA';
 var CHECKOUT_REQUEST = exports.CHECKOUT_REQUEST = 'CHECKOUT_REQUEST';
 var CHECKOUT_SUCCESS = exports.CHECKOUT_SUCCESS = 'CHECKOUT_SUCCESS';
 var CHECKOUT_FAILURE = exports.CHECKOUT_FAILURE = 'CHECKOUT_FAILURE';
@@ -46169,48 +46194,44 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "name": "price"
     }
   }, [_c('select', {
-    staticClass: "filters--sort-by-price",
+    staticClass: "filters--sort",
     attrs: {
       "name": "price"
     },
     domProps: {
-      "value": _vm.priceIsDESC
+      "value": _vm.priceSortIndex
     },
     on: {
       "input": _vm.sortByPrice
     }
   }, [_c('option', {
     attrs: {
+      "value": "asc",
       "selected": ""
-    },
-    domProps: {
-      "value": true
     }
   }, [_vm._v("From chip to expensive")]), _vm._v(" "), _c('option', {
-    domProps: {
-      "value": false
+    attrs: {
+      "value": "desc"
     }
   }, [_vm._v("From expensive to chip")])]), _vm._v(" "), _c('select', {
-    staticClass: "filters--sort-by-price",
+    staticClass: "filters--sort",
     attrs: {
       "name": "area"
     },
     domProps: {
-      "value": _vm.areaIsDESC
+      "value": _vm.areaSortIndex
     },
     on: {
       "input": _vm.sortByArea
     }
   }, [_c('option', {
     attrs: {
+      "value": "asc",
       "selected": ""
-    },
-    domProps: {
-      "value": true
     }
   }, [_vm._v("From small to big")]), _vm._v(" "), _c('option', {
-    domProps: {
-      "value": false
+    attrs: {
+      "value": "desc"
     }
   }, [_vm._v("From big to small")])])])
 },staticRenderFns: []}

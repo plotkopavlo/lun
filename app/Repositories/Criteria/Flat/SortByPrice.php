@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Bosnadev\Repositories\Criteria\Criteria;
 use Bosnadev\Repositories\Contracts\RepositoryInterface as Repository;
 
-class SortByMinPrice extends Criteria {
+class SortByPrice extends Criteria {
 
     /**
      * @param $model
@@ -16,6 +16,7 @@ class SortByMinPrice extends Criteria {
      */
     public function apply($model, Repository $repository)
     {
+        dd($model);
         //sort from minimum price (price calculated)
         $model = $model->select(DB::raw('*, (COALESCE(price_total, 0) + ( COALESCE(price_per_m2, 0) * area_m2) ) as price '))
             //for mysql 7.5+
