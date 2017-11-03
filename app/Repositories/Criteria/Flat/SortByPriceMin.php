@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Bosnadev\Repositories\Criteria\Criteria;
 use Bosnadev\Repositories\Contracts\RepositoryInterface as Repository;
 
-class SortByPrice extends Criteria {
+class SortByPriceMin extends Criteria {
 
     /**
      * @param $model

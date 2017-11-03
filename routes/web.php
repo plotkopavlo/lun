@@ -14,6 +14,7 @@
 
 Route::resource('/', 'SearchController');
 Route::get('/flats','RestAPI@getFlats');
+Route::get('/searchCriteria','RestAPI@getSearchCriteria');
 
 Auth::routes();
 

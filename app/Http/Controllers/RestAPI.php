@@ -6,7 +6,8 @@ use App\Repositories\FlatRepository;
 use App\Repositories\FlatTypeRepository;
 use App\Repositories\CityRepository;
 use Illuminate\Http\Request;
-use App\Repositories\Criteria\Flat\SortByPrice;
+use App\Repositories\Criteria\Flat\SortByPriceMin;
+use App\Repositories\Criteria\Flat\SortByPriceMax;
 use Illuminate\Support\Facades\DB;
 
 class RestAPI extends Controller
@@ -31,38 +32,45 @@ class RestAPI extends Controller
 
         $cityID = 0;
         $rooms  = 0;
-
         if( $request->searchCriteria){
-            dd($request->searchCriteria);
-            $cityID = $request->searchCriteria->city ? $request->city : 0;
-            $rooms = $request->searchCriteria->rooms ? $request->rooms : 0;
+            $data = json_decode($request->searchCriteria);
+            $cityID = $data->cityID ;
+            $rooms =$data->rooms;
         }
-//        $sort  = $request->sort ? $request->sort : null;
-//
-//        // TODO: use one method
-//        if ($sort.type == "price") {
-//            $this->flat->pushCriteria(new SortByPrice());
-//        }
+        // TODO: use one method
+
 
         $flats = $this->flat;
 
 
-//        if ($rooms) {
-//            $flats->findWhere(['num_of_rooms' => $rooms]);
-//        }
-//
-//        if ($cityID) {
-//            $flats->findWhere(['city_id' => $cityID]);
-//        }
+        if ($rooms) {
+            $flats->findWhere(['num_of_rooms' => $rooms]);
+        }
 
+        if ($cityID) {
+            $flats->findWhere(['city_id' => $cityID]);
+        }
 
-        $flats = $flats->paginate(2);
+        if ($request->sort) {
+            $data = json_decode($request->sort);
+            //TODO: Not Work
+
+//            if ($data->type == "price") {
+//                if ($data->sortIndex="asc") {
+//                    $this->flat->pushCriteria(new SortByPriceMin());
+//                }
+//                if ($data->sortIndex="desc") {
+//                    $this->flat->pushCriteria(new SortByPriceMax());
+//                }
+//            }
+        }
+
+        $flats = $flats->paginate(10);
         foreach ($flats as $flatOne){
             $flatOne->residential_complex = $flatOne->buildings()->first()->residentialComplex;
             $flatOne->buildings =$flatOne->buildings()->get();
             $flatOne->updated = $flatOne->updated_at->diffForHumans();
 
-            $flatOne->cityID = $flatOne->city;
             $flatOne->city = $flatOne->city->name;
 
             $flatOne->price_total = $flatOne->price_per_m2*$flatOne->area_m2;
@@ -70,13 +78,22 @@ class RestAPI extends Controller
 
         return response()->json( [
             'cityID' => $cityID,
+
             'rooms'  => $rooms,
 
             'flats'  => $flats,
-            'total'  => $flats->total()
         ]);
     }
 
+    public function getSearchCriteria(Request $request)
+    {
+        $cities = $this->city->all();
+        $roomMax= $this->flat->getMaxRooms();
+        return response()->json( [
+            'cities'  => $cities,
+            'roomsMax' => $roomMax
+        ]);
+    }
     /**
      * Show the form for creating a new resource.
      *
