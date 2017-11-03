@@ -14,6 +14,8 @@
                     <span v-if="n-1 === 0"> any </span>
                     <span v-else> {{ n-1 }} </span>
                 </option>
+
+               
             </select>
             <div class="input-group-btn">
                 <button v-on:click="searchRequest" class="btn btn-default" type="button" >Go!</button>
