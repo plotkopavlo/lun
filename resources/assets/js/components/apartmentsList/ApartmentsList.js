@@ -16,15 +16,11 @@ export default  {
         return{}
     },
     computed: mapGetters({
-            flats: 'flats'
+            flats: 'flats',
     }),
 
     created(){
-        console.log("YES");
-        this.$store.dispatch('getAjaxFlats');
+        // this.$store.dispatch('getAjaxFlats');
     },
 
-    methods: mapActions({
-                       getAjaxFlats: 'getAjaxFlats'
-    })
 }

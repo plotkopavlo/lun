@@ -5,16 +5,17 @@ export default {
 
     name: 'search',
     mounted() {
-        console.log('Component mounted filters.');
     },
 
     computed: {
         ...mapGetters({
-            citiesID: 'citiesID',
+            cities: 'cities',
 
             cityID: 'cityID',
 
-            rooms: 'rooms'
+            rooms: 'rooms',
+
+            roomsMax: 'roomsMax'
         })
     },
 
@@ -34,6 +35,7 @@ export default {
             searchRequest      : 'searchRequest',
             cityIDChange       : 'cityIDChange',
             roomsChange        : 'roomsChange',
+            searchCriteriaAJAX : 'searchCriteriaAJAX',
         })
     },
 

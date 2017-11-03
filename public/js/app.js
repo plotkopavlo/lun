@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 61);
+/******/ 	return __webpack_require__(__webpack_require__.s = 64);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -1320,6 +1320,63 @@ var index_esm = {
 
 /***/ }),
 /* 2 */
+/***/ (function(module, exports) {
+
+// this module is a runtime utility for cleaner component module output and will
+// be included in the final webpack user bundle
+
+module.exports = function normalizeComponent (
+  rawScriptExports,
+  compiledTemplate,
+  scopeId,
+  cssModules
+) {
+  var esModule
+  var scriptExports = rawScriptExports = rawScriptExports || {}
+
+  // ES6 modules interop
+  var type = typeof rawScriptExports.default
+  if (type === 'object' || type === 'function') {
+    esModule = rawScriptExports
+    scriptExports = rawScriptExports.default
+  }
+
+  // Vue.extend constructor export interop
+  var options = typeof scriptExports === 'function'
+    ? scriptExports.options
+    : scriptExports
+
+  // render functions
+  if (compiledTemplate) {
+    options.render = compiledTemplate.render
+    options.staticRenderFns = compiledTemplate.staticRenderFns
+  }
+
+  // scopedId
+  if (scopeId) {
+    options._scopeId = scopeId
+  }
+
+  // inject cssModules
+  if (cssModules) {
+    var computed = Object.create(options.computed || null)
+    Object.keys(cssModules).forEach(function (key) {
+      var module = cssModules[key]
+      computed[key] = function () { return module }
+    })
+    options.computed = computed
+  }
+
+  return {
+    esModule: esModule,
+    exports: scriptExports,
+    options: options
+  }
+}
+
+
+/***/ }),
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1420,7 +1477,7 @@ module.exports = defaults;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(13)))
 
 /***/ }),
-/* 3 */
+/* 4 */
 /***/ (function(module, exports) {
 
 /*
@@ -1476,63 +1533,6 @@ module.exports = function() {
 
 
 /***/ }),
-/* 4 */
-/***/ (function(module, exports) {
-
-// this module is a runtime utility for cleaner component module output and will
-// be included in the final webpack user bundle
-
-module.exports = function normalizeComponent (
-  rawScriptExports,
-  compiledTemplate,
-  scopeId,
-  cssModules
-) {
-  var esModule
-  var scriptExports = rawScriptExports = rawScriptExports || {}
-
-  // ES6 modules interop
-  var type = typeof rawScriptExports.default
-  if (type === 'object' || type === 'function') {
-    esModule = rawScriptExports
-    scriptExports = rawScriptExports.default
-  }
-
-  // Vue.extend constructor export interop
-  var options = typeof scriptExports === 'function'
-    ? scriptExports.options
-    : scriptExports
-
-  // render functions
-  if (compiledTemplate) {
-    options.render = compiledTemplate.render
-    options.staticRenderFns = compiledTemplate.staticRenderFns
-  }
-
-  // scopedId
-  if (scopeId) {
-    options._scopeId = scopeId
-  }
-
-  // inject cssModules
-  if (cssModules) {
-    var computed = Object.create(options.computed || null)
-    Object.keys(cssModules).forEach(function (key) {
-      var module = cssModules[key]
-      computed[key] = function () { return module }
-    })
-    options.computed = computed
-  }
-
-  return {
-    esModule: esModule,
-    exports: scriptExports,
-    options: options
-  }
-}
-
-
-/***/ }),
 /* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1552,7 +1552,7 @@ if (typeof DEBUG !== 'undefined' && DEBUG) {
   ) }
 }
 
-var listToStyles = __webpack_require__(59)
+var listToStyles = __webpack_require__(62)
 
 /*
 type StyleObject = {
@@ -12320,7 +12320,7 @@ Vue$3.compile = compileToFunctions;
 
 module.exports = Vue$3;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7), __webpack_require__(49).setImmediate))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7), __webpack_require__(50).setImmediate))
 
 /***/ }),
 /* 7 */
@@ -12818,7 +12818,7 @@ var _vuex = __webpack_require__(1);
 
 var _vuex2 = _interopRequireDefault(_vuex);
 
-var _store = __webpack_require__(38);
+var _store = __webpack_require__(39);
 
 var _store2 = _interopRequireDefault(_store);
 
@@ -12831,11 +12831,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  */
 
 __webpack_require__(34);
-__webpack_require__(42);
+__webpack_require__(43);
 // require('./jquery.simplePagination.js');
 
 $('.selectpicker').selectpicker({
-    style: 'btn-info-select'
+  style: 'btn-info-select'
 });
 
 // $(function() {
@@ -12870,14 +12870,13 @@ window.Vue = __webpack_require__(6);
 _vue2.default.use(_vuex2.default);
 
 //Vue.component('example', require('./components/Example.vue'));
-_vue2.default.component('apartments-list', __webpack_require__(51));
+_vue2.default.component('apartments-list', __webpack_require__(52));
+_vue2.default.component('search', __webpack_require__(54));
 
 var app = new _vue2.default({
-    el: '#app',
-    store: _store2.default,
-    created: function created() {
-        this.$store.dispatch('');
-    }
+  el: '#app',
+  store: _store2.default
+
 });
 
 /***/ }),
@@ -12902,7 +12901,7 @@ module.exports = __webpack_require__(17);
 var utils = __webpack_require__(0);
 var bind = __webpack_require__(12);
 var Axios = __webpack_require__(19);
-var defaults = __webpack_require__(2);
+var defaults = __webpack_require__(3);
 
 /**
  * Create an instance of Axios
@@ -13022,7 +13021,7 @@ module.exports = CancelToken;
 "use strict";
 
 
-var defaults = __webpack_require__(2);
+var defaults = __webpack_require__(3);
 var utils = __webpack_require__(0);
 var InterceptorManager = __webpack_require__(20);
 var dispatchRequest = __webpack_require__(21);
@@ -13176,7 +13175,7 @@ module.exports = InterceptorManager;
 var utils = __webpack_require__(0);
 var transformData = __webpack_require__(24);
 var isCancel = __webpack_require__(10);
-var defaults = __webpack_require__(2);
+var defaults = __webpack_require__(3);
 
 /**
  * Throws a `Cancel` if cancellation has been requested.
@@ -13734,7 +13733,7 @@ module.exports = function spread(callback) {
 "use strict";
 
 
-window._ = __webpack_require__(47);
+window._ = __webpack_require__(48);
 
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
@@ -13743,9 +13742,9 @@ window._ = __webpack_require__(47);
  */
 
 try {
-  window.$ = window.jQuery = __webpack_require__(46);
+  window.$ = window.jQuery = __webpack_require__(47);
 
-  __webpack_require__(41);
+  __webpack_require__(42);
 } catch (e) {}
 
 /**
@@ -13798,16 +13797,12 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 exports.default = {
-    mounted: function mounted() {
-        console.log('Component mounted.');
-    },
+    mounted: function mounted() {},
 
 
     props: ['flat'],
 
-    created: function created() {
-        console.log(this.flat);
-    }
+    created: function created() {}
 };
 
 /***/ }),
@@ -13823,11 +13818,11 @@ Object.defineProperty(exports, "__esModule", {
 
 var _vuex = __webpack_require__(1);
 
-var _Apartment = __webpack_require__(50);
+var _Apartment = __webpack_require__(51);
 
 var _Apartment2 = _interopRequireDefault(_Apartment);
 
-var _Filters = __webpack_require__(52);
+var _Filters = __webpack_require__(53);
 
 var _Filters2 = _interopRequireDefault(_Filters);
 
@@ -13849,14 +13844,8 @@ exports.default = {
     }),
 
     created: function created() {
-        console.log("YES");
-        this.$store.dispatch('getAjaxFlats');
-    },
-
-
-    methods: (0, _vuex.mapActions)({
-        getAjaxFlats: 'getAjaxFlats'
-    })
+        // this.$store.dispatch('getAjaxFlats');
+    }
 };
 
 /***/ }),
@@ -13877,9 +13866,7 @@ var _vuex = __webpack_require__(1);
 exports.default = {
 
     name: 'filters',
-    mounted: function mounted() {
-        console.log('Component mounted filters.');
-    },
+    mounted: function mounted() {},
 
 
     computed: _extends({}, (0, _vuex.mapGetters)({
@@ -13911,6 +13898,54 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _vuex = __webpack_require__(1);
+
+exports.default = {
+
+    name: 'search',
+    mounted: function mounted() {},
+
+
+    computed: _extends({}, (0, _vuex.mapGetters)({
+        cities: 'cities',
+
+        cityID: 'cityID',
+
+        rooms: 'rooms',
+
+        roomsMax: 'roomsMax'
+    })),
+
+    data: function data() {
+        return {};
+    },
+    created: function created() {
+        this.$store.dispatch('searchCriteriaAJAX');
+    },
+
+
+    methods: _extends({}, (0, _vuex.mapActions)({
+        searchRequest: 'searchRequest',
+        cityIDChange: 'cityIDChange',
+        roomsChange: 'roomsChange',
+        searchCriteriaAJAX: 'searchCriteriaAJAX'
+    }))
+
+};
+
+/***/ }),
+/* 39 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
 var _vue = __webpack_require__(6);
 
 var _vue2 = _interopRequireDefault(_vue);
@@ -13919,7 +13954,7 @@ var _vuex = __webpack_require__(1);
 
 var _vuex2 = _interopRequireDefault(_vuex);
 
-var _flats2 = __webpack_require__(39);
+var _flats2 = __webpack_require__(40);
 
 var _flats3 = _interopRequireDefault(_flats2);
 
@@ -13944,7 +13979,7 @@ exports.default = new _vuex2.default.Store({
 });
 
 /***/ }),
-/* 39 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13956,7 +13991,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _mutations;
 
-var _mutationTypes = __webpack_require__(40);
+var _mutationTypes = __webpack_require__(41);
 
 var types = _interopRequireWildcard(_mutationTypes);
 
@@ -13981,9 +14016,9 @@ var state = {
 
     checkoutStatus: null,
 
-    roomsMax: 0,
+    roomsMax: 5,
 
-    citiesID: [{
+    cities: [{
         id: 0,
         name: 'Any',
         selected: true
@@ -14030,8 +14065,8 @@ var getters = {
 
     //search
 
-    citiesID: function citiesID(state, getters, rootState) {
-        return state.citiesID;
+    cities: function cities(state, getters, rootState) {
+        return state.cities;
     },
 
     cityID: function cityID(state, getters, rootState) {
@@ -14050,52 +14085,62 @@ var getters = {
 
 // actions
 var actions = {
-    searchCriteriaAJAX: function searchCriteriaAJAX(_ref) {
+    searchRequest: function searchRequest(_ref) {
         var state = _ref.state,
             commit = _ref.commit,
             rootState = _ref.rootState;
 
-        axios.get('/searchCriteria').then(function (response) {
-            var data = response.data;
+        this.dispatch('getAjaxFlats', {
+            searchCriteria: state.searchCriteria
+        }).then(function (respond) {});
+    },
+    searchCriteriaAJAX: function searchCriteriaAJAX(_ref2) {
+        var state = _ref2.state,
+            commit = _ref2.commit,
+            rootState = _ref2.rootState;
 
+        return axios.get('/searchCriteria').then(function (response) {
+            var data = response.data;
             commit({
-                type: types.REWRITE_CITIES_ID,
-                citiesID: data.citiesID
+                type: types.REWRITE_CITIES,
+                cities: data.cities
             });
 
             commit({
                 type: types.REWRITE_MAX_ROOM,
                 roomsMax: data.roomsMax
             });
-        }).error(function (error) {
+        }).catch(function (error) {
+            commit(types.CHECKOUT_FAILURE);
             console.error(error);
         });
     },
-    cityIDChange: function cityIDChange(_ref2, event) {
-        var state = _ref2.state,
-            commit = _ref2.commit,
-            rootState = _ref2.rootState;
-
-        commit({
-            type: types.REWRITE_SEARCH_CRITERIA,
-            cityID: event.target.value
-        });
-    },
-    roomsChange: function roomsChange(_ref3, event) {
+    cityIDChange: function cityIDChange(_ref3, event) {
         var state = _ref3.state,
             commit = _ref3.commit,
             rootState = _ref3.rootState;
 
         commit({
             type: types.REWRITE_SEARCH_CRITERIA,
-            rooms: event.target.value
+            cityID: event.target.value
         });
     },
-    sortByPrice: function sortByPrice(_ref4, event) {
+    roomsChange: function roomsChange(_ref4, event) {
         var state = _ref4.state,
             commit = _ref4.commit,
             rootState = _ref4.rootState;
 
+        commit({
+            type: types.REWRITE_SEARCH_CRITERIA,
+            rooms: event.target.value
+        });
+    },
+    sortByPrice: function sortByPrice(_ref5, event) {
+        var state = _ref5.state,
+            commit = _ref5.commit,
+            rootState = _ref5.rootState;
+
+        console.log('price');
         commit({
             type: types.REWRITE_PRICE,
             min: null,
@@ -14103,21 +14148,19 @@ var actions = {
             sortIndex: event.target.value
         });
 
-        console.log(this);
-        this._actions.getAjaxFlats({
+        this.dispatch('getAjaxFlats', {
             sort: {
                 type: 'price',
                 sortIndex: state.priceFilter.sortIndex
-            },
-
-            searchCriteria: state.searchCriteria
-
+            }
         });
     },
-    sortByArea: function sortByArea(_ref5, event) {
-        var state = _ref5.state,
-            commit = _ref5.commit,
-            rootState = _ref5.rootState;
+    sortByArea: function sortByArea(_ref6, event) {
+        var state = _ref6.state,
+            commit = _ref6.commit,
+            rootState = _ref6.rootState;
+
+        console.log('area');
 
         commit({
             type: types.REWRITE_AREA,
@@ -14136,13 +14179,19 @@ var actions = {
         //
         // })
     },
-    getAjaxFlats: function getAjaxFlats(_ref6, body) {
-        var state = _ref6.state,
-            commit = _ref6.commit,
-            rootState = _ref6.rootState;
+    getAjaxFlats: function getAjaxFlats(_ref7, body) {
+        var state = _ref7.state,
+            commit = _ref7.commit,
+            rootState = _ref7.rootState;
 
-
-        return axios.get('/flats', body).then(function (response) {
+        console.log("1");
+        console.log(body);
+        console.log("2");
+        return axios({
+            method: 'get',
+            url: '/flats',
+            params: body
+        }).then(function (response) {
 
             commit(types.CHECKOUT_SUCCESS);
 
@@ -14150,6 +14199,8 @@ var actions = {
                 type: types.REWRITE_FLATS,
                 flats: response.data.flats.data
             });
+
+            return response;
         }).catch(function (error) {
             commit(types.CHECKOUT_FAILURE);
             console.error(error);
@@ -14170,9 +14221,7 @@ var mutations = (_mutations = {}, _defineProperty(_mutations, types.REWRITE_FLAT
 }), _defineProperty(_mutations, types.REWRITE_PRICE, function (state, data) {
 
     if (data.sortIndex) {
-        console.log(data);
         state.priceFilter.sortIndex = data.sortIndex;
-        console.log(state.priceFilter.sortIndex);
     }
 
     if (data.min) {
@@ -14194,17 +14243,17 @@ var mutations = (_mutations = {}, _defineProperty(_mutations, types.REWRITE_FLAT
     if (data.max) {
         state.areaFilter.min = data.max;
     }
-}), _defineProperty(_mutations, types.REWRITE_CITIES_ID, function (state, data) {
-    state.citiesID = data.citiesID;
+}), _defineProperty(_mutations, types.REWRITE_CITIES, function (state, data) {
+    state.cities = data.cities;
 }), _defineProperty(_mutations, types.REWRITE_MAX_ROOM, function (state, data) {
     state.roomsMax = data.roomsMax;
 }), _defineProperty(_mutations, types.REWRITE_SEARCH_CRITERIA, function (state, data) {
     if (data.rooms) {
-        state.searchCriteria.rooms = data.rooms;
+        state.searchCriteria.rooms = Number(data.rooms);
     }
 
     if (data.cityID) {
-        state.searchCriteria.cityID = data.cityID;
+        state.searchCriteria.cityID = Number(data.cityID);
     }
 }), _mutations);
 
@@ -14216,7 +14265,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 40 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14229,7 +14278,7 @@ var REWRITE_FLATS = exports.REWRITE_FLATS = 'REWRITE_FLATS';
 var REWRITE_PRICE = exports.REWRITE_PRICE = 'REWRITE_PRICE';
 var REWRITE_AREA = exports.REWRITE_AREA = 'REWRITE_AREA';
 var REWRITE_MAX_ROOM = exports.REWRITE_MAX_ROOM = 'REWRITE_MAX_ROOM';
-var REWRITE_CITIES_ID = exports.REWRITE_CITIES_ID = 'REWRITE_CITES_ID';
+var REWRITE_CITIES = exports.REWRITE_CITIES = 'REWRITE_CITES';
 var REWRITE_SEARCH_CRITERIA = exports.REWRITE_SEARCH_CRITERIA = 'REWRITE_SEARCH_CRITERIA';
 
 var CHECKOUT_REQUEST = exports.CHECKOUT_REQUEST = 'CHECKOUT_REQUEST';
@@ -14238,7 +14287,7 @@ var CHECKOUT_FAILURE = exports.CHECKOUT_FAILURE = 'CHECKOUT_FAILURE';
 var RECEIVE_PRODUCTS = exports.RECEIVE_PRODUCTS = 'RECEIVE_PRODUCTS';
 
 /***/ }),
-/* 41 */
+/* 42 */
 /***/ (function(module, exports) {
 
 /*!
@@ -16621,7 +16670,7 @@ if (typeof jQuery === 'undefined') {
 
 
 /***/ }),
-/* 42 */
+/* 43 */
 /***/ (function(module, exports) {
 
 (function ($) {
@@ -18473,28 +18522,28 @@ if (typeof jQuery === 'undefined') {
 
 
 /***/ }),
-/* 43 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(3)();
-exports.push([module.i, "\n.apartment-item {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: justify;\n        -ms-flex-pack: justify;\n            justify-content: space-between;\n\n    width: 100%;\n\n    margin-bottom: 20px;\n\n    border-bottom: 1px solid #ccd0d2;\n}\n.apartment-item--img-container{\n    width: 100px;\n    height: 100px;\n    display: inline-block;\n}\n.apartment-item--img{\n    width:100%;\n    height:100%;\n    -o-object-fit: cover;\n       object-fit: cover;\n    overflow: hidden;\n}\n.apartment-item--left-info{\n    max-width: 340px;\n    margin-left: 20px;\n}\n.apartment-item--right-info {\n}\n.apartment-item--info-text{\n    margin-bottom: 10px;\n}", ""]);
-
-/***/ }),
 /* 44 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(3)();
-exports.push([module.i, "\n.filters{\n    margin-bottom:20px;\n}", ""]);
+exports = module.exports = __webpack_require__(4)();
+exports.push([module.i, "\n.apartment-item {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: justify;\n        -ms-flex-pack: justify;\n            justify-content: space-between;\n\n    margin-bottom: 20px;\n\n    border-bottom: 1px solid #ccd0d2;\n}\n.apartment-item--img-container{\n    width: 100px;\n    height: 100px;\n    display: inline-block;\n}\n.apartment-item--img{\n    width:100%;\n    height:100%;\n    -o-object-fit: cover;\n       object-fit: cover;\n    overflow: hidden;\n}\n.apartment-item--left-info{\n    max-width: 340px;\n    margin-left: 20px;\n}\n.apartment-item--right-info {\n}\n.apartment-item--info-text{\n    margin-bottom: 10px;\n}", ""]);
 
 /***/ }),
 /* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(3)();
-exports.push([module.i, "", ""]);
+exports = module.exports = __webpack_require__(4)();
+exports.push([module.i, "\n.filters{\n    margin-bottom:20px;\n}", ""]);
 
 /***/ }),
 /* 46 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(4)();
+exports.push([module.i, "\n.apartments{\n    margin-right:auto;\n    margin-left: auto;\n}\n.apartments-list{\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient:vertical;\n    -webkit-box-direction:normal;\n        -ms-flex-direction:column;\n            flex-direction:column;\n}", ""]);
+
+/***/ }),
+/* 47 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -28754,7 +28803,7 @@ return jQuery;
 
 
 /***/ }),
-/* 47 */
+/* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, module) {var __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -45843,10 +45892,10 @@ return jQuery;
   }
 }.call(this));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7), __webpack_require__(60)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7), __webpack_require__(63)(module)))
 
 /***/ }),
-/* 48 */
+/* 49 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, process) {(function (global, undefined) {
@@ -46039,7 +46088,7 @@ return jQuery;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7), __webpack_require__(13)))
 
 /***/ }),
-/* 49 */
+/* 50 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var apply = Function.prototype.apply;
@@ -46092,24 +46141,24 @@ exports._unrefActive = exports.active = function(item) {
 };
 
 // setimmediate attaches itself to the global object
-__webpack_require__(48);
+__webpack_require__(49);
 exports.setImmediate = setImmediate;
 exports.clearImmediate = clearImmediate;
 
 
 /***/ }),
-/* 50 */
+/* 51 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(56)
+__webpack_require__(59)
 
-var Component = __webpack_require__(4)(
+var Component = __webpack_require__(2)(
   /* script */
   __webpack_require__(35),
   /* template */
-  __webpack_require__(53),
+  __webpack_require__(55),
   /* scopeId */
   null,
   /* cssModules */
@@ -46136,18 +46185,18 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 51 */
+/* 52 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(58)
+__webpack_require__(61)
 
-var Component = __webpack_require__(4)(
+var Component = __webpack_require__(2)(
   /* script */
   __webpack_require__(36),
   /* template */
-  __webpack_require__(55),
+  __webpack_require__(58),
   /* scopeId */
   null,
   /* cssModules */
@@ -46174,18 +46223,18 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 52 */
+/* 53 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(57)
+__webpack_require__(60)
 
-var Component = __webpack_require__(4)(
+var Component = __webpack_require__(2)(
   /* script */
   __webpack_require__(37),
   /* template */
-  __webpack_require__(54),
+  __webpack_require__(56),
   /* scopeId */
   null,
   /* cssModules */
@@ -46212,7 +46261,41 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 53 */
+/* 54 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(2)(
+  /* script */
+  __webpack_require__(38),
+  /* template */
+  __webpack_require__(57),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "/home/pashka/WorkSpace/lun/resources/assets/js/components/search/Search.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] Search.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-a2a1245c", Component.options)
+  } else {
+    hotAPI.reload("data-v-a2a1245c", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 55 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -46265,7 +46348,7 @@ if (false) {
 }
 
 /***/ }),
-/* 54 */
+/* 56 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -46326,19 +46409,97 @@ if (false) {
 }
 
 /***/ }),
-/* 55 */
+/* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('ul', {
+  return _c('section', {
+    staticClass: "search"
+  }, [_c('h2', {
+    staticClass: "search--header"
+  }, [_vm._v("Let's find something")]), _vm._v(" "), _c('form', {
+    staticClass: "search--form input-group",
+    attrs: {
+      "method": "GET"
+    }
+  }, [_c('input', {
+    staticClass: "form-control",
+    attrs: {
+      "type": "text",
+      "disabled": "",
+      "placeholder": "Search for..."
+    }
+  }), _vm._v(" "), _c('select', {
+    attrs: {
+      "name": "city"
+    },
+    domProps: {
+      "value": _vm.cityID
+    },
+    on: {
+      "input": _vm.cityIDChange
+    }
+  }, _vm._l((_vm.cities), function(city) {
+    return _c('option', {
+      domProps: {
+        "value": city.id
+      }
+    }, [_vm._v("\n                " + _vm._s(city.name) + "\n            ")])
+  })), _vm._v(" "), _c('select', {
+    attrs: {
+      "name": "rooms",
+      "id": "rooms"
+    },
+    domProps: {
+      "value": _vm.rooms
+    },
+    on: {
+      "input": _vm.roomsChange
+    }
+  }, _vm._l(((_vm.roomsMax + 1)), function(n) {
+    return _c('option', {
+      domProps: {
+        "value": n - 1
+      }
+    }, [(n - 1 === 0) ? _c('span', [_vm._v(" any ")]) : _c('span', [_vm._v(" " + _vm._s(n - 1) + " ")])])
+  })), _vm._v(" "), _c('div', {
+    staticClass: "input-group-btn"
+  }, [_c('button', {
+    staticClass: "btn btn-default",
+    attrs: {
+      "type": "button"
+    },
+    on: {
+      "click": _vm.searchRequest
+    }
+  }, [_vm._v("Go!")])])])])
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-a2a1245c", module.exports)
+  }
+}
+
+/***/ }),
+/* 58 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "apartments"
+  }, [_c('h2', {
+    staticClass: "apartments-title"
+  }, [_vm._v("Found "), _c('span', [_vm._v(_vm._s(_vm.flats.length))]), _vm._v(" results")]), _vm._v(" "), _c('filters'), _vm._v(" "), _c('ul', {
     staticClass: "apartments-list"
-  }, [_c('filters'), _vm._v(" "), _vm._l((_vm.flats), function(flat) {
+  }, _vm._l((_vm.flats), function(flat) {
     return _c('apartment', {
       attrs: {
         "flat": flat
       }
     })
-  })], 2)
+  }))], 1)
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
@@ -46349,13 +46510,13 @@ if (false) {
 }
 
 /***/ }),
-/* 56 */
+/* 59 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(43);
+var content = __webpack_require__(44);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -46375,13 +46536,13 @@ if(false) {
 }
 
 /***/ }),
-/* 57 */
+/* 60 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(44);
+var content = __webpack_require__(45);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -46401,13 +46562,13 @@ if(false) {
 }
 
 /***/ }),
-/* 58 */
+/* 61 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(45);
+var content = __webpack_require__(46);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -46427,7 +46588,7 @@ if(false) {
 }
 
 /***/ }),
-/* 59 */
+/* 62 */
 /***/ (function(module, exports) {
 
 /**
@@ -46460,7 +46621,7 @@ module.exports = function listToStyles (parentId, list) {
 
 
 /***/ }),
-/* 60 */
+/* 63 */
 /***/ (function(module, exports) {
 
 module.exports = function(module) {
@@ -46488,7 +46649,7 @@ module.exports = function(module) {
 
 
 /***/ }),
-/* 61 */
+/* 64 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(14);

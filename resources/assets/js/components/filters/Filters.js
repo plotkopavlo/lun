@@ -5,7 +5,6 @@ export default {
 
     name: 'filters',
     mounted() {
-        console.log('Component mounted filters.');
     },
 
     computed: {

@@ -51,11 +51,10 @@ Vue.use(Vuex);
 
 //Vue.component('example', require('./components/Example.vue'));
 Vue.component('apartments-list', require('./components/apartmentsList/ApartmentsList.vue'));
+Vue.component('search', require('./components/search/Search.vue'));
 
 const app = new Vue({
     el: '#app',
     store,
-    created(){
-        this.$store.dispatch('')
-    }
+
 });

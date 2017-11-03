@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Repositories\FlatRepository;
 use Illuminate\Http\Request;
-use App\Repositories\Criteria\Flat\SortByPrice;
+use App\Repositories\Criteria\Flat\SortByPriceMin;
 use Illuminate\Support\Facades\DB;
 
 class SearchController extends Controller
