@@ -17,10 +17,13 @@ const state = {
 
     checkoutStatus: null,
 
-    citiesID: [
+    roomsMax: 5,
+
+    cities: [
         {
             id: 0,
-            name:'All'
+            name:'Any',
+            selected: true
         }
 
     ],
@@ -47,19 +50,77 @@ const state = {
 // getters
 const getters = {
 
+    flats: (state, getters, rootState) => state.flats,
+
+    checkoutStatus: (state, getters, rootState) => state.checkoutStatus,
+
+    //filter
     priceSortIndex: (state,getters,rootState) => state.priceFilter.sortIndex,
 
     areaSortIndex: (state,getters,rootState) => state.areaFilter.sortIndex,
 
-    checkoutStatus: (state, getters, rootState) => state.checkoutStatus,
+    //search
 
-    flats: (state, getters, rootState) => state.flats
+    cities:(state,getters,rootState) => state.cities,
+
+    cityID:(state,getters,rootState) => state.searchCriteria.cityID,
+
+    roomsMax:(state,getters,rootState) => state.roomsMax,
+
+    rooms:(state,getters,rootState) => state.searchCriteria.rooms,
+
+
+
 };
 
 // actions
 const actions = {
+    searchRequest({state, commit, rootState }){
+        this.dispatch('getAjaxFlats',{
+            searchCriteria: state.searchCriteria
+        })
+            .then((respond) =>{
+            })
+
+    },
+    searchCriteriaAJAX( { state, commit, rootState }) {
+        return axios.get('/searchCriteria')
+            .then(response => {
+                let data = response.data;
+                    commit({
+                        type: types.REWRITE_CITIES,
+                        cities: data.cities
+                    });
+
+                    commit({
+                        type: types.REWRITE_MAX_ROOM,
+                        roomsMax: data.roomsMax
+                    });
+
+            })
+            .catch(error => {
+                commit(types.CHECKOUT_FAILURE);
+                console.error(error)
+            });
+
+    },
+
+    cityIDChange({ state, commit, rootState }, event) {
+        commit({
+            type: types.REWRITE_SEARCH_CRITERIA,
+            cityID: event.target.value
+        })
+    },
+
+    roomsChange({ state, commit, rootState }, event) {
+        commit({
+            type: types.REWRITE_SEARCH_CRITERIA,
+            rooms: event.target.value
+        })
+    },
 
     sortByPrice({ state, commit, rootState }, event) {
+        console.log('price');
         commit({
             type: types.REWRITE_PRICE,
             min: null,
@@ -67,19 +128,18 @@ const actions = {
             sortIndex : event.target.value
         });
 
-        console.log(this);
-        this._actions.getAjaxFlats({
+        this.dispatch('getAjaxFlats',{
             sort: {
                 type: 'price',
                 sortIndex: state.priceFilter.sortIndex
-            },
+            }
+        });
 
-            searchCriteria: state.searchCriteria
-
-        })
     },
 
     sortByArea({ state, commit, rootState }, event) {
+        console.log('area');
+
         commit({
             type: types.REWRITE_AREA,
             min: null,
@@ -99,8 +159,14 @@ const actions = {
     },
 
     getAjaxFlats( { state, commit, rootState }, body) {
-
-        return axios.get('/flats', body)
+        console.log("1");
+        console.log(body);
+        console.log("2");
+        return axios({
+            method: 'get',
+            url:'/flats',
+            params: body
+        })
             .then(response => {
 
                 commit(types.CHECKOUT_SUCCESS);
@@ -110,6 +176,7 @@ const actions = {
                     flats: response.data.flats.data
                 });
 
+                return response
             })
             .catch(error => {
                 commit(types.CHECKOUT_FAILURE);
@@ -141,19 +208,16 @@ const mutations = {
     [types.REWRITE_PRICE] (state, data) {
 
          if(data.sortIndex) {
-            console.log(data);
             state.priceFilter.sortIndex = data.sortIndex;
-            console.log(state.priceFilter.sortIndex);
         }
-        //
-        // if(data.min) {
-        //     state.priceFilter.min = data.min;
-        // }
-        //
-        // if(data.max) {
-        //     state.priceFilter.min = data.max;
-        // }
 
+        if(data.min) {
+            state.priceFilter.min = data.min;
+        }
+
+        if(data.max) {
+            state.priceFilter.min = data.max;
+        }
 
     },
 
@@ -169,7 +233,25 @@ const mutations = {
         if(data.max) {
             state.areaFilter.min = data.max;
         }
-    }
+    },
+
+    [types.REWRITE_CITIES] (state, data) {
+        state.cities = data.cities
+    },
+
+    [types.REWRITE_MAX_ROOM] (state, data) {
+        state.roomsMax = data.roomsMax
+    },
+
+    [types.REWRITE_SEARCH_CRITERIA] (state, data) {
+        if(data.rooms) {
+            state.searchCriteria.rooms = Number(data.rooms);
+        }
+
+        if(data.cityID) {
+            state.searchCriteria.cityID = Number(data.cityID);
+        }
+    },
 };
 
 export default {
