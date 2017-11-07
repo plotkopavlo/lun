@@ -8015,6 +8015,9 @@ ul, li {
 }
 
 .search-block {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   height: 70vh;
   background: url(../img/main.jpg) 50% 50% fixed, #464646;
   background-size: cover;
@@ -8022,52 +8025,6 @@ ul, li {
 
 .search-block .center-screen {
   margin-top: calc(30vh - 40px);
-}
-
-.search-block .center-screen .header-text {
-  text-align: center;
-  color: #333;
-}
-
-.search-block .center-screen .btn-info-select {
-  width: 100px;
-  outline: none;
-  border: 1px solid #ccd0d2;
-  background-color: white;
-  border-radius: 0;
-  border-left: 0;
-}
-
-.search-block .center-screen .btn-info-select:hover {
-  outline: none !important;
-}
-
-.search-block .center-screen .btn-info-select:active {
-  outline: none !important;
-}
-
-.search-block .center-screen .btn-info-select:focus {
-  outline: none !important;
-}
-
-.search-block .center-screen .btn-info-select:active:focus {
-  outline: none !important;
-}
-
-.search-block .center-screen .btn-info-select .dropdown-menu a:hover {
-  outline: none !important;
-}
-
-.search-block .center-screen .btn-info-select .dropdown-menu a:active {
-  outline: none !important;
-}
-
-.search-block .center-screen .btn-info-select .dropdown-menu a:focus {
-  outline: none !important;
-}
-
-.search-block .center-screen .btn-info-select .dropdown-menu a:active:focus {
-  outline: none !important;
 }
 
 .result-block .result-apartments-block {

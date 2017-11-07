@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Repositories\FlatRepository;
+use App\Http\Models\Flat as Flat;
 use App\Repositories\FlatTypeRepository;
 use App\Repositories\CityRepository;
 use Illuminate\Http\Request;
@@ -10,15 +11,17 @@ use App\Repositories\Criteria\Flat\SortByPriceMin;
 use App\Repositories\Criteria\Flat\SortByPriceMax;
 use Illuminate\Support\Facades\DB;
 
+
 class RestAPI extends Controller
 {
 
     protected $city;
     protected $flat;
 
-    public function __construct(FlatRepository $flat,CityRepository $city)
+    public function __construct(Flat $flat,FlatRepository $flatR,CityRepository $city)
     {
         $this->flat = $flat;
+        $this->flatR = $flatR;
         $this->city = $city;
     }
 
@@ -39,22 +42,20 @@ class RestAPI extends Controller
         }
         // TODO: use one method
 
-
-        $flats = $this->flat;
+        $flats = $this->flat->newQuery();
 
 
         if ($rooms) {
-            $flats->findWhere(['num_of_rooms' => $rooms]);
+            $flats->where('num_of_rooms', $rooms);
         }
 
         if ($cityID) {
-            $flats->findWhere(['city_id' => $cityID]);
+            $flats->where('city_id', $cityID);
         }
-
-        if ($request->sort) {
-            $data = json_decode($request->sort);
-            //TODO: Not Work
-
+//        if ($request->sort) {
+//            $data = json_decode($request->sort);
+//            //TODO: Not Work
+//
 //            if ($data->type == "price") {
 //                if ($data->sortIndex="asc") {
 //                    $this->flat->pushCriteria(new SortByPriceMin());
@@ -63,17 +64,19 @@ class RestAPI extends Controller
 //                    $this->flat->pushCriteria(new SortByPriceMax());
 //                }
 //            }
-        }
-
+//        }
         $flats = $flats->paginate(10);
-        foreach ($flats as $flatOne){
-            $flatOne->residential_complex = $flatOne->buildings()->first()->residentialComplex;
-            $flatOne->buildings =$flatOne->buildings()->get();
-            $flatOne->updated = $flatOne->updated_at->diffForHumans();
 
-            $flatOne->city = $flatOne->city->name;
 
-            $flatOne->price_total = $flatOne->price_per_m2*$flatOne->area_m2;
+
+        foreach ($flats as $flat){
+            $flat->residential_complex = $flat->buildings()->first()->residentialComplex;
+            $flat->buildings =$flat->buildings()->get();
+            $flat->updated = $flat->updated_at->diffForHumans();
+
+            $flat->city = $flat->city->name;
+
+            $flat->price_total = $flat->price_per_m2*$flat->area_m2;
         }
 
         return response()->json( [
@@ -88,7 +91,7 @@ class RestAPI extends Controller
     public function getSearchCriteria(Request $request)
     {
         $cities = $this->city->all();
-        $roomMax= $this->flat->getMaxRooms();
+        $roomMax= $this->flatR->getMaxRooms();
         return response()->json( [
             'cities'  => $cities,
             'roomsMax' => $roomMax

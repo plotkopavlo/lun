@@ -1,0 +1,17 @@
+.search{
+    margin:auto;
+}
+
+.search--header {
+    text-align: center;
+    color: #333;
+}
+.search--btn {
+    width: 100px;
+    outline: none;
+    border: 1px solid #ccd0d2;
+    background-color: white;
+    border-radius: 0;
+    border-left: 0;
+
+}

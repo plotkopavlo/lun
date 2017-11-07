@@ -14,18 +14,10 @@
     </head>
     <body>
     <div class="Vue" id="app">
-        <section class="first-screen container">
-            <div class="search-block ">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-sm-6 col-sm-offset-3">
-                            <div class="center-screen">
+        <section class="first-screen search-block">
+
                 <search></search>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
         </section>
 
         <section class="result-block container">

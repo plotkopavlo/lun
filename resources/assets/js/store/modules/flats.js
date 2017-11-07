@@ -20,11 +20,11 @@ const state = {
     roomsMax: 5,
 
     cities: [
-        {
-            id: 0,
-            name:'Any',
-            selected: true
-        }
+        // {
+        //     id: 0,
+        //     name:'Any',
+        //     selected: true
+        // }
 
     ],
 
@@ -50,7 +50,10 @@ const state = {
 // getters
 const getters = {
 
-    flats: (state, getters, rootState) => state.flats,
+    flats: (state, getters, rootState) =>{
+        console.log(state.flats);
+        return state.flats
+    } ,
 
     checkoutStatus: (state, getters, rootState) => state.checkoutStatus,
 
@@ -170,7 +173,7 @@ const actions = {
             .then(response => {
 
                 commit(types.CHECKOUT_SUCCESS);
-
+                console.log(response.data.flats.data);
                 commit({
                     type:types.REWRITE_FLATS,
                     flats: response.data.flats.data
@@ -180,6 +183,7 @@ const actions = {
             })
             .catch(error => {
                 commit(types.CHECKOUT_FAILURE);
+                console.log('asdsa');
                 console.error(error)
             });
 
@@ -189,6 +193,7 @@ const actions = {
 // mutations
 const mutations = {
     [types.REWRITE_FLATS] (state, data) {
+        console.log(data);
         state.flats = data.flats
     },
 

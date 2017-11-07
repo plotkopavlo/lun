@@ -34,8 +34,7 @@ export default {
         ...mapActions({
             searchRequest      : 'searchRequest',
             cityIDChange       : 'cityIDChange',
-            roomsChange        : 'roomsChange',
-            searchCriteriaAJAX : 'searchCriteriaAJAX',
+            roomsChange        : 'roomsChange'
         })
     },
 
