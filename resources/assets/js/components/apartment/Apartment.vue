@@ -1,6 +1,6 @@
 <template>
     <li class="apartment-item">
-        <router-link to="/flat" class="apartment-item__link">
+        <router-link :to="this.url" class="apartment-item__link">
             <div class="apartment-item__img-container">
                 <!-- TODO: image -->
                 <img src="img/page.jpg" class="apartment-item__img" alt="flat's picture">

@@ -5,6 +5,11 @@ export default {
     },
 
     props:['flat'],
+    computed:{
+        url(){
+            return '/flat/' + this.flat.id
+        }
+    },
 
     created(){
     }

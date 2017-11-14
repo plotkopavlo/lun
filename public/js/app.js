@@ -12883,7 +12883,7 @@ _vue2.default.use(_vuex2.default);
 _vue2.default.component('apartments-list', __webpack_require__(53));
 _vue2.default.component('search', __webpack_require__(55));
 _vue2.default.component('flat-information', _FlatInformation2.default);
-var routes = [{ path: '/flat', component: _FlatInformation2.default }];
+var routes = [{ path: '/flat/:id', component: _FlatInformation2.default }];
 
 var router = new _vueRouter2.default({
     routes: routes // сокращение от `routes: routes`
@@ -13819,6 +13819,11 @@ exports.default = {
 
 
     props: ['flat'],
+    computed: {
+        url: function url() {
+            return '/flat/' + this.flat.id;
+        }
+    },
 
     created: function created() {}
 };
@@ -46219,7 +46224,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('router-link', {
     staticClass: "apartment-item__link",
     attrs: {
-      "to": "/flat"
+      "to": this.url
     }
   }, [_c('div', {
     staticClass: "apartment-item__img-container"
