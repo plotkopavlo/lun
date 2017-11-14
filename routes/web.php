@@ -14,6 +14,7 @@
 
 Route::resource('/', 'SearchController');
 Route::get('/flats','RestAPI@getFlats');
+Route::get('/flat/{id}','RestAPI@getFlat');
 Route::get('/instagram','RestAPI@instagram');
 Route::get('/searchCriteria','RestAPI@getSearchCriteria');
 

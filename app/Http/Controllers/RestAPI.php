@@ -73,6 +73,18 @@ class RestAPI extends Controller
        $this->instagram->getImagesByID(1708129225);
     }
 
+    public function getFlat($id)
+    {
+        $flat =  $this->flatR->find($id);
+        $flat->with(['buildings', 'city']);
+        $flat->get();
+        $flat->buildings;
+        $flat->city;
+        $flat->updated = $flat->updated_at->diffForHumans();
+
+        return response()->json($flat);
+    }
+
     public function getSearchCriteria(Request $request)
     {
         $cities  = $this->city->all();
