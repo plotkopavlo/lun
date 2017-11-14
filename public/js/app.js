@@ -46651,11 +46651,36 @@ Object.defineProperty(exports, "__esModule", {
 
 var _vuex = __webpack_require__(1);
 
+var _Gallery = __webpack_require__(77);
+
+var _Gallery2 = _interopRequireDefault(_Gallery);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 exports.default = {
     name: 'flatInformation',
+
     data: function data() {
-        return {};
+        return {
+            flat: {
+                name: "asdasdsa",
+
+                city: {
+                    id: 1,
+                    name: 'Kiev'
+                },
+
+                num_of_rooms: 2,
+                description: "adsadasdasdsaaadd"
+            }
+        };
+    },
+
+
+    components: {
+        gallery: _Gallery2.default
     }
+
 };
 
 /***/ }),
@@ -46708,14 +46733,28 @@ module.exports = Component.exports
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _vm._m(0)
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
+  return _c('section', {
     staticClass: "flat-information"
-  }, [_c('h2', {
+  }, [_c('div', {
+    staticClass: "flat-information__main"
+  }, [_c('div', {
+    staticClass: "flat-information__gallery"
+  }, [_c('gallery')], 1), _vm._v(" "), _c('div', {
+    staticClass: "flat-information__text"
+  }, [_c('div', {
+    staticClass: "apartment-item--info-text"
+  }, [_c('b', [_vm._v("City:")]), _vm._v(" "), (_vm.flat.city) ? _c('span', [_vm._v(_vm._s(_vm.flat.city.name))]) : _c('span', [_vm._v("-")])]), _vm._v(" "), _c('div', {
+    staticClass: "apartment-item--info-text"
+  }, [_c('b', [_vm._v("Rooms: ")]), _vm._v(" " + _vm._s(_vm.flat.num_of_rooms) + "\n            ")])])]), _vm._v(" "), _c('div', {
+    staticClass: "flat-infotmation__description"
+  }, [_c('b', [_vm._v("Description: ")]), _vm._v(" "), _c('span', {
+    domProps: {
+      "innerHTML": _vm._s(_vm.flat.description)
+    }
+  })]), _vm._v(" "), _c('h2', {
     staticClass: "flat-information__header"
   }, [_vm._v("Work")])])
-}]}
+},staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
@@ -46742,6 +46781,130 @@ if(false) {
  if(!content.locals) {
    module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-6ad782ba\",\"scoped\":false,\"hasInlineConfig\":true}!./FlatInformation.css", function() {
      var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-6ad782ba\",\"scoped\":false,\"hasInlineConfig\":true}!./FlatInformation.css");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 75 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _vuex = __webpack_require__(1);
+
+exports.default = {
+
+    name: 'gallery',
+    mounted: function mounted() {},
+
+
+    computed: {},
+
+    data: function data() {
+        return {};
+    },
+    created: function created() {},
+
+
+    methods: _extends({}, (0, _vuex.mapActions)({
+        sortByPrice: 'sortByPrice',
+        sortByArea: 'sortByArea'
+    }))
+
+};
+
+/***/ }),
+/* 76 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(2)();
+exports.push([module.i, "", ""]);
+
+/***/ }),
+/* 77 */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+/* styles */
+__webpack_require__(79)
+
+var Component = __webpack_require__(3)(
+  /* script */
+  __webpack_require__(75),
+  /* template */
+  __webpack_require__(78),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "/home/pashka/WorkSpace/lun/resources/assets/js/components/gallery/Gallery.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] Gallery.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-2b51fd78", Component.options)
+  } else {
+    hotAPI.reload("data-v-2b51fd78", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 78 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "Gallery"
+  }, [_vm._v("\n    Gallery\n")])
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-2b51fd78", module.exports)
+  }
+}
+
+/***/ }),
+/* 79 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(76);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(4)("45130d38", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-2b51fd78\",\"scoped\":false,\"hasInlineConfig\":true}!./Gallery.css", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-2b51fd78\",\"scoped\":false,\"hasInlineConfig\":true}!./Gallery.css");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });

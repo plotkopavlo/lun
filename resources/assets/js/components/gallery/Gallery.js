@@ -8,10 +8,6 @@ export default {
     },
 
     computed: {
-        ...mapGetters({
-            priceSortIndex: 'priceSortIndex',
-            areaSortIndex: 'areaSortIndex'
-        })
     },
 
     data() {
