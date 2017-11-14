@@ -40,4 +40,10 @@ class Flat extends Model
     {
         return $this->belongsTo(City::class);
     }
+
+    public function getPriceTotalAttribute()
+    {
+        return $this->attributes['price_per_m2'] * $this->attributes['area_m2'];
+    }
+
 }

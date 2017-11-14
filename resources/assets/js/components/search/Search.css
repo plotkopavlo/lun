@@ -1,4 +1,4 @@
-.search{
+.search {
     margin:auto;
 }
 
@@ -6,6 +6,7 @@
     text-align: center;
     color: #333;
 }
+
 .search--btn {
     width: 100px;
     outline: none;
@@ -13,5 +14,4 @@
     background-color: white;
     border-radius: 0;
     border-left: 0;
-
 }

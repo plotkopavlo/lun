@@ -1,9 +1,9 @@
-.apartments{
+.apartments {
     margin-right:auto;
     margin-left: auto;
 }
 
-.apartments-list{
+.apartments-list {
     display: flex;
     flex-direction:column;
 }

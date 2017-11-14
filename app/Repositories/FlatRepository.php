@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\DB;
 
 class FlatRepository extends Repository {
 
+    public $sortOrder = 'asc';
+
     public function model() {
         return 'App\Http\Models\Flat';
     }
@@ -22,7 +24,10 @@ class FlatRepository extends Repository {
 
         return $maxRooms;
     }
+    public function getData()
+    {
 
+    }
     public function withResidentialComplex()
     {
         //

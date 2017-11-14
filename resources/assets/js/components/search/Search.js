@@ -1,19 +1,11 @@
-import { mapGetters } from 'vuex'
-import { mapActions } from 'vuex'
+import { mapState } from 'vuex'
 
 export default {
-
     name: 'search',
-    mounted() {
-    },
 
     computed: {
-        ...mapGetters({
+        ...mapState({
             cities: 'cities',
-
-            cityID: 'cityID',
-
-            rooms: 'rooms',
 
             roomsMax: 'roomsMax'
         })
@@ -21,6 +13,8 @@ export default {
 
     data() {
         return {
+            cityID: 0,
+            rooms: 0
 
         }
     },
@@ -30,13 +24,13 @@ export default {
     },
 
     methods: {
-
-        ...mapActions({
-            searchRequest      : 'searchRequest',
-            cityIDChange       : 'cityIDChange',
-            roomsChange        : 'roomsChange'
-        })
+        search (){
+           this.$store.commit('REWRITE_SEARCH_CRITERIA',{
+               cityID: this.cityID,
+               rooms: this.rooms
+           });
+           this.$store.dispatch('searchRequest');
+        },
     },
-
 
 }

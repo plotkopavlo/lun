@@ -8,21 +8,21 @@
     border-bottom: 1px solid #ccd0d2;
 }
 
-.apartment-item--img-container{
+.apartment-item--img-container {
+    display: inline-block;
     width: 100px;
     height: 100px;
-    display: inline-block;
 }
 
-.apartment-item--img{
+.apartment-item--img {
     width:100%;
     height:100%;
+
     object-fit: cover;
     overflow: hidden;
-
 }
 
-.apartment-item--left-info{
+.apartment-item--left-info {
     max-width: 340px;
     margin-left: 20px;
 
@@ -31,6 +31,6 @@
 .apartment-item--right-info {
 }
 
-.apartment-item--info-text{
+.apartment-item--info-text {
     margin-bottom: 10px;
 }

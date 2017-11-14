@@ -1,5 +1,4 @@
-import { mapGetters } from 'vuex'
-import { mapActions } from 'vuex'
+import { mapState } from 'vuex'
 
 import apartment from './../apartment/Apartment.vue';
 import filters from './../filters/Filters.vue';
@@ -12,15 +11,14 @@ export default  {
         apartment: apartment,
         filters:   filters
     },
+
     data() {
-        return{}
+        return{
+
+        }
     },
-    computed: mapGetters({
+
+    computed: mapState({
             flats: 'flats',
     }),
-
-    created(){
-        // this.$store.dispatch('getAjaxFlats');
-    },
-
 }

@@ -13,8 +13,8 @@
 
                 <label class="sr-only" for="city">City</label>
 
-                <select :value="cityID"  @input="cityIDChange" name="city" id="city" class="form-control">
-                    <option value="0" selected>any </option>
+                <select v-model.number="cityID"  name="city" id="city" class="form-control">
+                    <option value="0" selected> any </option>
 
                     <option v-for="city in cities" :value="city.id">
                         {{ city.name }}
@@ -26,8 +26,8 @@
 
                 <label class="sr-only" for="rooms">Numbers of room</label>
 
-                <select :value="rooms" @input="roomsChange" name="rooms" id="rooms" class="form-control">
-                    <option value="0" selected>any </option>
+                <select v-model.number="rooms" name="rooms" id="rooms" class="form-control">
+                    <option value="0" selected> any </option>
 
                     <option v-for="n in roomsMax" :value="n">
                         {{ n }}
@@ -35,7 +35,7 @@
                 </select>
             </div>
 
-            <button v-on:click="searchRequest" class="btn btn-default search--btn" type="button" >Go!</button>
+            <button @click="search" class="btn btn-default search--btn" type="button" >Go!</button>
         </form>
 
     </div>

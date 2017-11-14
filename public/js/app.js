@@ -13797,6 +13797,8 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 exports.default = {
+    name: 'apartment',
+
     mounted: function mounted() {},
 
 
@@ -13835,17 +13837,15 @@ exports.default = {
         apartment: _Apartment2.default,
         filters: _Filters2.default
     },
+
     data: function data() {
         return {};
     },
 
-    computed: (0, _vuex.mapGetters)({
-        flats: 'flats'
-    }),
 
-    created: function created() {
-        // this.$store.dispatch('getAjaxFlats');
-    }
+    computed: (0, _vuex.mapState)({
+        flats: 'flats'
+    })
 };
 
 /***/ }),
@@ -13859,31 +13859,54 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
 var _vuex = __webpack_require__(1);
 
 exports.default = {
-
     name: 'filters',
-    mounted: function mounted() {},
 
-
-    computed: _extends({}, (0, _vuex.mapGetters)({
-        priceSortIndex: 'priceSortIndex',
-        areaSortIndex: 'areaSortIndex'
-    })),
+    computed: {},
 
     data: function data() {
-        return {};
+        return {
+            priceFilter: {
+                min: 0,
+                max: 0,
+                sortIndex: ""
+            },
+
+            areaFilter: {
+                min: 0,
+                max: 0,
+                sortIndex: ""
+            }
+
+        };
     },
-    created: function created() {},
 
 
-    methods: _extends({}, (0, _vuex.mapActions)({
-        sortByPrice: 'sortByPrice',
-        sortByArea: 'sortByArea'
-    }))
+    methods: {
+        sortByPrice: function sortByPrice(event) {
+            this.priceFilter.sortIndex == event.target.value;
+            this.dispatch('getAjaxFlats', {
+                sort: {
+                    type: 'price',
+                    sortIndex: this.priceFilter.sortIndex
+                }
+            });
+        },
+        sortByArea: function sortByArea(event) {
+
+            // getAjaxFlats({
+            //     sort: {
+            //         type: 'area',
+            //         isDESC: state.priceArea.isDESC
+            //     },
+            //
+            //     searchCriteria: state.searchCriteria
+            //
+            // })
+        }
+    }
 
 };
 
@@ -13903,34 +13926,35 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 var _vuex = __webpack_require__(1);
 
 exports.default = {
-
     name: 'search',
-    mounted: function mounted() {},
 
-
-    computed: _extends({}, (0, _vuex.mapGetters)({
+    computed: _extends({}, (0, _vuex.mapState)({
         cities: 'cities',
-
-        cityID: 'cityID',
-
-        rooms: 'rooms',
 
         roomsMax: 'roomsMax'
     })),
 
     data: function data() {
-        return {};
+        return {
+            cityID: 0,
+            rooms: 0
+
+        };
     },
     created: function created() {
         this.$store.dispatch('searchCriteriaAJAX');
     },
 
 
-    methods: _extends({}, (0, _vuex.mapActions)({
-        searchRequest: 'searchRequest',
-        cityIDChange: 'cityIDChange',
-        roomsChange: 'roomsChange'
-    }))
+    methods: {
+        search: function search() {
+            this.$store.commit('REWRITE_SEARCH_CRITERIA', {
+                cityID: this.cityID,
+                rooms: this.rooms
+            });
+            this.$store.dispatch('searchRequest');
+        }
+    }
 
 };
 
@@ -13999,20 +14023,7 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; } // import shop from '../../api/shop'
 
 
-// initial state
-// shape: [{ id, quantity }]
-/**
- *
- * @type {{flats: Array, flatsFilters: Array, checkoutStatus: null, citiesID: {}}}
- */
-
-/**
- *
- * @type {{flats: Array, checkoutStatus: null, citiesID: [{id: number, name: string}], searchCriteria: {cityID: number, rooms: number}, priceRange: {min: number, max: number, isDESC: boolean}, areaRange: {min: number, max: number, isDESC: boolean}}}
- */
 var state = {
-    flats: [],
-
     checkoutStatus: null,
 
     roomsMax: 5,
@@ -14021,70 +14032,17 @@ var state = {
         // {
         //     id: 0,
         //     name:'Any',
-        //     selected: true
         // }
-
     ],
 
     searchCriteria: {
         cityID: 0,
         rooms: 0
-    },
-
-    priceFilter: {
-        min: 0,
-        max: 0,
-        sortIndex: ""
-    },
-
-    areaFilter: {
-        min: 0,
-        max: 0,
-        sortIndex: ""
     }
-
 };
 
 // getters
-var getters = {
-
-    flats: function flats(state, getters, rootState) {
-        console.log(state.flats);
-        return state.flats;
-    },
-
-    checkoutStatus: function checkoutStatus(state, getters, rootState) {
-        return state.checkoutStatus;
-    },
-
-    //filter
-    priceSortIndex: function priceSortIndex(state, getters, rootState) {
-        return state.priceFilter.sortIndex;
-    },
-
-    areaSortIndex: function areaSortIndex(state, getters, rootState) {
-        return state.areaFilter.sortIndex;
-    },
-
-    //search
-
-    cities: function cities(state, getters, rootState) {
-        return state.cities;
-    },
-
-    cityID: function cityID(state, getters, rootState) {
-        return state.searchCriteria.cityID;
-    },
-
-    roomsMax: function roomsMax(state, getters, rootState) {
-        return state.roomsMax;
-    },
-
-    rooms: function rooms(state, getters, rootState) {
-        return state.searchCriteria.rooms;
-    }
-
-};
+var getters = {};
 
 // actions
 var actions = {
@@ -14093,9 +14051,8 @@ var actions = {
             commit = _ref.commit,
             rootState = _ref.rootState;
 
-        this.dispatch('getAjaxFlats', {
-            searchCriteria: state.searchCriteria
-        }).then(function (respond) {});
+        console.log(state.searchCriteria);
+        this.dispatch('getAjaxFlats', state.searchCriteria);
     },
     searchCriteriaAJAX: function searchCriteriaAJAX(_ref2) {
         var state = _ref2.state,
@@ -14109,8 +14066,7 @@ var actions = {
                 cities: data.cities
             });
 
-            commit({
-                type: types.REWRITE_MAX_ROOM,
+            commit(types.REWRITE_MAX_ROOM, {
                 roomsMax: data.roomsMax
             });
         }).catch(function (error) {
@@ -14118,78 +14074,11 @@ var actions = {
             console.error(error);
         });
     },
-    cityIDChange: function cityIDChange(_ref3, event) {
+    getAjaxFlats: function getAjaxFlats(_ref3, body) {
         var state = _ref3.state,
             commit = _ref3.commit,
             rootState = _ref3.rootState;
 
-        commit({
-            type: types.REWRITE_SEARCH_CRITERIA,
-            cityID: event.target.value
-        });
-    },
-    roomsChange: function roomsChange(_ref4, event) {
-        var state = _ref4.state,
-            commit = _ref4.commit,
-            rootState = _ref4.rootState;
-
-        commit({
-            type: types.REWRITE_SEARCH_CRITERIA,
-            rooms: event.target.value
-        });
-    },
-    sortByPrice: function sortByPrice(_ref5, event) {
-        var state = _ref5.state,
-            commit = _ref5.commit,
-            rootState = _ref5.rootState;
-
-        console.log('price');
-        commit({
-            type: types.REWRITE_PRICE,
-            min: null,
-            max: null,
-            sortIndex: event.target.value
-        });
-
-        this.dispatch('getAjaxFlats', {
-            sort: {
-                type: 'price',
-                sortIndex: state.priceFilter.sortIndex
-            }
-        });
-    },
-    sortByArea: function sortByArea(_ref6, event) {
-        var state = _ref6.state,
-            commit = _ref6.commit,
-            rootState = _ref6.rootState;
-
-        console.log('area');
-
-        commit({
-            type: types.REWRITE_AREA,
-            min: null,
-            max: null,
-            sortIndex: event.target.value
-        });
-
-        // getAjaxFlats({
-        //     sort: {
-        //         type: 'area',
-        //         isDESC: state.priceArea.isDESC
-        //     },
-        //
-        //     searchCriteria: state.searchCriteria
-        //
-        // })
-    },
-    getAjaxFlats: function getAjaxFlats(_ref7, body) {
-        var state = _ref7.state,
-            commit = _ref7.commit,
-            rootState = _ref7.rootState;
-
-        console.log("1");
-        console.log(body);
-        console.log("2");
         return axios({
             method: 'get',
             url: '/flats',
@@ -14197,7 +14086,6 @@ var actions = {
         }).then(function (response) {
 
             commit(types.CHECKOUT_SUCCESS);
-            console.log(response.data.flats.data);
             commit({
                 type: types.REWRITE_FLATS,
                 flats: response.data.flats.data
@@ -14206,7 +14094,6 @@ var actions = {
             return response;
         }).catch(function (error) {
             commit(types.CHECKOUT_FAILURE);
-            console.log('asdsa');
             console.error(error);
         });
     }
@@ -14214,7 +14101,6 @@ var actions = {
 
 // mutations
 var mutations = (_mutations = {}, _defineProperty(_mutations, types.REWRITE_FLATS, function (state, data) {
-    console.log(data);
     state.flats = data.flats;
 }), _defineProperty(_mutations, types.CHECKOUT_REQUEST, function (state) {
     state.flats = [];
@@ -14237,15 +14123,15 @@ var mutations = (_mutations = {}, _defineProperty(_mutations, types.REWRITE_FLAT
         state.priceFilter.min = data.max;
     }
 }), _defineProperty(_mutations, types.REWRITE_AREA, function (state, data) {
-    if (data.sortIndex) {
+    if (data.sortIndex !== undefined) {
         state.areaFilter.sortIndex = data.sortIndex;
     }
 
-    if (data.min) {
+    if (data.min !== undefined) {
         state.areaFilter.min = data.min;
     }
 
-    if (data.max) {
+    if (data.max !== undefined) {
         state.areaFilter.min = data.max;
     }
 }), _defineProperty(_mutations, types.REWRITE_CITIES, function (state, data) {
@@ -14253,12 +14139,12 @@ var mutations = (_mutations = {}, _defineProperty(_mutations, types.REWRITE_FLAT
 }), _defineProperty(_mutations, types.REWRITE_MAX_ROOM, function (state, data) {
     state.roomsMax = data.roomsMax;
 }), _defineProperty(_mutations, types.REWRITE_SEARCH_CRITERIA, function (state, data) {
-    if (data.rooms) {
-        state.searchCriteria.rooms = Number(data.rooms);
+    if (data.rooms !== undefined) {
+        state.searchCriteria.rooms = data.rooms;
     }
 
-    if (data.cityID) {
-        state.searchCriteria.cityID = Number(data.cityID);
+    if (data.rooms !== undefined) {
+        state.searchCriteria.cityID = data.cityID;
     }
 }), _mutations);
 
@@ -18531,28 +18417,28 @@ if (typeof jQuery === 'undefined') {
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(2)();
-exports.push([module.i, "\n.apartment-item {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: justify;\n        -ms-flex-pack: justify;\n            justify-content: space-between;\n\n    margin-bottom: 20px;\n\n    border-bottom: 1px solid #ccd0d2;\n}\n.apartment-item--img-container{\n    width: 100px;\n    height: 100px;\n    display: inline-block;\n}\n.apartment-item--img{\n    width:100%;\n    height:100%;\n    -o-object-fit: cover;\n       object-fit: cover;\n    overflow: hidden;\n}\n.apartment-item--left-info{\n    max-width: 340px;\n    margin-left: 20px;\n}\n.apartment-item--right-info {\n}\n.apartment-item--info-text{\n    margin-bottom: 10px;\n}", ""]);
+exports.push([module.i, "\n.apartment-item {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: justify;\n        -ms-flex-pack: justify;\n            justify-content: space-between;\n\n    margin-bottom: 20px;\n\n    border-bottom: 1px solid #ccd0d2;\n}\n.apartment-item--img-container {\n    display: inline-block;\n    width: 100px;\n    height: 100px;\n}\n.apartment-item--img {\n    width:100%;\n    height:100%;\n\n    -o-object-fit: cover;\n\n       object-fit: cover;\n    overflow: hidden;\n}\n.apartment-item--left-info {\n    max-width: 340px;\n    margin-left: 20px;\n}\n.apartment-item--right-info {\n}\n.apartment-item--info-text {\n    margin-bottom: 10px;\n}", ""]);
 
 /***/ }),
 /* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(2)();
-exports.push([module.i, "\n.filters{\n    margin-bottom:20px;\n}", ""]);
+exports.push([module.i, "\n.filters {\n    margin-bottom:20px;\n}", ""]);
 
 /***/ }),
 /* 46 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(2)();
-exports.push([module.i, "\n.search{\n    margin:auto;\n}\n.search--header {\n    text-align: center;\n    color: #333;\n}\n.search--btn {\n    width: 100px;\n    outline: none;\n    border: 1px solid #ccd0d2;\n    background-color: white;\n    border-radius: 0;\n    border-left: 0;\n}", ""]);
+exports.push([module.i, "\n.search {\n    margin:auto;\n}\n.search--header {\n    text-align: center;\n    color: #333;\n}\n.search--btn {\n    width: 100px;\n    outline: none;\n    border: 1px solid #ccd0d2;\n    background-color: white;\n    border-radius: 0;\n    border-left: 0;\n}", ""]);
 
 /***/ }),
 /* 47 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(2)();
-exports.push([module.i, "\n.apartments{\n    margin-right:auto;\n    margin-left: auto;\n}\n.apartments-list{\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient:vertical;\n    -webkit-box-direction:normal;\n        -ms-flex-direction:column;\n            flex-direction:column;\n}", ""]);
+exports.push([module.i, "\n.apartments {\n    margin-right:auto;\n    margin-left: auto;\n}\n.apartments-list {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient:vertical;\n    -webkit-box-direction:normal;\n        -ms-flex-direction:column;\n            flex-direction:column;\n}", ""]);
 
 /***/ }),
 /* 48 */
@@ -46341,7 +46227,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "apartment-item--right-info"
   }, [_c('div', {
     staticClass: "apartment-item--info-text"
-  }, [_vm._v(_vm._s(_vm.flat.price_total) + " $")]), _vm._v(" "), _c('div', {
+  }, [_vm._v(_vm._s(_vm.flat.total_price) + " $")]), _vm._v(" "), _c('div', {
     staticClass: "apartment-item--info-text"
   }, [_c('b', [_vm._v("Area: ")]), _vm._v(" " + _vm._s(_vm.flat.area_m2) + " m2\n        ")])])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -46384,11 +46270,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_vm._v("Sort by Price")]), _vm._v(" "), _c('select', {
     staticClass: "form-control filters--sort ",
     attrs: {
+      "model": _vm.priceFilter.sortIndex,
       "name": "price",
       "id": "price"
-    },
-    domProps: {
-      "value": _vm.priceSortIndex
     },
     on: {
       "input": _vm.sortByPrice
@@ -46434,23 +46318,37 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "for": "city"
     }
   }, [_vm._v("City")]), _vm._v(" "), _c('select', {
+    directives: [{
+      name: "model",
+      rawName: "v-model.number",
+      value: (_vm.cityID),
+      expression: "cityID",
+      modifiers: {
+        "number": true
+      }
+    }],
     staticClass: "form-control",
     attrs: {
       "name": "city",
       "id": "city"
     },
-    domProps: {
-      "value": _vm.cityID
-    },
     on: {
-      "input": _vm.cityIDChange
+      "change": function($event) {
+        var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
+          return o.selected
+        }).map(function(o) {
+          var val = "_value" in o ? o._value : o.value;
+          return _vm._n(val)
+        });
+        _vm.cityID = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+      }
     }
   }, [_c('option', {
     attrs: {
       "value": "0",
       "selected": ""
     }
-  }, [_vm._v("any ")]), _vm._v(" "), _vm._l((_vm.cities), function(city) {
+  }, [_vm._v(" any ")]), _vm._v(" "), _vm._l((_vm.cities), function(city) {
     return _c('option', {
       domProps: {
         "value": city.id
@@ -46464,23 +46362,37 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "for": "rooms"
     }
   }, [_vm._v("Numbers of room")]), _vm._v(" "), _c('select', {
+    directives: [{
+      name: "model",
+      rawName: "v-model.number",
+      value: (_vm.rooms),
+      expression: "rooms",
+      modifiers: {
+        "number": true
+      }
+    }],
     staticClass: "form-control",
     attrs: {
       "name": "rooms",
       "id": "rooms"
     },
-    domProps: {
-      "value": _vm.rooms
-    },
     on: {
-      "input": _vm.roomsChange
+      "change": function($event) {
+        var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
+          return o.selected
+        }).map(function(o) {
+          var val = "_value" in o ? o._value : o.value;
+          return _vm._n(val)
+        });
+        _vm.rooms = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+      }
     }
   }, [_c('option', {
     attrs: {
       "value": "0",
       "selected": ""
     }
-  }, [_vm._v("any ")]), _vm._v(" "), _vm._l((_vm.roomsMax), function(n) {
+  }, [_vm._v(" any ")]), _vm._v(" "), _vm._l((_vm.roomsMax), function(n) {
     return _c('option', {
       domProps: {
         "value": n
@@ -46492,7 +46404,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "type": "button"
     },
     on: {
-      "click": _vm.searchRequest
+      "click": _vm.search
     }
   }, [_vm._v("Go!")])])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;

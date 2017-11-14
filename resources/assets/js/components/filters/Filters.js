@@ -2,33 +2,53 @@ import { mapGetters } from 'vuex'
 import { mapActions } from 'vuex'
 
 export default {
-
     name: 'filters',
-    mounted() {
-    },
 
     computed: {
-        ...mapGetters({
-            priceSortIndex: 'priceSortIndex',
-            areaSortIndex: 'areaSortIndex'
-        })
     },
 
     data() {
         return {
+            priceFilter: {
+                min: 0,
+                max: 0,
+                sortIndex: "",
+            },
+
+            areaFilter:{
+                min: 0,
+                max: 0,
+                sortIndex: ""
+            }
+
 
         }
     },
 
-    created() {
-
-    },
-
     methods: {
-        ...mapActions({
-            sortByPrice: 'sortByPrice',
-            sortByArea: 'sortByArea'
-        })
+        sortByPrice(event) {
+            this.priceFilter.sortIndex == event.target.value
+            this.dispatch('getAjaxFlats',{
+                sort: {
+                    type: 'price',
+                    sortIndex: this.priceFilter.sortIndex
+                }
+            });
+
+        },
+
+        sortByArea(event) {
+
+            // getAjaxFlats({
+            //     sort: {
+            //         type: 'area',
+            //         isDESC: state.priceArea.isDESC
+            //     },
+            //
+            //     searchCriteria: state.searchCriteria
+            //
+            // })
+        },
     },
 
 

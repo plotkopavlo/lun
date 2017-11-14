@@ -3,13 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Repositories\FlatRepository;
-use App\Http\Models\Flat as Flat;
+use App\Http\Models\Flat;
 use App\Repositories\FlatTypeRepository;
 use App\Repositories\CityRepository;
 use Illuminate\Http\Request;
 use App\Repositories\Criteria\Flat\SortByPriceMin;
 use App\Repositories\Criteria\Flat\SortByPriceMax;
 use Illuminate\Support\Facades\DB;
+use App\Services\InstagramService;
 
 
 class RestAPI extends Controller
@@ -18,11 +19,12 @@ class RestAPI extends Controller
     protected $city;
     protected $flat;
 
-    public function __construct(Flat $flat,FlatRepository $flatR,CityRepository $city)
+    public function __construct(Flat $flat, FlatRepository $flatR, CityRepository $city, InstagramService $instagram)
     {
         $this->flat = $flat;
         $this->flatR = $flatR;
         $this->city = $city;
+        $this->instagram = $instagram;
     }
 
     /**
@@ -35,48 +37,26 @@ class RestAPI extends Controller
 
         $cityID = 0;
         $rooms  = 0;
-        if( $request->searchCriteria){
-            $data = json_decode($request->searchCriteria);
-            $cityID = $data->cityID ;
-            $rooms =$data->rooms;
-        }
-        // TODO: use one method
 
+        // TODO: use one method
         $flats = $this->flat->newQuery();
 
-
-        if ($rooms) {
-            $flats->where('num_of_rooms', $rooms);
+        if ($request->rooms) {
+            //$flats->pushCriteria(new sampleRooms($rooms));
+            $flats->where('num_of_rooms', $request->rooms);
         }
 
-        if ($cityID) {
-            $flats->where('city_id', $cityID);
+        if ($request->cityID) {
+//            $flats->pushCriteria(new sampleCity($cityID));
+            $flats->where('city_id', $request->cityID);
         }
-//        if ($request->sort) {
-//            $data = json_decode($request->sort);
-//            //TODO: Not Work
-//
-//            if ($data->type == "price") {
-//                if ($data->sortIndex="asc") {
-//                    $this->flat->pushCriteria(new SortByPriceMin());
-//                }
-//                if ($data->sortIndex="desc") {
-//                    $this->flat->pushCriteria(new SortByPriceMax());
-//                }
-//            }
-//        }
+
+        $flats->with(['buildings', 'city']);
         $flats = $flats->paginate(10);
 
-
-
-        foreach ($flats as $flat){
-            $flat->residential_complex = $flat->buildings()->first()->residentialComplex;
-            $flat->buildings =$flat->buildings()->get();
+        foreach ($flats as $flat) {
+            $flat->residential_complex = $flat->buildings[0]->residentialComplex;
             $flat->updated = $flat->updated_at->diffForHumans();
-
-            $flat->city = $flat->city->name;
-
-            $flat->price_total = $flat->price_per_m2*$flat->area_m2;
         }
 
         return response()->json( [
@@ -88,10 +68,16 @@ class RestAPI extends Controller
         ]);
     }
 
+    public function instagram(Request $request)
+    {
+       $this->instagram->getImagesByID(1708129225);
+    }
+
     public function getSearchCriteria(Request $request)
     {
-        $cities = $this->city->all();
-        $roomMax= $this->flatR->getMaxRooms();
+        $cities  = $this->city->all();
+        $roomMax = $this->flatR->getMaxRooms();
+
         return response()->json( [
             'cities'  => $cities,
             'roomsMax' => $roomMax

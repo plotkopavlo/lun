@@ -4,7 +4,7 @@
 
             <label class="sr-only" for="price">Sort by Price</label>
 
-            <select :value="priceSortIndex" @input="sortByPrice" name="price" id="price" class="form-control filters--sort " >
+            <select :model="priceFilter.sortIndex" @input="sortByPrice" name="price" id="price" class="form-control filters--sort " >
                 <option value="asc" selected>From chip to expensive</option>
                 <option value="desc">From expensive to chip</option>
             </select>
