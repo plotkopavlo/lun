@@ -8023,8 +8023,9 @@ ul, li {
   background-size: cover;
 }
 
-.search-block .center-screen {
-  margin-top: calc(30vh - 40px);
+.search-block__container {
+  margin: auto;
+  margin: auto;
 }
 
 .result-block .result-apartments-block {

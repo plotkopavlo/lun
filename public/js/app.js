@@ -18435,7 +18435,7 @@ exports.push([module.i, "\n.filters {\n    margin-bottom:20px;\n}", ""]);
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(2)();
-exports.push([module.i, "\n.search {\n    margin:auto;\n}\n.search--header {\n    text-align: center;\n    color: #333;\n}\n.search--btn {\n    width: 100px;\n    outline: none;\n    border: 1px solid #ccd0d2;\n    background-color: white;\n    border-radius: 0;\n    border-left: 0;\n}", ""]);
+exports.push([module.i, "\n.search {\n}\n.search--header {\n    text-align: center;\n    color: #333;\n}\n.search--btn {\n    width: 100px;\n    outline: none;\n    border: 1px solid #ccd0d2;\n    background-color: white;\n    border-radius: 0;\n    border-left: 0;\n}", ""]);
 
 /***/ }),
 /* 47 */
@@ -46307,9 +46307,7 @@ if (false) {
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "search"
-  }, [_c('h2', {
-    staticClass: "search--header"
-  }, [_vm._v("Let's find something")]), _vm._v(" "), _c('form', {
+  }, [_c('form', {
     staticClass: "search--form form-inline",
     attrs: {
       "method": "GET"

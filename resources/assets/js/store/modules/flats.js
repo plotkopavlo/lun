@@ -28,8 +28,7 @@ const getters = {
 const actions = {
     searchRequest({state, commit, rootState }) {
         console.log(state.searchCriteria);
-        this.dispatch('flats/getAjaxFlats',state.searchCriteria
-        )
+        this.dispatch('flats/getAjaxFlats',state.searchCriteria)
 
     },
 

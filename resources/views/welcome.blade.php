@@ -15,8 +15,10 @@
     <body>
     <div class="Vue" id="app">
         <section class="first-screen search-block">
-
-                <search></search>
+                <div class="search-block__container">
+                    <h2 class="search--header">Let's find something</h2>
+                    <search></search>
+                </div>
 
         </section>
 

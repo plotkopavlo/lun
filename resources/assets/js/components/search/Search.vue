@@ -1,6 +1,5 @@
 <template>
     <div class="search">
-        <h2 class="search--header">Let's find something</h2>
         <form method="GET" class="search--form form-inline">
             <div class="form-group">
 

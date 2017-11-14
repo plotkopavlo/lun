@@ -26,9 +26,11 @@ ul, li{
   height: 70vh;
   background: url(../img/main.jpg) 50% 50% fixed, #464646;
   background-size: cover;
-  .center-screen {
-    margin-top: calc(30vh - 40px);
-  }
+}
+
+.search-block__container{
+  margin:auto;
+  margin:auto;
 }
 .result-block {
   .result-apartments-block {
