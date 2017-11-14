@@ -45,17 +45,29 @@ $('.selectpicker').selectpicker({
 window.Vue = require('vue');
 import Vue from 'vue';
 import Vuex from 'vuex';
-import store from './store';
+import VueRouter from 'vue-router';
 
+Vue.use(VueRouter);
 Vue.use(Vuex);
 
+import store from './store';
+
+
 //Vue.component('example', require('./components/Example.vue'));
+import FlatInformation from './components/flatInformation/FlatInformation.vue';
 Vue.component('apartments-list', require('./components/apartmentsList/ApartmentsList.vue'));
 Vue.component('search', require('./components/search/Search.vue'));
-Vue.component('flat-information', require('./components/flatInformation/FlatInformation.vue'));
+Vue.component('flat-information', FlatInformation);
+const routes = [
+    { path: '/flat', component: FlatInformation},
+];
 
+const router = new VueRouter({
+    routes // сокращение от `routes: routes`
+});
 const app = new Vue({
     el: '#app',
     store,
+    router
 
 });

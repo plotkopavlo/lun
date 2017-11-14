@@ -21,8 +21,6 @@ export default  {
             }
         }
     },
-
-
     components: {
         gallery: gallery
     }
