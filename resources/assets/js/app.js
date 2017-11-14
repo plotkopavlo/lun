@@ -59,7 +59,7 @@ Vue.component('apartments-list', require('./components/apartmentsList/Apartments
 Vue.component('search', require('./components/search/Search.vue'));
 Vue.component('flat-information', FlatInformation);
 const routes = [
-    { path: '/flat/:id', component: FlatInformation},
+    { path: '/flat/:id', component: FlatInformation,  props: true},
 ];
 
 const router = new VueRouter({

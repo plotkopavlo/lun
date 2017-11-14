@@ -7,6 +7,7 @@ export default {
     props:['flat'],
     computed:{
         url(){
+            console.log('/flat/' + this.flat.id);
             return '/flat/' + this.flat.id
         }
     },

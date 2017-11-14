@@ -31,7 +31,6 @@
 
         </section>
         <router-view></router-view>
-        <flat-information></flat-information>
     </div>
         {!! Html::script('js/app.js') !!}
     </body>

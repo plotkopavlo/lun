@@ -12883,7 +12883,7 @@ _vue2.default.use(_vuex2.default);
 _vue2.default.component('apartments-list', __webpack_require__(53));
 _vue2.default.component('search', __webpack_require__(55));
 _vue2.default.component('flat-information', _FlatInformation2.default);
-var routes = [{ path: '/flat/:id', component: _FlatInformation2.default }];
+var routes = [{ path: '/flat/:id', component: _FlatInformation2.default, props: true }];
 
 var router = new _vueRouter2.default({
     routes: routes // сокращение от `routes: routes`
@@ -13821,6 +13821,7 @@ exports.default = {
     props: ['flat'],
     computed: {
         url: function url() {
+            console.log('/flat/' + this.flat.id);
             return '/flat/' + this.flat.id;
         }
     },
@@ -46652,6 +46653,10 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 exports.default = {
     name: 'flatInformation',
 
+    components: {
+        gallery: _Gallery2.default
+    },
+
     data: function data() {
         return {
             flat: {
@@ -46664,12 +46669,41 @@ exports.default = {
 
                 num_of_rooms: 2,
                 description: "adsadasdasdsaaadd"
-            }
+            },
+            loading: false,
+            error: null
         };
     },
+    created: function created() {
+        console.log('create FlatInformation');
+        this.fetchData();
+    },
 
-    components: {
-        gallery: _Gallery2.default
+
+    watch: {
+        '$route': 'fetchData'
+    },
+
+    methods: {
+        fetchData: function fetchData() {
+            var _this = this;
+
+            console.log('asd');
+            this.error = null;
+            this.loading = true;
+            axios({
+                method: 'get',
+                url: '/flat/' + this.$route.params.id
+            }).then(function (response) {
+                console.log(response.data);
+                _this.flat = response.data;
+                _this.loading = null;
+            }).catch(function (error) {
+                _this.error = true;
+            });
+
+            // замените здесь `getPost` используемым методом получения данных / доступа к API
+        }
     }
 
 };
