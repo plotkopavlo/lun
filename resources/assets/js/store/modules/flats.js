@@ -17,6 +17,7 @@ const state = {
         cityID: 0,
         rooms: 0
     },
+    flats: []
 };
 
 // getters
@@ -27,7 +28,7 @@ const getters = {
 const actions = {
     searchRequest({state, commit, rootState }) {
         console.log(state.searchCriteria);
-        this.dispatch('getAjaxFlats',state.searchCriteria
+        this.dispatch('flats/getAjaxFlats',state.searchCriteria
         )
 
     },
@@ -147,6 +148,7 @@ const mutations = {
 };
 
 export default {
+    namespaced : true,
     state,
     getters,
     actions,

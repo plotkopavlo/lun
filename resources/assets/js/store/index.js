@@ -16,6 +16,7 @@ export default new Vuex.Store({
         }
     },
     modules: {
-        flats
+        'flats': flats
+
     }
 })

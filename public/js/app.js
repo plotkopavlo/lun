@@ -12872,6 +12872,7 @@ _vue2.default.use(_vuex2.default);
 //Vue.component('example', require('./components/Example.vue'));
 _vue2.default.component('apartments-list', __webpack_require__(53));
 _vue2.default.component('search', __webpack_require__(55));
+_vue2.default.component('flat-information', __webpack_require__(72));
 
 var app = new _vue2.default({
   el: '#app',
@@ -13843,7 +13844,7 @@ exports.default = {
     },
 
 
-    computed: (0, _vuex.mapState)({
+    computed: (0, _vuex.mapState)('flats', {
         flats: 'flats'
     })
 };
@@ -13887,7 +13888,7 @@ exports.default = {
     methods: {
         sortByPrice: function sortByPrice(event) {
             this.priceFilter.sortIndex == event.target.value;
-            this.dispatch('getAjaxFlats', {
+            this.dispatch('flats/getAjaxFlats', {
                 sort: {
                     type: 'price',
                     sortIndex: this.priceFilter.sortIndex
@@ -13928,7 +13929,7 @@ var _vuex = __webpack_require__(1);
 exports.default = {
     name: 'search',
 
-    computed: _extends({}, (0, _vuex.mapState)({
+    computed: _extends({}, (0, _vuex.mapState)('flats', {
         cities: 'cities',
 
         roomsMax: 'roomsMax'
@@ -13942,17 +13943,17 @@ exports.default = {
         };
     },
     created: function created() {
-        this.$store.dispatch('searchCriteriaAJAX');
+        this.$store.dispatch('flats/searchCriteriaAJAX');
     },
 
 
     methods: {
         search: function search() {
-            this.$store.commit('REWRITE_SEARCH_CRITERIA', {
+            this.$store.commit('flats/REWRITE_SEARCH_CRITERIA', {
                 cityID: this.cityID,
                 rooms: this.rooms
             });
-            this.$store.dispatch('searchRequest');
+            this.$store.dispatch('flats/searchRequest');
         }
     }
 
@@ -13997,7 +13998,8 @@ exports.default = new _vuex2.default.Store({
         }
     },
     modules: {
-        flats: _flats3.default
+        'flats': _flats3.default
+
     }
 });
 
@@ -14038,7 +14040,8 @@ var state = {
     searchCriteria: {
         cityID: 0,
         rooms: 0
-    }
+    },
+    flats: []
 };
 
 // getters
@@ -14052,7 +14055,7 @@ var actions = {
             rootState = _ref.rootState;
 
         console.log(state.searchCriteria);
-        this.dispatch('getAjaxFlats', state.searchCriteria);
+        this.dispatch('flats/getAjaxFlats', state.searchCriteria);
     },
     searchCriteriaAJAX: function searchCriteriaAJAX(_ref2) {
         var state = _ref2.state,
@@ -14149,6 +14152,7 @@ var mutations = (_mutations = {}, _defineProperty(_mutations, types.REWRITE_FLAT
 }), _mutations);
 
 exports.default = {
+    namespaced: true,
     state: state,
     getters: getters,
     actions: actions,
@@ -46632,6 +46636,121 @@ module.exports = function(module) {
 __webpack_require__(14);
 module.exports = __webpack_require__(15);
 
+
+/***/ }),
+/* 67 */,
+/* 68 */,
+/* 69 */,
+/* 70 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _vuex = __webpack_require__(1);
+
+exports.default = {
+    name: 'flatInformation',
+    data: function data() {
+        return {};
+    }
+};
+
+/***/ }),
+/* 71 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(2)();
+exports.push([module.i, "", ""]);
+
+/***/ }),
+/* 72 */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+/* styles */
+__webpack_require__(74)
+
+var Component = __webpack_require__(3)(
+  /* script */
+  __webpack_require__(70),
+  /* template */
+  __webpack_require__(73),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "/home/pashka/WorkSpace/lun/resources/assets/js/components/flatInformation/FlatInformation.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] FlatInformation.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-6ad782ba", Component.options)
+  } else {
+    hotAPI.reload("data-v-6ad782ba", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 73 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _vm._m(0)
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "flat-information"
+  }, [_c('h2', {
+    staticClass: "flat-information__header"
+  }, [_vm._v("Work")])])
+}]}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-6ad782ba", module.exports)
+  }
+}
+
+/***/ }),
+/* 74 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(71);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(4)("7abd5143", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-6ad782ba\",\"scoped\":false,\"hasInlineConfig\":true}!./FlatInformation.css", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-6ad782ba\",\"scoped\":false,\"hasInlineConfig\":true}!./FlatInformation.css");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
 
 /***/ })
 /******/ ]);

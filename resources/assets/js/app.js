@@ -52,6 +52,7 @@ Vue.use(Vuex);
 //Vue.component('example', require('./components/Example.vue'));
 Vue.component('apartments-list', require('./components/apartmentsList/ApartmentsList.vue'));
 Vue.component('search', require('./components/search/Search.vue'));
+Vue.component('flat-information', require('./components/flatInformation/FlatInformation.vue'));
 
 const app = new Vue({
     el: '#app',

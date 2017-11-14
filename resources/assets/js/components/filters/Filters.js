@@ -28,7 +28,7 @@ export default {
     methods: {
         sortByPrice(event) {
             this.priceFilter.sortIndex == event.target.value
-            this.dispatch('getAjaxFlats',{
+            this.dispatch('flats/getAjaxFlats',{
                 sort: {
                     type: 'price',
                     sortIndex: this.priceFilter.sortIndex

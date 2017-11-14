@@ -4,7 +4,7 @@ export default {
     name: 'search',
 
     computed: {
-        ...mapState({
+        ...mapState('flats',{
             cities: 'cities',
 
             roomsMax: 'roomsMax'
@@ -20,16 +20,16 @@ export default {
     },
 
     created() {
-        this.$store.dispatch('searchCriteriaAJAX');
+        this.$store.dispatch('flats/searchCriteriaAJAX');
     },
 
     methods: {
         search (){
-           this.$store.commit('REWRITE_SEARCH_CRITERIA',{
+           this.$store.commit('flats/REWRITE_SEARCH_CRITERIA',{
                cityID: this.cityID,
                rooms: this.rooms
            });
-           this.$store.dispatch('searchRequest');
+           this.$store.dispatch('flats/searchRequest');
         },
     },
 
