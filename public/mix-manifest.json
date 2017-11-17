@@ -2,5 +2,7 @@
   "/js/app.js": "/js/app.js",
   "/css/app.css": "/css/app.css",
   "/js/admin/flats/main.js": "/js/admin/flats/main.js",
-  "/mix.js": "/mix.js"
+  "/mix.js": "/mix.js",
+  "/js/vendor.js": "/js/vendor.js",
+  "/js/manifest.js": "/js/manifest.js"
 }

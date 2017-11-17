@@ -1,12 +1,13 @@
 .search {
 }
 
-.search--header {
+.search__header {
     text-align: center;
     color: #333;
+    font-size: 48px;
 }
 
-.search--btn {
+.search__btn {
     width: 100px;
     outline: none;
     border: 1px solid #ccd0d2;

@@ -14,23 +14,7 @@
     </head>
     <body>
     <div class="Vue" id="app">
-        <section class="first-screen search-block">
-                <div class="search-block__container">
-                    <h2 class="search--header">Let's find something</h2>
-                    <search></search>
-                </div>
 
-        </section>
-
-        <section class="result-block container">
-            <div class="row">
-                <div class="col-sm-6 col-sm-offset-3">
-                    <apartments-list class="center-screen"></apartments-list>
-                </div>
-            </div>
-
-        </section>
-        <router-view></router-view>
     </div>
         {!! Html::script('js/app.js') !!}
     </body>

@@ -24,7 +24,6 @@
         <div class="flat-infotmation__description">
             <b>Description: </b> <span v-html="flat.description"></span>
         </div>
-        <h2 class="flat-information__header">Work</h2>
     </section>
 </template>
 

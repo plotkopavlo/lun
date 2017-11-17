@@ -24,13 +24,14 @@ export default {
     },
 
     methods: {
-        search (){
-           this.$store.commit('flats/REWRITE_SEARCH_CRITERIA',{
-               cityID: this.cityID,
-               rooms: this.rooms
-           });
-           this.$store.dispatch('flats/searchRequest');
-        },
-    },
+        search () {
+            this.$store.commit('flats/REWRITE_SEARCH_CRITERIA', {
+                cityID: this.cityID,
+                rooms: this.rooms
+            });
+            let url = "/search?cityID=" + this.cityID + "&rooms=" + this.rooms;
+            this.$router.push(url);
+        }
+    }
 
 }
