@@ -2,7 +2,7 @@ import { mapState } from 'vuex'
 
 export default {
     name: 'search',
-
+    props:['fullSearch'],
     computed: {
         ...mapState('flats',{
             cities: 'cities',

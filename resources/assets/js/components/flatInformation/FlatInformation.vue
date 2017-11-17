@@ -2,16 +2,20 @@
     <section class="flat-information">
         <div class="flat-information__main">
             <div class="flat-information__gallery">
-                <gallery></gallery>
+                <img src="img/page.jpg" class="flat-information__img" alt="flat's picture">
+                <!--<gallery></gallery>-->
             </div>
-            <div class="flat-information__text">
-                <div class="apartment-item--info-text">
+            <div class="flat-information__info">
+                <div class="apartment-item__info-text">
                     <b>City:</b>
                     <span v-if="flat.city">{{ flat.city.name }}</span>
                     <span v-else>-</span>
                 </div>
-                <div class="apartment-item--info-text">
-                    <b>Rooms: </b> {{ flat.num_of_rooms }}
+                <div class="apartment-item__info-text">
+                    <b>Rooms: </b>
+                    <span>
+                        {{ flat.num_of_rooms }}
+                    </span>
                 </div>
                 <!--<div class="apartment-item&#45;&#45;info-text">-->
                     <!--<b>Building(s): </b>-->
@@ -22,7 +26,10 @@
             </div>
         </div>
         <div class="flat-infotmation__description">
-            <b>Description: </b> <span v-html="flat.description"></span>
+            <b>Description: </b>
+            <div class="flat-infotmation__text" v-html="flat.description">
+
+            </div>]
         </div>
     </section>
 </template>

@@ -1,4 +1,22 @@
 @import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
+.first-screen {
+  background-color: #464646;
+}
+.search-block {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  background: url(/img/main.jpg) 50% 50% fixed, #464646;
+  background-size: cover;
+  padding: 20px 20px;
+}
+.search-block--full-screen {
+    height: 100vh;
+}
+.search-block__container {
+  margin: auto;
+}
+
 .apartments {
     margin-right:auto;
     margin-left: auto;

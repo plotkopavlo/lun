@@ -13797,7 +13797,7 @@ var _vuex = __webpack_require__(1);
 
 exports.default = {
     name: 'search',
-
+    props: ['fullSearch'],
     computed: _extends({}, (0, _vuex.mapState)('flats', {
         cities: 'cities',
 
@@ -46283,22 +46283,31 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "flat-information"
   }, [_c('div', {
     staticClass: "flat-information__main"
+  }, [_vm._m(0), _vm._v(" "), _c('div', {
+    staticClass: "flat-information__info"
   }, [_c('div', {
-    staticClass: "flat-information__gallery"
-  }, [_c('gallery')], 1), _vm._v(" "), _c('div', {
-    staticClass: "flat-information__text"
-  }, [_c('div', {
-    staticClass: "apartment-item--info-text"
+    staticClass: "apartment-item__info-text"
   }, [_c('b', [_vm._v("City:")]), _vm._v(" "), (_vm.flat.city) ? _c('span', [_vm._v(_vm._s(_vm.flat.city.name))]) : _c('span', [_vm._v("-")])]), _vm._v(" "), _c('div', {
-    staticClass: "apartment-item--info-text"
-  }, [_c('b', [_vm._v("Rooms: ")]), _vm._v(" " + _vm._s(_vm.flat.num_of_rooms) + "\n            ")])])]), _vm._v(" "), _c('div', {
+    staticClass: "apartment-item__info-text"
+  }, [_c('b', [_vm._v("Rooms: ")]), _vm._v(" "), _c('span', [_vm._v("\n                    " + _vm._s(_vm.flat.num_of_rooms) + "\n                ")])])])]), _vm._v(" "), _c('div', {
     staticClass: "flat-infotmation__description"
-  }, [_c('b', [_vm._v("Description: ")]), _vm._v(" "), _c('span', {
+  }, [_c('b', [_vm._v("Description: ")]), _vm._v(" "), _c('div', {
+    staticClass: "flat-infotmation__text",
     domProps: {
       "innerHTML": _vm._s(_vm.flat.description)
     }
-  })])])
-},staticRenderFns: []}
+  }), _vm._v("]\n    ")])])
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "flat-information__gallery"
+  }, [_c('img', {
+    staticClass: "flat-information__img",
+    attrs: {
+      "src": "img/page.jpg",
+      "alt": "flat's picture"
+    }
+  })])
+}]}
 module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
@@ -46314,9 +46323,9 @@ if (false) {
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "search"
-  }, [_c('h2', {
+  }, [(_vm.fullSearch) ? _c('h2', {
     staticClass: "search__header"
-  }, [_vm._v("Let's find something")]), _vm._v(" "), _c('form', {
+  }, [_vm._v("Let's find something")]) : _vm._e(), _vm._v(" "), _c('form', {
     staticClass: "search--form form-inline",
     attrs: {
       "method": "GET"
@@ -49201,19 +49210,24 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = {
     data: function data() {
         return {
-            fullSearch: True
+            fullSearch: true
         };
     },
 
     watch: {
         '$route': 'isFullScreen'
     },
+    created: function created() {
+        this.isFullScreen();
+    },
+    mounted: function mounted() {
+        this.isFullScreen();
+    },
+
     methods: {
         isFullScreen: function isFullScreen() {
-            console.log(this.$route.path);
-            //                if( this.$route){
-            //
-            //                }
+            console.log(this.$route);
+            this.fullSearch = this.$route.path == "/";
         }
     }
 };
@@ -49222,7 +49236,7 @@ exports.default = {
 /* 88 */
 /***/ (function(module, exports) {
 
-throw new Error("Module build failed: ModuleNotFoundError: Module not found: Error: Can't resolve '../img/main.jpg' in '/home/pashka/WorkSpace/lun/resources/assets/js'\n    at factoryCallback (/home/pashka/WorkSpace/lun/node_modules/webpack/lib/Compilation.js:260:39)\n    at /home/pashka/WorkSpace/lun/node_modules/webpack/lib/NormalModuleFactory.js:243:19\n    at onDoneResolving (/home/pashka/WorkSpace/lun/node_modules/webpack/lib/NormalModuleFactory.js:59:20)\n    at /home/pashka/WorkSpace/lun/node_modules/webpack/lib/NormalModuleFactory.js:132:20\n    at /home/pashka/WorkSpace/lun/node_modules/webpack/node_modules/async/dist/async.js:3861:9\n    at /home/pashka/WorkSpace/lun/node_modules/webpack/node_modules/async/dist/async.js:421:16\n    at iteratorCallback (/home/pashka/WorkSpace/lun/node_modules/webpack/node_modules/async/dist/async.js:996:13)\n    at /home/pashka/WorkSpace/lun/node_modules/webpack/node_modules/async/dist/async.js:906:16\n    at /home/pashka/WorkSpace/lun/node_modules/webpack/node_modules/async/dist/async.js:3858:13\n    at /home/pashka/WorkSpace/lun/node_modules/webpack/lib/NormalModuleFactory.js:124:22\n    at onError (/home/pashka/WorkSpace/lun/node_modules/enhanced-resolve/lib/Resolver.js:65:10)\n    at loggingCallbackWrapper (/home/pashka/WorkSpace/lun/node_modules/enhanced-resolve/lib/createInnerCallback.js:31:19)\n    at runAfter (/home/pashka/WorkSpace/lun/node_modules/enhanced-resolve/lib/Resolver.js:158:4)\n    at innerCallback (/home/pashka/WorkSpace/lun/node_modules/enhanced-resolve/lib/Resolver.js:146:3)\n    at loggingCallbackWrapper (/home/pashka/WorkSpace/lun/node_modules/enhanced-resolve/lib/createInnerCallback.js:31:19)\n    at next (/home/pashka/WorkSpace/lun/node_modules/tapable/lib/Tapable.js:252:11)\n    at /home/pashka/WorkSpace/lun/node_modules/enhanced-resolve/lib/UnsafeCachePlugin.js:40:4\n    at loggingCallbackWrapper (/home/pashka/WorkSpace/lun/node_modules/enhanced-resolve/lib/createInnerCallback.js:31:19)\n    at runAfter (/home/pashka/WorkSpace/lun/node_modules/enhanced-resolve/lib/Resolver.js:158:4)\n    at innerCallback (/home/pashka/WorkSpace/lun/node_modules/enhanced-resolve/lib/Resolver.js:146:3)\n    at loggingCallbackWrapper (/home/pashka/WorkSpace/lun/node_modules/enhanced-resolve/lib/createInnerCallback.js:31:19)\n    at next (/home/pashka/WorkSpace/lun/node_modules/tapable/lib/Tapable.js:252:11)\n    at innerCallback (/home/pashka/WorkSpace/lun/node_modules/enhanced-resolve/lib/Resolver.js:144:11)\n    at loggingCallbackWrapper (/home/pashka/WorkSpace/lun/node_modules/enhanced-resolve/lib/createInnerCallback.js:31:19)\n    at next (/home/pashka/WorkSpace/lun/node_modules/tapable/lib/Tapable.js:249:35)\n    at resolver.doResolve.createInnerCallback (/home/pashka/WorkSpace/lun/node_modules/enhanced-resolve/lib/DescriptionFilePlugin.js:44:6)\n    at loggingCallbackWrapper (/home/pashka/WorkSpace/lun/node_modules/enhanced-resolve/lib/createInnerCallback.js:31:19)\n    at afterInnerCallback (/home/pashka/WorkSpace/lun/node_modules/enhanced-resolve/lib/Resolver.js:168:10)\n    at loggingCallbackWrapper (/home/pashka/WorkSpace/lun/node_modules/enhanced-resolve/lib/createInnerCallback.js:31:19)\n    at next (/home/pashka/WorkSpace/lun/node_modules/tapable/lib/Tapable.js:252:11)");
+// removed by extract-text-webpack-plugin
 
 /***/ }),
 /* 89 */
@@ -49274,7 +49288,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('section', {
     staticClass: "first-screen search-block",
     class: {
-      fullSearch: 'search-block--full-screen'
+      'search-block--full-screen': _vm.fullSearch
     }
   }, [_c('div', {
     staticClass: "search-block__container"
