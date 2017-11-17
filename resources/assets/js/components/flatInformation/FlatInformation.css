@@ -1,0 +1,22 @@
+.flat-information {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+            "gallery info"
+            "description description"
+
+}
+.flat-information__gallery {
+    grid-area: gallery;
+
+}
+
+.flat-information__info {
+    grid-area: info;
+
+}
+
+.flat-infotmation__description {
+    grid-area: description;
+    padding-top: 10px;
+}

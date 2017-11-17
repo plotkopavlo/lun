@@ -16,7 +16,29 @@
 .search-block__container {
   margin: auto;
 }
+.result-block {
+  padding-top: 25px;
+}
 
+.flat-information {
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: 1fr 1fr;
+        grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+            "gallery info"
+            "description description"
+}
+.flat-information__gallery {
+    grid-area: gallery;
+}
+.flat-information__info {
+    grid-area: info;
+}
+.flat-infotmation__description {
+    grid-area: description;
+    padding-top: 10px;
+}
 .apartments {
     margin-right:auto;
     margin-left: auto;

@@ -1,6 +1,5 @@
 <template>
     <section class="flat-information">
-        <div class="flat-information__main">
             <div class="flat-information__gallery">
                 <img src="img/page.jpg" class="flat-information__img" alt="flat's picture">
                 <!--<gallery></gallery>-->
@@ -24,7 +23,6 @@
                     <!--</ul>-->
                 <!--</div>-->
             </div>
-        </div>
         <div class="flat-infotmation__description">
             <b>Description: </b>
             <div class="flat-infotmation__text" v-html="flat.description">

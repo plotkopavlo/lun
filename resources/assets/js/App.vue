@@ -66,4 +66,8 @@
         margin:auto;
     }
 
+    .result-block {
+        padding-top: 25px;
+    }
+
 </style>

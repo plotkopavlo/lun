@@ -46281,15 +46281,13 @@ if (false) {
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('section', {
     staticClass: "flat-information"
-  }, [_c('div', {
-    staticClass: "flat-information__main"
   }, [_vm._m(0), _vm._v(" "), _c('div', {
     staticClass: "flat-information__info"
   }, [_c('div', {
     staticClass: "apartment-item__info-text"
   }, [_c('b', [_vm._v("City:")]), _vm._v(" "), (_vm.flat.city) ? _c('span', [_vm._v(_vm._s(_vm.flat.city.name))]) : _c('span', [_vm._v("-")])]), _vm._v(" "), _c('div', {
     staticClass: "apartment-item__info-text"
-  }, [_c('b', [_vm._v("Rooms: ")]), _vm._v(" "), _c('span', [_vm._v("\n                    " + _vm._s(_vm.flat.num_of_rooms) + "\n                ")])])])]), _vm._v(" "), _c('div', {
+  }, [_c('b', [_vm._v("Rooms: ")]), _vm._v(" "), _c('span', [_vm._v("\n                    " + _vm._s(_vm.flat.num_of_rooms) + "\n                ")])])]), _vm._v(" "), _c('div', {
     staticClass: "flat-infotmation__description"
   }, [_c('b', [_vm._v("Description: ")]), _vm._v(" "), _c('div', {
     staticClass: "flat-infotmation__text",
