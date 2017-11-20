@@ -8,16 +8,31 @@
   display: flex;
   background: url(/img/main.jpg) 50% 50% fixed, #464646;
   background-size: cover;
-  padding: 20px 20px;
 }
 .search-block--full-screen {
     height: 100vh;
 }
 .search-block__container {
+  z-index: 100;
   margin: auto;
 }
 .result-block {
   padding-top: 25px;
+}
+.container-canvas {
+  display: none;
+  z-index: 100;
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+}
+.container-canvas--full-screen {
+    display: block;
+    height: 100vh;
+}
+.container-canvas canvas {
+    width: 100% !important;
+    height: 100vh !important;
 }
 
 .flat-information {

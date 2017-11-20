@@ -1,9 +1,11 @@
 <template>
     <div id="app">
         <section class="first-screen search-block"
-                 v-bind:class="{  'search-block--full-screen' : fullSearch}">
+        v-bind:class="{  'search-block--full-screen' : fullScreen}">
+            <div id="container" class="container-canvas"
+                 v-bind:class="{  'container-canvas--full-screen' : fullScreen}"></div>
             <div class="search-block__container">
-                <search :fullScreen="fullSearch"></search>
+                <search :fullScreen="fullScreen"></search>
             </div>
 
         </section>
@@ -19,13 +21,18 @@
 
         </section>
     </div>
+
 </template>
+
+
+
+
 
 <script>
     export default {
         data(){
             return{
-                fullSearch: true
+                fullScreen: true
             }
         },
         watch: {
@@ -36,11 +43,12 @@
         },
         mounted() {
             this.isFullScreen();
+            require('./animation/index.js')
         },
         methods:{
             isFullScreen(){
                 console.log(this.$route);
-                this.fullSearch = this.$route.path == "/";
+                this.fullScreen = this.$route.path == "/";
             }
         }
     }
@@ -56,18 +64,33 @@
         display: flex;
         background: url(/img/main.jpg) 50% 50% fixed, #464646;
         background-size: cover;
-        padding: 20px 20px;
+
         &--full-screen{
             height: 100vh;
         }
     }
-
     .search-block__container {
+        z-index:100;
         margin:auto;
     }
 
     .result-block {
         padding-top: 25px;
+    }
+    .container-canvas{
+        display: none;
+        z-index: 100;
+        position: absolute;
+        width:100vw;
+        height: 100vh;
+        &--full-screen{
+            display: block;
+            height: 100vh;
+        }
+        & canvas{
+            width: 100% !important;
+            height: 100vh !important;
+        }
     }
 
 </style>
