@@ -117,7 +117,8 @@
 .filters {
     margin-bottom:20px;
 }
-.search {
+.search .form-control {
+    font-size: 24px !important;
 }
 .search__header {
     text-align: center;

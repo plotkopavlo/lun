@@ -1,7 +1,7 @@
 <template>
     <div class="search">
         <h2 class="search__header" v-if="fullScreen">Let's find something</h2>
-        <form method="GET" class="search--form form-inline">
+        <form method="GET" class="search__form form-inline">
             <div class="form-group">
 
                 <label class="sr-only" for="flat-name">Search for...</label>

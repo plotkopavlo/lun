@@ -13581,17 +13581,17 @@ function init(MyTexture) {
     scene.add(mesh);
     renderer = new THREE.WebGLRenderer();
     renderer.setPixelRatio(window.devicePixelRatio);
-
+    renderer.setSize(MyTexture.image.width / 2, MyTexture.image.height / 2);
     container.appendChild(renderer.domElement);
     onWindowResize();
     window.addEventListener('resize', onWindowResize, false);
     return Promise.resolve();
 }
 function onWindowResize(event) {
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    uniforms.u_resolution.value.x = renderer.domElement.width;
-    uniforms.u_resolution.value.y = renderer.domElement.height;
-    //            uniforms.u_size.value.x = renderer.domElement.width;
+    // renderer.setSize( window.innerWidth, window.innerHeight );
+    uniforms.u_resolution.value.x = renderer.domElement.width * 4;
+    uniforms.u_resolution.value.y = renderer.domElement.height * 4;
+    //            uniforms.u_size.valё ue.x = renderer.domElement.width;
     //            uniforms.u_size.value.y = renderer.domElement.height;
     uniforms.u_mouse.value.x = mouse.x;
     uniforms.u_mouse.value.y = mouse.y;
@@ -91666,7 +91666,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [(_vm.fullScreen) ? _c('h2', {
     staticClass: "search__header"
   }, [_vm._v("Let's find something")]) : _vm._e(), _vm._v(" "), _c('form', {
-    staticClass: "search--form form-inline",
+    staticClass: "search__form form-inline",
     attrs: {
       "method": "GET"
     }

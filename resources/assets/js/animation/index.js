@@ -47,7 +47,7 @@ function init(MyTexture) {
         u_animation: { type: "f", value: 0.0 },
         u_mouse: { type: "v2", value: new THREE.Vector2() },
         u_resolution: { type: "v2", value: new THREE.Vector2() },
-        u_size: {type:"v2",value: new THREE.Vector2(MyTexture.image.width, MyTexture.image.height) },
+        u_size: {type:"v2",value: new THREE.Vector2( MyTexture.image.width, MyTexture.image.height ) },
         texture: {value:MyTexture },
         map1: {value:loader.load( "img/1.jpg" ) },
         map2: {value:loader.load( "img/2.jpg" ) }
@@ -63,17 +63,17 @@ function init(MyTexture) {
     scene.add( mesh );
     renderer = new THREE.WebGLRenderer();
     renderer.setPixelRatio( window.devicePixelRatio );
-
+    renderer.setSize( MyTexture.image.width/2, MyTexture.image.height/2 );
     container.appendChild( renderer.domElement );
     onWindowResize();
     window.addEventListener( 'resize', onWindowResize, false );
     return Promise.resolve();
 }
 function onWindowResize( event ) {
-    renderer.setSize( window.innerWidth, window.innerHeight );
-    uniforms.u_resolution.value.x = renderer.domElement.width;
-    uniforms.u_resolution.value.y = renderer.domElement.height;
-//            uniforms.u_size.value.x = renderer.domElement.width;
+    // renderer.setSize( window.innerWidth, window.innerHeight );
+    uniforms.u_resolution.value.x = renderer.domElement.width*4;
+    uniforms.u_resolution.value.y = renderer.domElement.height*4;
+//            uniforms.u_size.valё ue.x = renderer.domElement.width;
 //            uniforms.u_size.value.y = renderer.domElement.height;
     uniforms.u_mouse.value.x = mouse.x;
     uniforms.u_mouse.value.y = mouse.y;
